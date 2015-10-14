@@ -1,34 +1,46 @@
-<html>
-<head>
-    <title>Museo de la Pasión Boquense</title>
-    <meta charset='utf-8'>
-    <LINK href="css/style.css" rel="stylesheet" type="text/css">
-    <LINK href="css/materialize.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-	<div class="capa1">
-		<div class="anio">1992</div>
-		<div class="anio">1994</div> 
-		<div class="anio">1995</div> 
-		<div class="anio">1998</div> 
-		<div class="anio">1999</div>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+	<link rel="stylesheet" type="text/css" href="css/timeline.css" media="screen">
+  </head>
+  <body class="dragon">
+	<div class="layer1" data-stellar-ratio="1">
+			<img src="imgexample/4.jpg">
+			<img src="imgexample/5.jpg">
+			<img src="imgexample/6.jpg">
+			<img src="imgexample/3.jpg">
+			<img src="imgexample/4.jpg">
+			<img src="imgexample/5.jpg">
 	</div>
-	<div class="capa2">
-		<div class="row">
-			<img src="imgexample/1.png" class="imgscroll responsive-img">
-		</div>
-		<div class="row2">
-			<img src="imgexample/2.png" class="imgscroll responsive-img">
-		</div>
+	<div class="layer2" data-stellar-ratio="2">
+			<img src="imgexample/1.png" class="imgline track1">
+			<img src="imgexample/2.png" class="imgline track2">
+			<img src="imgexample/4.png" class="imgline track2">
 	</div>
-	<div class="capa3">
-	
+	<div class="layer3" data-stellar-ratio="1">	
+			<img src="imgexample/4.png" class="imgline track2">
+			<img src="imgexample/3.png" class="imgline track1">
 	</div>
-	<div class="capa4">
-		<img src="imgexample/4.jpg" class="bg-img">
-		<img src="imgexample/5.jpg" class="bg-img">
-		<img src="imgexample/6.jpg" class="bg-img">
+	<div class="layer4" data-stellar-ratio="0.3">
+		<div class="anio">1993</div>
+		<div class="anio">1994</div>
+		<div class="anio">1995</div>
 	</div>
-
 </body>
+<script  type="text/javascript" src="js/jquery-2.0.2.js"></script>
+<script type="text/javascript" src="js/jquery.stellar.js"></script>
+<script src='js/drag-on.js'></script>
+<script>
+	$(function(){
+		$.stellar({
+			horizontalScrolling: true,
+			responsive: true
+		});
+		  $('body').dragOn({cursor:'none',easing:false});
+	});
+	
+</script>
 </html>
+

@@ -1,53 +1,8 @@
-.anio{
-	color: #FFF;
-	font-size: 80px;
-	font-family: sansCondensed;
-	font-style: uppercase;
-	background-color: rgba(11,28,99,0.8);
-	margin-left: 500px;
-    display: inline;	
+::-webkit-scrollbar {
+    display: none;
 }
-.bg-img{
-	height: 100%;
-	width: 100%;
-	display: inline;
-}
-.imgscroll{
-	display: inline;
-	position: relative;
-}
-.capa1{	
-	-webkit-animation: scrolling 50s linear infinite;
-	z-index: 5;
-	display: block;
-	white-space: nowrap;
-	bottom: 10%;
-	position: absolute;
-}
-.capa2{
-	-webkit-animation: scrolling 40s linear infinite;
-	z-index: 4;
-	position: absolute;
-	width: 100%;
-}
-.capa3{
-	-webkit-animation: scrolling 20s linear infinite;
-	z-index: 3;
-}
-.capa4{
-	-webkit-animation: scrolling 35s linear infinite;
-	z-index: 2;
-	display: block;
-	white-space: nowrap;
-	position: absolute;
-}
-@-webkit-keyframes scrolling {
-    0%   { 
-        -webkit-transform: translateX(-100%);  
-    }    
-    100% { 
-        -webkit-transform: translateX(100%);  
-    }
+a {
+	cursor: none;
 }
 body {
     background-color: rgba(11,28,99,1);
@@ -56,6 +11,10 @@ body {
 	-webkit-animation: fadeIn 5s;
 	margin: 0;
     padding: 0;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+	cursor: none;
 }
 body.dividido{
 	 background: linear-gradient(to right, rgba(11,28,99,1), rgba(11,28,99,1) 50%, #FFA500 50%, #FFA500);}
