@@ -112,6 +112,7 @@ td, th {
 	margin: 0 auto 60px;
 	padding: 0;
 	*zoom: 1;
+	height:100%;
 }
 
 .bx-wrapper img {
@@ -125,7 +126,10 @@ td, th {
 	display: block;
 
 }
-
+video{
+	width: 100%;
+	height: 100%;
+}
 /** THEME
 ===================================*/
 
@@ -133,9 +137,8 @@ td, th {
 	-moz-box-shadow: 0 0 5px #ccc;
 	-webkit-box-shadow: 0 0 5px #ccc;
 	box-shadow: 0 0 5px #ccc;
-	border:  5px solid #fff;
 	left: -5px;
-	background: #fff;
+	height: 100%;
 	
 	/*fix other elements on the page moving (on Chrome)*/
 	-webkit-transform: translatez(0);
