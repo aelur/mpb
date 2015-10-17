@@ -1,3 +1,26 @@
+#modal{
+	width: 500px;
+	height: 500px;
+	background-color: rgba(11,28,99,0.9);
+	border-radius: 20px;
+	box-shadow: 5px 5px 20px #000;	
+	padding: 20px;
+}
+#modal p{
+	color: #fff;
+	font-family: beue;
+	font-size: 50px;
+	text-align: center;
+	letter-spacing: 4px;
+	text-decoration: none;
+}
+#modal a{
+	color: #fde65f;
+}
+@font-face {
+    font-family: beue;
+    src: url(../font/Bebas/BebasNeue.otf);
+}
 img{
 	 height:100%;
 	 margin-left: -5px;
@@ -10,6 +33,10 @@ img{
 	background-color: rgba(11,28,99,0.8);
 	display: inline-block;
 	margin-left: 600px;
+	cursor: none;
+}
+a{
+	cursor: none;
 }
 a:hover{
 	cursor: none;

@@ -8,13 +8,25 @@ body {
     background-color: rgba(11,28,99,1);
     overflow: hidden;
 	height: 100%;
-	-webkit-animation: fadeIn 5s;
+	-webkit-animation: fadeIn 2s;
 	margin: 0;
     padding: 0;
 	-webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
 	cursor: none;
+}
+.fadeIn{
+	-webkit-animation: fadeIn 1s linear;
+}
+@keyframes slidedown{
+	0%{
+		bottom: 0;
+	}
+	100%{
+		opacity : 0;
+	}
+	
 }
 body.dividido{
 	 background: linear-gradient(to right, rgba(11,28,99,1), rgba(11,28,99,1) 50%, #FFA500 50%, #FFA500);}
