@@ -1,0 +1,25 @@
+Jugador;Nombre Jugador;Partidos;Conversiones
+Arquero;Juan Yustrich;28;0
+Arquero;Luis Perdiez;11;0
+.;.;.;
+Defensores;Moises Alvez Rio;34;2
+Defensores;Juan Yustrich;31;1
+Defensores;Luis Perdiez;5;3
+Defensores;Moises Alvez Rio;4;2
+Defensores;Juan Yustrich;2;0
+Defensores;Luis Perdiez;1;0
+.;.;.;
+Medios;Moises Alvez Rio;35;6
+Medios;Juan Yustrich;22;5
+Medios;Luis Perdiez;14;2
+Medios;Moises Alvez Rio;11;1
+.;.;.;
+Delanteros ;Juan Yustrich;32;9
+Delanteros;Luis Perdiez;31;9
+Delanteros ;Moises Alvez Rio;23;7
+Delanteros;Juan Yustrich;14;3
+Delanteros ;Luis Perdiez;12;1
+Delanteros;Moises Alvez Rio;12;2
+.;.;.;
+DT ;Luis Perdiez;;
+DT ;Moises Alvez Rio;;
