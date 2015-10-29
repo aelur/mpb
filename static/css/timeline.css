@@ -1,100 +1,118 @@
-#modal{
-	width: 500px;
-	height: 500px;
-	background-color: rgba(11,28,99,0.9);
-	border-radius: 20px;
-	box-shadow: 5px 5px 20px #000;	
-	padding: 20px;
-}
-#modal p{
-	color: #fff;
-	font-family: beue;
-	font-size: 50px;
-	text-align: center;
-	letter-spacing: 4px;
-	text-decoration: none;
-}
-#modal a{
-	color: #fde65f;
-}
 @font-face {
-    font-family: beue;
-    src: url(../font/Bebas/BebasNeue.otf);
-}
-img{
-	 height:100%;
-	 margin-left: -5px;
-}
-.anio{
-	font-size: 60px;
-	font-family: Calibri;
-	color: #fff;
-	white-space: nowrap;
-	background-color: rgba(11,28,99,0.8);
-	display: inline-block;
-	margin-left: 600px;
-	cursor: none;
-}
-a{
-	cursor: none;
-}
-a:hover{
-	cursor: none;
-	transform: scale(1.1);
-}
-.layer1{
-	white-space: nowrap;
-	position: absolute; 
-	height: 100%;
-	z-index: -4;
-}
-.layer2{
-	white-space: nowrap;
-	position: absolute; 
-	height: 100%;
-	z-index: -3;
-}
-.layer3{
-	white-space: nowrap;
-	position: absolute; 
-	height: 100%;
-	z-index: -2;
-}
-.layer4{
-	white-space: nowrap;
-	position: absolute; 
-	height: 100%;
-	z-index: 2;
-	margin-top: 40%;
-}
-::-webkit-scrollbar {
-    display: none;
+    font-family: varsity;
+    src: url(varsity_regular.ttf);
 }
 body{
-	margin: 0;
-    overflow-y: hidden;
-    background-color: rgba(11,28,99,1);
-	-webkit-animation: fadeIn 5s;
-	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
-	cursor: none;
+	width: 100%;
+	/* cursor: none; */
+	overflow: hidden;  
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
-
-@-webkit-keyframes fadeIn{
-	0% {
-		opacity: 0;
-	}
+.nombre{
+	position: absolute;
+	opacity: 0.4;
+	color: white;
+	font-family: varsity;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%,0);
+	font-size: 150px;
 }
-.imgline{
-	position: relative;
-	
+.TOPBAR{	
+	display: inline-block;
+	width: 100%;
+	position: absolute;
+	margin-top: 40px;
+	margin-left: 30px;
+	margin-right: 30px;
+	height: 90px;	
 }
-.imgline.track1{
-	bottom: -100px;
-	margin-left: 100px;
+.BOTTOMBAR{
+	height: 120px;
+	width:80%;
+	position: absolute;
+	bottom: 0px;
+	margin-bottom: 5%;
+	left: 50%;
+	transform: translate(-50%, 0);
 }
-.imgline.track2{
-	bottom: 40px;
-	margin-left: 500px;
+.responsive{
+	height: 100%;
+	width: auto;
 }
+.left{
+	height: 100%;
+	text-align: left;
+	float: left;
+}
+.right{
+	height: 100%;
+	text-align: right;
+	float: right;
+	padding-right: 10%;
+}
+.right .responsive{
+	top: 50%;
+	transform: translate(0,-50%);
+	height: 60%;
+	width: auto;
+}
+.disabled{
+	opacity: 0.4;
+}
+.vline{
+	height: 100%;
+	width: 1px;
+	display: inline-block;
+}
+.white{
+	color: #fff;
+	background: #fff;
+}
+.typesetter{
+	border-radius: 20%;
+	background-image:url("foo.png");
+	margin-left: 35pt;
+	margin-bottom: 25pt;
+	opacity: 0.6;
+	width: 130px;
+	height: 40px;
+	display: inline-block;
+}
+.button{
+	font-family: Arial;
+	color: white;
+	font-size: 50px;
+	top: 50px;
+	transform: translate(0, -50px);
+}
+.next{
+	float: right;
+}
+.prev{
+	float:left; 
+}
+#carousel {
+    width:1000px;
+    height: 200px;
+    display: absolute;
+	clear:both;
+	overflow:hidden;
+	margin:0 auto;
+	margin-bottom: 5%;
+	bottom: 0px;
+	position: absolute !important;
+	left: 50%;
+	transform: translate(-50%, 0);
+  }
+ #carousel div {
+   display: hidden; /* hide images until carousel prepares them */
+   cursor: pointer; /* not needed if you wrap carousel items in links */
+ }
+ #carousel p {
+	display: hidden;
+ }
+  

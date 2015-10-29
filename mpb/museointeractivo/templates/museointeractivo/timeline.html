@@ -1,62 +1,72 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Test</title>
-	<link rel="stylesheet" href="../css/materialize.css">
-	<link rel="stylesheet" type="text/css" href="../css/timeline.css" media="screen">
+    <title>Museo de la Pasión Boquense</title>
+    <LINK href="{% static "css/timeline.css" %}" rel="stylesheet" type="text/css">
   </head>
-<body class="dragon">
-	<div class="layer1" data-stellar-ratio="1">
-			<img src="../imgexample/4.jpg">
-			<img src="../imgexample/5.jpg">
-			<img src="../imgexample/6.jpg">
-			<img src="../imgexample/3.jpg">
-			<img src="../imgexample/4.jpg">
-			<img src="../imgexample/5.jpg">
-	</div>
-	<div class="layer2" data-stellar-ratio="2">
-			<img src="../imgexample/1.png" class="imgline track1">
-			<img src="../imgexample/2.png" class="imgline track2">
-			<img src="../imgexample/4.png" class="imgline track2">
-	</div>
-	<div class="layer3" data-stellar-ratio="1">	
-			<img src="../imgexample/4.png" class="imgline track2">
-			<img src="../imgexample/3.png" class="imgline track1">
-	</div>
-	<div class="layer4" data-stellar-ratio="0.3">
-			<a class="modal-trigger" id="mod" href="#modal">
-				<div class="anio">1993</div>
-			</a>
-			<a id="mod" href="#modal">
-				<div class="anio">1994</div>
-			</a>
-			<a id="mod" href="#modal">
-				<div class="anio">1995</div>
-			</a>
+<body style="background:url('{% static "BG.jpg" %}')  no-repeat center center fixed;">
+	<div class="nombre">NACIONALES</div>
+	
+	<div class="TOPBAR">
+		<div class="left">
+			<img src="{% static "logo.png" %}" class="responsive">
+			<div class="typesetter">
+				<div class=""></div>
+				<div class=""></div>
+			</div>
+		</div>
+		<div class="right">
+			<img src="{% static "es.png" %}" class="responsive">
+			<div class="vline white disabled"></div>
+			<img src="{% static "en.png" %}" class="responsive disabled">
+			<div class="vline white disabled"></div>
+			<img src="{% static "por.png" %}" class="responsive disabled">
+		</div>
 	</div>
 	
-	<div id="modal" class="modal">
-        <div class="modal-content">
-			<p>Un breve resumen de los <a href="datos_campeonatos.html">datos</a> del campeonato</p>
-		</div>
+	<div class ="BOTTOMBAR">
+		<div id="prev" class="button prev"><</div>
+		<div id="next" class="button next">></div>
+	</div>
+	<div id="carousel">
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
+		<div><img src="{% static "estrella.png" %}" width="160px" height="160px"></div>
 	</div>
 
 </body>
-<script  type="text/javascript" src="../js/jquery-2.0.2.js"></script>
-<script type="text/javascript" src="../js/jquery.stellar.js"></script>
-<script src='../js/drag-on.js'></script>
-<script src="../js/materialize.js"></script>
-<script>
-	$(function(){
-		$('.modal-trigger').leanModal();
-		$.stellar({
-			horizontalScrolling: true,
-			responsive: true
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{% static "jquery.waterwheelCarousel.min.js" %}"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var carousel = $("#carousel").waterwheelCarousel({
+			horizon: 110,
+			horizonOffset: 10,
+			horizonOffsetMultiplier: .7,
+			separation: 200,
+			edgeFadeEnabled: true,
+			animationEasing: 'swing'
 		});
-		$('body').dragOn({
-			cursor:'none',
-			easing:false
+		$('#prev').bind('click', function () {
+			carousel.prev();
+			return false
+		});
+	
+		$('#next').bind('click', function () {
+			carousel.next();
+			return false;
 		});
 	});
 	

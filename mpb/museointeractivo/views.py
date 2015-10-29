@@ -4,10 +4,8 @@ from models import campeonato
 # Create your views here.
 
 def index(request):
-	return render(request, 'museointeractivo/index.html')
-def timeline(request, tipo):
 	campeonatos = campeonato.objects.all()
-	context = {'tipo': tipo,'campeonatos' : campeonatos }
+	context = {'tipo': 'nacional','campeonatos' : campeonatos }
 	return render(request, 'museointeractivo/timeline.html', context)
 def information(request, campeonato_id):
 	camp = campeonato.objects.get(pk=campeonato_id)
