@@ -163,6 +163,7 @@
 		$('.down').fadeOut();
 	$(document).ready(function() {
 	handler_imagenes();	
+	$("img").mousedown(function(){	return false; 	});
 	var scrolled=0;
 	$('.selector').click(function(){
 		$objActivo = $("#lang_active");

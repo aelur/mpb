@@ -2,7 +2,6 @@
 from django.db import models
 from django.conf import settings
 import datetime, xlrd
-from django.core.exceptions import ValidationError
 
 class campeonato(models.Model):		
 
@@ -18,13 +17,11 @@ class campeonato(models.Model):
 	imagen_copa = models.ImageField(upload_to='', 
 							default='',
 							blank=True,
-							#validators=[validate_copa(tipo)],
 							help_text='Imagen de la copa - obligatorio si es Internacional.')
 	imagen_fondo = models.ImageField(upload_to='')
 	imagen_campo = models.ImageField(upload_to='', 
 							default='',
 							blank=True,
-							#validators=[validate_campo(tipo)],
 							help_text='Gráfico con formación del equipo - obligatorio si es Internacional.')
 	imagen_formacion = models.ImageField(upload_to='', 
 							default='',
@@ -34,22 +31,16 @@ class campeonato(models.Model):
 							verbose_name='Curiosidades - Español',
 							default='',
 							blank=True,
-							#validators=[validate_curiosidades(tipo), 
-							#				validate_formato],
 							help_text='Texto de curiosidades - obligatorio si es nacional.')
 	curiosidades_en = models.FileField(upload_to=settings.MEDIA_ROOT,  
 							verbose_name='Curiosidades - Inglés',
 							default='',
 							blank=True,
-							#validators=[validate_curiosidades(tipo), 
-							#				validate_formato],
 							help_text='Texto de curiosidades - obligatorio si es nacional.')
 	curiosidades_por = models.FileField(upload_to=settings.MEDIA_ROOT,  
 							verbose_name='Curiosidades - Portugués',
 							default='',
 							blank=True,
-							#validators=[validate_curiosidades(tipo), 
-							#				validate_formato],
 							help_text='Texto de curiosidades - obligatorio si es nacional.')
 
 	video1 = models.FileField(upload_to='')
@@ -155,11 +146,3 @@ class campeonato(models.Model):
 		return (self.leer_tablas('posiciones'))
 	def get_datos_campania(self):
 		return (self.leer_tablas('campania'))
-
-	def save(self, *args, **kwargs):
-		if self.tipo=='Internacional' and (self.imagen_copa=='' or self.imagen_copa==None):
-			raise ValidationError('Para los campeonatos internacionales es necesario subir una imagen de copa.')
-		if self.tipo=='Internacional' and  (self.imagen_fondo=='' or self.imagen_fondo==None):
-			raise ValidationError('Para los campeonatos internacionales es necesario subir una imagen de campo.')
-
-		super(campeonato,self).save(*args,**kwargs)

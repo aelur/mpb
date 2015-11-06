@@ -15,7 +15,8 @@ body{
 	overflow: hidden;  
 	background-size: cover !important;
 	/*cursor: none !important;*/
-	-webkit-user-select: none !important;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
 }
 #body_datos{
 	width: 100%;

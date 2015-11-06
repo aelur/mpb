@@ -86,6 +86,8 @@
 		if (typeof carousel != 'undefined') carousel.reload(opciones);
 	} 
 	$(document).ready(function() {
+		$("img").mousedown(function(){	return false; 	});
+		
 		var carousel = $("#carousel").waterwheelCarousel(opciones);
 		
 		$('#prev').bind('click', function () {
@@ -200,6 +202,7 @@
 							"url("+datos_campeonatos[$newCenterItem.attr('alt')-1].urlbg+") no-repeat center center fixed");
 			}
 		};
+
 	filtrar('>TODOS');
 </script>
 </html>
