@@ -1,8 +1,12 @@
 from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls.static import static
 
 from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^information/(?P<campeonato_id>[0-9]+)/$', views.information, name='information'),
-]
+    url(r'^datos/(?P<campeonato_id>[0-9]+)/$', views.datos, name='datos'),
+    url(r'^tablas/(?P<campeonato_id>[0-9]+)/(?P<tabla_sel>(jugadores|campania|posiciones))/$', views.tablas, name='tablas'),
+]  
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
