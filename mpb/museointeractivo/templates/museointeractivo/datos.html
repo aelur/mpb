@@ -19,7 +19,7 @@
 				<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}">
 				<span class="anio">{{ campeonato.anio }}</span>
 				{% if campeonato.tipo != 'NAC' %}
-				<img src="{{ campeonato.imagen_campo.url }}" style="width: 120%;height: auto;bottom: -20%;left: 0px;position: absolute;animation:none;">
+				<img src="{{ campeonato.imagen_campo.url }}" style="width: 145%;height: auto;bottom: -70%;left: -80px;position: absolute;animation:none;">
 				{% else %}
 					<img src="{% static 'img/preg.png' %}" id="preg">
 					<span class="title" id="curiosidades_texto">Curiosidades</span>
@@ -78,7 +78,17 @@
 <script type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.velocity.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.colorbox-min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.touchSwipe.js' %}"></script>
 <script type="text/javascript">
+	$("#body_datos").swipe({
+		swipeUp:function(event,direction,distance,duration,fingerCount){
+			window.location.href = "{% url 'index' %}";
+		},
+		swipeLeft:function(event,direction,distance,duration,fingerCount){
+			window.location.href = "{% url 'index' %}";
+		},
+		fingers:'all'
+	});
 	$(document).ready(function() {
 		$("#videocentral").on('click', function(e){
 			var $video = $(this).get(0);
@@ -162,10 +172,10 @@
 				$(this).velocity({
 					perspective: '+=300px',
 					rotateY: '+=360deg',
-					translateX:-448,
-					translateY:30,
-					scaleX: 2.37,
-					scaleY: 4.25,
+					translateX:-503,
+					translateY:-26,
+					scaleX: 2.53,
+					scaleY: 4.62,
 					opacity:0.3,
 					duration: 500,
 					});

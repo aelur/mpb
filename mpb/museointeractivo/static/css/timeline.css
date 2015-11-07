@@ -14,7 +14,7 @@ body{
 	width: 100%;
 	overflow: hidden;  
 	background-size: cover !important;
-	/*cursor: none !important;*/
+	cursor: none !important;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 }
@@ -22,7 +22,7 @@ body{
 	width: 100%;
 	height:100%;
 	position: absolute;
-	top: 0px;
+	top: 50px;
 	left: 0px;
 	overflow: hidden;  
 	background-size: cover !important;
@@ -39,7 +39,11 @@ body{
 	animation: bounceInUp 2s linear;
 }
 #body_tabla{
-	overflow: auto;
+	overflow-x: hidden;
+	position: absolute;
+	top: 90px;
+	width: 100%;
+	height:100%;
 }
 #body_tabla::-webkit-scrollbar{
 	display: none;
@@ -57,10 +61,10 @@ body{
 }
 .nombre{
 	position: absolute;
-	opacity: 0.2;
+	opacity: 0.8;
 	color: white;
 	font-family: varsity;
-	top: 20%;
+	top: 30%;
 	left: 50%;
 	transform: translate(-50%,0);
 	font-size: 150px;
@@ -70,7 +74,7 @@ body{
 	display: inline-block;
 	width: 100%;
 	position: absolute;
-	margin-top: 40px;
+	margin-top: 10px;
 	margin-left: 30px;
 	margin-right: 30px;
 	height: 90px;	
@@ -90,16 +94,21 @@ body{
 	width: auto;
 }
 .left{
-	height: 100%;
+	height: 130%;
 	text-align: left;
 	float: left;
+	padding-left: 4%;
 }
 .right{
 	height: 100%;
 	text-align: right;
 	float: right;
-	padding-right: 10%;
 }
+#tl{
+	padding-right: 18%;
+	padding-top: 2%;
+}
+
 .right .typesetter {
 	background-image: none;
 	background-size: cover !important;
@@ -112,8 +121,8 @@ body{
     position: inherit;
 }
 #rightdatos{
-    margin-top: 5%  !important;
-    padding-right: 9%  !important;
+    margin-top: 3%  !important;
+    margin-right: 19%  !important;
 }
 #othervid{
 	opacity:0.5;
@@ -134,13 +143,17 @@ body{
 .typesetter{
 	background-image:url("../img/foo.png");
 	background-size: cover !important;
-    left: 8%;
+    left: 13%;
     top: 8%;
     height: 100px;
     width: 210px;
     display: inline-flex;
     padding-left: 4px;
     position: absolute;
+}
+#langtype{
+	top:14% !important;
+	right:0% !important;
 }
 .typesetter img{
 	display: inline-block;
@@ -282,14 +295,15 @@ body{
 	position: absolute;
 	width: 20%;
 	height: 600px;
-    margin-left: 35px;
+    margin-left:130px;
 	text-align: center;
 }
 .curiosidades .title{
 	font-family: college;
-	font-size: 30px;
+	font-size: 40px;
 	letter-spacing: 2px;
-	padding-left: 65px;
+	padding-left: 55px;
+	margin-top: 5px;
 	color: white;    
 	text-shadow: #000 0 0 10px;
 }
@@ -298,11 +312,11 @@ body{
     height: 95%;
 	overflow-y: scroll;
     text-align: justify;
-	margin-top: 24px;
+	margin-top: 30px;
 }
 .curiosidades img{
-	height: 160px;
-	padding-bottom: 25px;
+	height: 170px;
+	padding-bottom: 50px;
     -webkit-filter: drop-shadow(0px 0px 15px rgba(255,255,255,0.8)) !important;
 	animation: rotateIn 1s ease;
 }
@@ -332,8 +346,9 @@ body{
 	letter-spacing: 3px;    
 	width: 650px;
     position: absolute;
-    left: 24%;
-    margin-top: 80px;
+    left: 46%;
+    transform: translateX(-46%);
+    margin-top: 20px;
 }
 .central .subtitulo{
     font-size: 20px;
@@ -343,8 +358,8 @@ body{
 	width: 23%;
 	position: absolute;
 	right: 0px;
-    margin-right: 4%;
-    margin-top: 13%;
+    margin-right: 10%;
+    margin-top: 5%;
 	padding: 5px;
 	text-align: center;
 }
@@ -389,8 +404,17 @@ body{
     position: absolute;
 	animation: zoomIn 1s ease;
 }
+#curiosidtablas{
+	width:200px !important;
+}
+#centraltablas{
+	margin-top: 100px !important;
+	margin-left: 65%;
+	left: 0%;
+	width: 100%;
+}
 .videobox .play{
-    right: 50%;
+    right: 45%;
 }
 .play:hover{
 	text-shadow: #FFF 10 10 10px;
@@ -404,8 +428,8 @@ body{
     z-index: 0;
 }
 .media .imgbox{
-	width:92%;
-    height: 180px;
+	width:80%;
+    height: 250px;
     background: rgba(255,255,255,0.2);
 	overflow: hidden;
 	border: 1px solid rgba(255,255,255,0.8);	
@@ -413,8 +437,8 @@ body{
 }
 .videobox{
     margin-top: 30px;
-    width: 92%;
-    height: 600px;
+    width: 98%;
+    height: 650px;
 	border: 1px solid rgba(255,255,255,0.8);
 	overflow: hidden;
 }
@@ -428,15 +452,18 @@ body{
     left: 0%;
 }
 .central .titulo{
-    font-size: 32px;
+    font-size: 45px;
 	text-transform: uppercase;
 }
+#body_tabla .central .titulo{
+	font-size: 50px;
+}
 .curiosidades #preg{
-    width: 60px;
+    width: 80px;
     height: auto;
     position: absolute;
-    top: 28%;
-    left: 0;
+    top: 29%;
+    left: 2%;
 	animation: jello 3s infinite;
 }
 .curiosidades .anio{
@@ -450,8 +477,8 @@ body{
 .tablas{
     width: 104%;
     position: absolute;
-    bottom: -190%;
-    right: -2%;
+    bottom: -130%;
+    right:4%;
 }
 .tablas img{
     width: 65px;
@@ -506,8 +533,10 @@ body{
 **/
 .tabla{
     position: absolute;
-    top: 28%;
+    top: 22%;
  	padding-bottom: 50px;
+ 	left:50%;
+ 	transform: translate(-50%,0);
 }
 .tablaimg{
 	position: absolute;
@@ -597,13 +626,13 @@ tr:nth-child(even) {
 	padding-left: 14%;
 }
 .jugadores{
-    width: 70%;
+    width: 40%;
 	z-index:0;
 	opacity:1;
 	display: none;
 }
 .posiciones{
-    width: 70%;  
+    width: 60%;  
 	z-index:0;
 	opacity:1;	
 	display: none;
@@ -611,10 +640,14 @@ tr:nth-child(even) {
 .resultados{
 	z-index:0;
 	opacity:1;
-	width:70%;
+	width:60%;
 	display: none;
 }
 .arrowback:hover{
 	position: fixed;
 	-webkit-filter: drop-shadow(0px 0px 15px  rgba(255,255,255,0.8)) !important;
+}
+#timelinebar{
+	margin-top: 100px !important;
+	margin-left: 50px !important;
 }

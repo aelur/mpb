@@ -13,7 +13,7 @@
 	<div class="fondo_campeonato"></div>
 	<div class="nombre">TODOS</div>
 	
-	<div class="TOPBAR">
+	<div class="TOPBAR" id="timelinebar">
 		<div class="left">
 			<img src="{% static 'img/logo.png' %}" class="responsive">
 			<div class="typesetter">
@@ -22,9 +22,10 @@
 				<div class="selector" id="copas"><img src="{% static 'img/nac.png' %}" id="nac"><span class="flecha">></span><span class="titulo nac">NACIONALES</span></div>
 			</div>
 		</div>
-		<div class="right">
-			<div class="typesetter">
-				<div class="selector" id="lang_active"><img src="{% static 'img/es.png' %}" id="es"></div>
+		<div class="right" id="tl">
+			<div class="typesetter" id="langtype">
+				<div class="selector" id="lang_active">
+				<img src="{% static 'img/es.png' %}" id="es"></div>
 				<div class="selector" id="lang"><img src="{% static 'img/en.png' %}" id="en"></div>
 				<div class="selector" id="lang"><img src="{% static 'img/por.png' %}" id="por"></div>
 			</div>
@@ -42,6 +43,7 @@
 </body>
 <script type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.waterwheelCarousel.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.touchSwipe.js' %}"></script>
 <script type="text/javascript">
 	var filtrar = function(tipo, carousel){
 		var filtrados;
@@ -85,10 +87,21 @@
 							"url("+elem.urlbg+") no-repeat center center fixed"});
 		if (typeof carousel != 'undefined') carousel.reload(opciones);
 	} 
+
 	$(document).ready(function() {
 		$("img").mousedown(function(){	return false; 	});
 		
 		var carousel = $("#carousel").waterwheelCarousel(opciones);
+		
+		$("#carousel").swipe({
+			swipeLeft:function(event,direction,distance,duration,fingerCount){
+				carousel.prev();
+			},
+			swipeRight:function(event,direction,distance,duration,fingerCount){
+				carousel.next();
+			},
+			fingers:'all'
+		});
 		
 		$('#prev').bind('click', function () {
 			carousel.prev();
@@ -155,7 +168,7 @@
 					{"id": {{campeonato.id}},
 					"tipo": '{{campeonato.tipo}}',
 					"urlbg": '{{campeonato.imagen_fondo.url}}',
-					"imgcopa":"{% if campeonato.imagen_copa%}{{ campeonato.imagen_copa.url }}{% else %}{% static 'img/estrella.png' %}{% endif %}",
+					"imgcopa":"{% if campeonato.tipo == 'INT' %}{{ campeonato.imagen_copa.url }}{% else %}{% static 'img/estrella.png' %}{% endif %}",
 					"url": "{% url 'datos' campeonato.id %}",
 					"titulo": "{{ campeonato.titulo_es }}",
 					"anio" : "{{ campeonato.anio }}"
