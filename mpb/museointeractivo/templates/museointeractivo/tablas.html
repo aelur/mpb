@@ -104,8 +104,6 @@
 		</table>
 	</div>
 	</div>
-	<div class="up"> < </div>
-	<div class="down"> ></div>
 	
 	<div class="tablaimg">
 		<img src="{% static 'img/campania.png' %}" id="imgcampania">
@@ -179,8 +177,6 @@
 			$('#imgcampania').on('click', handler_clicker);
 		};
 	};
-	if ($(document).height() < 100) 
-		$('.down').fadeOut();
 	$(document).ready(function() {
 	handler_imagenes();	
 	$("img").mousedown(function(){	return false; 	});
@@ -268,27 +264,12 @@
 		};
 	});
 	
-		$(window).scroll(function(){
-			if ($(this).scrollTop() > 100) {
-				$('.up').fadeIn();
-				$('.down').fadeOut();
-			} else {
-				$('.up').fadeOut();
-				$('.down').fadeIn();
-			}
-		});
-		$('.up').on('click',function(){
-			$('html, body').animate({scrollTop : 0},800);
-		});
-		$('.down').on('click',function(){
-			var n = $(document).height();
-			$('html, body').animate({scrollTop : n},800);
-	
-		});
+		
+		
 	});
 	$("#1").css('opacity',1);
 	$("#a1").css('opacity',1);
-	$('.up').fadeOut();
+	
 	$('#img{{ tabla_activa }}').addClass('activa');
 	
 </script>

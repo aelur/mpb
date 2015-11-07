@@ -44,17 +44,23 @@
 			<div class="imgbox" style="background: url('{% if campeonato.imagen_formacion %}{{ campeonato.imagen_formacion.url }}{% endif %}')">
 				<img src="{% static 'img/lupa.png' %}" class="lupa">
 			</div></a>
-			<div class="video vid1" id="activevid">
+			{% if campeonato.video2 %}
+			<div class="video vid1" id="activevid" 
+					{% if not campeonato.video3 %} style="transform:translateX(45px) translateY(15px)" {% endif %}
+				>
 				<video id="video1" type="video/avi" muted>
 					<source src="{{ campeonato.video2.url }}" type="video/mp4">
 				</video>
 				<img src="{% static 'img/play.png' %}" class="play">
 			</div>
+			{% endif %}
+			{% if campeonato.video3 %}
 			<div class="video vid2" id="othervid">
 				<video id="video2" type="video/avi" muted>
 					<source src="{{ campeonato.video3.url }}" type="video/mp4">
 				</video>
 			</div>
+			{% endif %}
 			<div class="tablas">
 				<a href="{% url 'tablas' campeonato.id 'jugadores' %}"><div id="jugadores"><img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas</div></a>
 				<a href="{% url 'tablas' campeonato.id 'campania' %}"><div id="campania"><img src="{% static 'img/campania.png' %}"><span>></span> Resultados</div></a>
@@ -188,9 +194,14 @@
 					$video2 = $('#video2'),
 					$video2SRC = $('source', $video2).attr('src');					
 				$('#videocentral source').attr('src', $video1SRC);
-				$('#video1 source').attr('src', $video2SRC);
-				$('#video2 source').attr('src', $videoCentralSRC);
+				{% if campeonato.video3 %}
+					$('#video1 source').attr('src', $video2SRC);
+					$('#video2 source').attr('src', $videoCentralSRC);
+				{% else %}
+					$('#video1 source').attr('src', $videoCentralSRC);
+				{% endif %}
 				$videoCentral.get(0).load();
+				{% if campeonato.video3 %}
 				$(this).velocity({
 					scaleX: 1,
 					scaleY: 1,
@@ -209,6 +220,19 @@
 				$segundo.attr('id', 'activevid');
 				$segundo.append('<img src="{% static 'img/play.png' %}" class="play">');
 				
+				{% else %}
+				$(this).append('<img src="{% static 'img/play.png' %}" class="play">');
+				
+					$(this).velocity({
+					scaleX: 1,
+					scaleY: 1,
+					translateX:45,
+					translateY:15,
+					opacity: 1,
+
+					});
+				{% endif %}
+
 				$videoCentral.get(0).play();
 			};
 		});

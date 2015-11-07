@@ -44,8 +44,8 @@ class campeonato(models.Model):
 							help_text='Texto de curiosidades - obligatorio si es nacional.')
 
 	video1 = models.FileField(upload_to='')
-	video2 = models.FileField(upload_to='')
-	video3 = models.FileField(upload_to='')
+	video2 = models.FileField(upload_to='',blank=True)
+	video3 = models.FileField(upload_to='',blank=True)
 	tablas = models.FileField(upload_to=settings.MEDIA_ROOT, 
 			help_text="Archivo Excel XLSX con información de: posiciones del campeonato (pestaña 'posiciones'), "+
 							"jugadores (pestaña 'jugadores'), y la campaña (pestaña 'campania').")

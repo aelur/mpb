@@ -14,7 +14,7 @@ body{
 	width: 100%;
 	overflow: hidden;  
 	background-size: cover !important;
-	cursor: none !important;
+	/*cursor: none !important;*/
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 }
@@ -87,7 +87,7 @@ body{
 	margin-bottom: 5%;
 	left: 50%;
 	transform: translate(-50%, 0);
-	z-index: 4;
+	z-index: 0;
 }
 .responsive{
 	height: 100%;
@@ -198,13 +198,16 @@ body{
 	bottom: 5%;
 	left: 0;
     width:69%;
+    height:400px;
 	height: 250px;
 	overflow-x:hidden;
+	overflow-Y: hidden;
     text-align: center;
  	left: 50%;
 	transform: translate(-50%, 0); 
   }
  #carousel img:hover{
+ 	width:;
 	transform: scale(1.4);
  }
 
@@ -642,6 +645,10 @@ tr:nth-child(even) {
 	opacity:1;
 	width:60%;
 	display: none;
+}
+.arrowback{
+	position:fixed;
+	z-index:10;
 }
 .arrowback:hover{
 	position: fixed;
