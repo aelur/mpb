@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from django import forms
 import xlrd
 
-from .models import campeonato
+from museointeractivo.models import campeonato
 
 def extensionEsInvalida(nombre, ext):
 	tam = len(ext)
@@ -78,6 +78,14 @@ class campeonatoForm(forms.ModelForm):
 			err.append('El excel con las tablas debe tener la extension XLSX.')
 		validarExcel(excel, err)
 
+		videoBoca = self.cleaned_data['videoBoca']
+		videoMundo = self.cleaned_data['videoMundo']
+		videoArgentina = self.cleaned_data['videoArgentina']
+		if (extensionEsInvalida(videoBoca.name,'mp4') or
+			(videoMundo is not None and extensionEsInvalida(videoMundo.name,'mp4') ) or
+			(videoArgentina is not None and extensionEsInvalida(videoArgentina.name,'mp4') ) ):
+			err.append('Los videos deben tener la extension mp4.')
+
 		if err:
 			raise forms.ValidationError(err)
 
@@ -94,7 +102,7 @@ class campeonatoAdmin(admin.ModelAdmin):
 						('imagen_campo','img_campo_thumb'),
 						('imagen_formacion','img_formacion_thumb'),
 						]}),
-		('Videos', {'fields': [('video1', 'video2', 'video3')]}),
+		('Videos', {'fields': [('videoBoca', 'videoMundo', 'videoArgentina')]}),
 		('Información', 
 			{'fields': [('curiosidades_es', 'curiosidades_en', 'curiosidades_por'),'tablas']}),
 	]

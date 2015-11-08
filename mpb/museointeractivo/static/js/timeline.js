@@ -4,6 +4,39 @@ var getNombreUnico= function(dato){
 	return nombre.substr(0,nombre.lastIndexOf("_"));
 }
 
+var traducir = function(lenguaje,
+	traducir_contenido_dinamico_es,
+	traducir_contenido_dinamico_en,
+	traducir_contenido_dinamico_por,
+	lenguaje_pantalla,
+	traducirLinks){
+	if(lenguaje=='es'){
+		$('.todos').text('TODOS');
+		$('.nac').text('NACIONALES');
+		$('.int').text('INTERNACIONALES');
+		$('.nombre').text($('#copas_active').find('.titulo').text());
+		traducir_contenido_dinamico_es();
+		lenguaje_pantalla='es';
+	}
+	if(lenguaje=='en'){
+		$('.todos').text('ALL');
+		$('.nac').text('NATIONALS');
+		$('.int').text('INTERNATIONALS');
+		$('.nombre').text($('#copas_active').find('.titulo').text());
+		traducir_contenido_dinamico_en();
+		lenguaje_pantalla='en';
+	}
+	if(lenguaje=='por'){
+		$('.todos').text('TODOS');
+		$('.nac').text('NACIONAIS');
+		$('.int').text('INTERNACIONAIS');
+		$('.nombre').text($('#copas_active').find('.titulo').text());
+		traducir_contenido_dinamico_por();
+		lenguaje_pantalla='por';
+	}
+	traducirLinks(lenguaje_pantalla);
+}
+
 
 var setup_timeline = function(datos_campeonatos,
 	traducir_contenido_dinamico_es,
@@ -11,7 +44,15 @@ var setup_timeline = function(datos_campeonatos,
 	traducir_contenido_dinamico_por,
 	lenguaje_pantalla,
 	traducirLinks){
-	
+			
+			traducir(lenguaje_pantalla,
+					traducir_contenido_dinamico_es,
+					traducir_contenido_dinamico_en,
+					traducir_contenido_dinamico_por,
+					lenguaje_pantalla,
+					traducirLinks);
+
+
 	var prevCentroCarousel = $('.carousel-center').attr('alt');
 
 	// OPCIONES DEL CAROUSEL
@@ -102,7 +143,12 @@ var setup_timeline = function(datos_campeonatos,
 
 	var default_starter = $.grep(datos_campeonatos,function(elem,index){
 		return elem.anio=="2000";
-	})[0].id;
+	})[0];
+	if (typeof default_starter == 'undefined'){
+		default_starter = 1;
+	} else {
+		default_starter = default_starter.id;
+	}
 
 	$(document).ready(function() {
 		//Levantar Carousel	
@@ -149,31 +195,12 @@ var setup_timeline = function(datos_campeonatos,
 				$(this).attr('id','lang_active');
 				$(this).find("img").animate({opacity:1});	
 				var lenguaje = $(this).find("img").attr('id');
-				if(lenguaje=='es'){
-					$('.todos').text('TODOS');
-					$('.nac').text('NACIONALES');
-					$('.int').text('INTERNACIONALES');
-					$('.nombre').text($('#copas_active').find('.titulo').text());
-					traducir_contenido_dinamico_es();
-					lenguaje_pantalla='es';
-				}
-				if(lenguaje=='en'){
-					$('.todos').text('ALL');
-					$('.nac').text('NATIONALS');
-					$('.int').text('INTERNATIONALS');
-					$('.nombre').text($('#copas_active').find('.titulo').text());
-					traducir_contenido_dinamico_en();
-					lenguaje_pantalla='en';
-				}
-				if(lenguaje=='por'){
-					$('.todos').text('TODOS');
-					$('.nac').text('NACIONAIS');
-					$('.int').text('INTERNACIONAIS');
-					$('.nombre').text($('#copas_active').find('.titulo').text());
-					traducir_contenido_dinamico_por();
-					lenguaje_pantalla='por';
-				}
-				traducirLinks(lenguaje_pantalla);
+				traducir(lenguaje,
+					traducir_contenido_dinamico_es,
+					traducir_contenido_dinamico_en,
+					traducir_contenido_dinamico_por,
+					lenguaje_pantalla,
+					traducirLinks);
 			}
 		});
 	});

@@ -15,7 +15,14 @@ var traducirLinks = function(lenguaje_pantalla){
 	$("a").each(function(){
 		var valAntig = $(this).attr("href");
 		valAntig = valAntig.substr(0,valAntig.lastIndexOf('/')); 
-		valAntig = valAntig.substr(0,valAntig.lastIndexOf('/')+1); 
-		$(this).attr("href", valAntig+lenguaje_pantalla+"/");
+		if (valAntig == ""){
+			 $(this).attr("href", "/"+lenguaje_pantalla+"/");
+		}else{
+			if (valAntig.indexOf('/media/') == -1 && 
+				valAntig.indexOf('/static/') == -1 ){
+					valAntig = valAntig.substr(0,valAntig.lastIndexOf('/')+1); 
+					$(this).attr("href", valAntig+lenguaje_pantalla+"/");
+			}
+		};
 	});
 };

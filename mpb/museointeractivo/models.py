@@ -22,6 +22,7 @@ class campeonato(models.Model):
 	imagen_campo = models.ImageField(upload_to='', 
 							default='',
 							blank=True,
+							verbose_name='Imagen de Posiciones',
 							help_text='Gráfico con formación del equipo - obligatorio si es Internacional.')
 	imagen_formacion = models.ImageField(upload_to='', 
 							default='',
@@ -43,14 +44,22 @@ class campeonato(models.Model):
 							blank=True,
 							help_text='Texto de curiosidades - obligatorio si es nacional.')
 
-	video1 = models.FileField(upload_to='')
-	video2 = models.FileField(upload_to='',blank=True)
-	video3 = models.FileField(upload_to='',blank=True)
+	videoBoca = models.FileField(upload_to='',
+							verbose_name='Video de Boca')
+	videoMundo = models.FileField(upload_to='',
+							blank=True,
+							verbose_name='Video del Mundo')
+	videoArgentina = models.FileField(upload_to='',
+							blank=True,
+							verbose_name='Video de la Argentina')
 	tablas = models.FileField(upload_to=settings.MEDIA_ROOT, 
 			help_text="Archivo Excel XLSX con información de: posiciones del campeonato (pestaña 'posiciones'), "+
 							"jugadores (pestaña 'jugadores'), y la campaña (pestaña 'campania').")
 
 	def __str__(self):
+		return unicode(self.titulo_es)
+
+	def __unicode__(self):
 		return self.titulo_es
 
 	def img_copa_thumb(self):
@@ -94,19 +103,19 @@ class campeonato(models.Model):
 			return ''
 		path = self.curiosidades_es.url
 		with open(path) as fp:
-			return fp.read().replace('\n', '<br>')
+			return fp.read().replace('\n', '<br>').replace('\r', '<br>')
 	def get_curiosidades_en(self):
 		if (not bool(self.curiosidades_en)):
 			return ''
 		path = self.curiosidades_en.url
 		with open(path) as fp:
-			return fp.read().replace('\n', '<br>')
+			return fp.read().replace('\n', '<br>').replace('\r', '<br>')
 	def get_curiosidades_por(self):
 		if (not bool(self.curiosidades_por)):
 			return ''
 		path = self.curiosidades_por.url
 		with open(path) as fp:
-			return fp.read().replace('\n', '<br>')
+			return fp.read().replace('\n', '<br>').replace('\r', '<br>')
 
 	def leer_tablas(self, nombre_tabla):
 		wb = xlrd.open_workbook(self.tablas.url)

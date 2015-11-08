@@ -31,10 +31,10 @@
 		<div class="central">
 			<span class="titulo">{{ campeonato.titulo_es }}</span>
 			<div class="videobox">
-				<video id="videocentral" type="video/avi" muted autoplay>
-					<source src="{{ campeonato.video1.url }}" type="video/mp4">
+				<video id="videocentral" type="video/avi" muted autoplay preload>
+					<source src="{{ campeonato.videoBoca.url }}" type="video/mp4">
 				</video>
-			<img src="{% static 'img/stop.png' %}" id="stop" class="control">
+				<span>Boca Campeón</span>
 			</div>
 		</div>
 		<div class="media">
@@ -42,21 +42,24 @@
 			<div class="imgbox" style="background: url('{% if campeonato.imagen_formacion %}{{ campeonato.imagen_formacion.url }}{% endif %}')">
 				<img src="{% static 'img/lupa.png' %}" class="lupa">
 			</div></a>
-			{% if campeonato.video2 %}
-			<div class="video vid1" id="activevid" 
-					{% if not campeonato.video3 %} style="transform:translateX(45px) translateY(15px)" {% endif %}
-				>
-				<video id="video1" type="video/avi" muted autoplay>
-					<source src="{{ campeonato.video2.url }}" type="video/mp4">
+
+			{% if campeonato.videoMundo %}
+				<div class="video vid1"
+					{% if not campeonato.videoArgentina %} 
+						style="transform:translateX(45px) translateY(15px)" 
+					{% endif %}>
+				<video id="video1" type="video/avi" muted autoplay preload>
+					<source src="{{ campeonato.videoMundo.url }}" type="video/mp4">
 				</video>
-				<img src="{% static 'img/play.png' %}" class="play">
+				<span></span>
 			</div>
 			{% endif %}
-			{% if campeonato.video3 %}
-			<div class="video vid2" id="othervid">
-				<video id="video2" type="video/avi" muted autoplay>
-					<source src="{{ campeonato.video3.url }}" type="video/mp4">
+			{% if campeonato.videoArgentina %}
+			<div class="video vid2">
+				<video id="video2" type="video/avi" muted autoplay preload>
+					<source src="{{ campeonato.videoArgentina.url }}" type="video/mp4">
 				</video>
+				<span>La Argentina en el año {{ campeonato.anio }}</span>
 			</div>
 			{% endif %}
 			<div class="tablas">
@@ -90,7 +93,11 @@
 		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas');
 		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span style="margin-left: 27px;">></span> Resultados');
 		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Tabla de Posiciones');
-					
+
+		$(".vid1").find("span").text("{{ campeonato.anio }} en el mundo");
+		$(".vid2").find("span").text("La Argentina en el año {{ campeonato.anio }}");
+		$(".videobox").find("span").text("Boca Campeón");
+
 		$('.titulo').text('{{ campeonato.titulo_es }}');
 		$('.divtext > p').text('{{ campeonato.get_curiosidades_es }}');
 	};
@@ -98,7 +105,11 @@
 		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonists');
 		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 13px;">></span> Results');
 		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Scores');
-					
+		
+		$(".vid1").find("span").text("{{ campeonato.anio }} in the world");
+		$(".vid2").find("span").text("Argentina in the year {{ campeonato.anio }}");
+		$(".videobox").find("span").text("Boca, the Champion");
+
 		$('.titulo').text('{{ campeonato.titulo_en }}');
 		$('.divtext > p').text('{{ campeonato.get_curiosidades_en }}');
 	};
@@ -106,7 +117,11 @@
 		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas');
 		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 28px;">></span> Resultados');
 		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> POSIÇÕES');
-					
+		
+		$(".vid1").find("span").text("{{ campeonato.anio }} em todo o mundo");
+		$(".vid2").find("span").text("Argentina em {{ campeonato.anio }}");
+		$(".videobox").find("span").text("Boca, campeão");
+
 		$('.titulo').text('{{ campeonato.titulo_por }}');
 		$('.divtext > p').text('{{ campeonato.get_curiosidades_por }}');
 

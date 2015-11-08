@@ -379,11 +379,17 @@ body{
 	text-shadow: #FFF 0 0 5px;
 	transform: scale(1.5);
 }
+video {	
+    min-width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    object-fit: cover;
+}
 .video{
 	margin-top: 20px;
     position: absolute;
-    width: 251px;
-    height: 140px;
+    width: 250px;
+    height: 250px;
     background: rgba(255,255,255,0.2);
 	overflow: hidden;
 	border: 1px solid rgba(255,255,255,0.8);	
@@ -423,16 +429,29 @@ body{
 	text-shadow: #FFF 10 10 10px;
 }
 .vid1{
-    transform: translateX(0px) translateY(15px);
-    z-index: 3;
+    transform: translateX(0px) translateY(24px);
 }
 .vid2{
-    transform: translateX(25px) translateY(45px);
-    z-index: 0;
+    transform: translateX(282px) translateY(24px);
+}
+.vid2 span{
+    bottom: 73px !important;	
+}
+.video span, .videobox span{
+	font-family: myriad;
+    text-transform: uppercase;
+    color: white;
+    opacity: 0.7;
+    font-size: 20pt;
+    position: relative;
+    bottom: 57px;
+    background-color: rgba(43,35,133,1);
+    display: inherit;
+
 }
 .media .imgbox{
-	width:80%;
-    height: 250px;
+	width: 532px;
+    height: 331px;
     background: rgba(255,255,255,0.2);
 	overflow: hidden;
 	border: 1px solid rgba(255,255,255,0.8);	
@@ -440,8 +459,8 @@ body{
 }
 .videobox{
     margin-top: 30px;
-    width: 98%;
-    height: 650px;
+    width: 600px;
+    height: 480px;
 	border: 1px solid rgba(255,255,255,0.8);
 	overflow: hidden;
 }
@@ -515,8 +534,6 @@ body{
 	z-index: 9;
 }
 #videocentral {
-    position: absolute;
-	width:100%;
 }
 ::-webkit-scrollbar {
     width: 12px;
