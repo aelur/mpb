@@ -6,7 +6,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^datos/(?P<campeonato_id>[0-9]+)/$', views.datos, name='datos'),
-    url(r'^tablas/(?P<campeonato_id>[0-9]+)/(?P<tabla_sel>(jugadores|campania|posiciones))/$', views.tablas, name='tablas'),
+    url(r'^datos/(?P<campeonato_id>[0-9]+)/(?P<lenguaje>(es|por|en))/$', views.datos, name='datos'),
+    url(r'^tablas/(?P<campeonato_id>[0-9]+)/(?P<tabla_sel>(jugadores|campania|posiciones))/(?P<lenguaje>(es|por|en))/$', views.tablas, name='tablas'),
 ]  
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

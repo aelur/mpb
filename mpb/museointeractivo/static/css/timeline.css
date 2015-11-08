@@ -41,7 +41,7 @@ body{
 #body_tabla{
 	overflow-x: hidden;
 	position: absolute;
-	top: 90px;
+	padding-tops: 90px;
 	width: 100%;
 	height:100%;
 }
@@ -362,7 +362,7 @@ body{
 	position: absolute;
 	right: 0px;
     margin-right: 10%;
-    margin-top: 5%;
+    margin-top: 7%;
 	padding: 5px;
 	text-align: center;
 }

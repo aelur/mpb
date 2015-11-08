@@ -11,6 +11,7 @@ from .models import campeonato
 
 def extensionEsInvalida(nombre, ext):
 	tam = len(ext)
+	nombre = str(nombre)
 	return (nombre[-tam:].upper() != ext.upper())
 
 def validarExcel(excel, err):
@@ -52,7 +53,7 @@ class campeonatoForm(forms.ModelForm):
 		cleaned_data = super(campeonatoForm, self).clean()
 		tipo = cleaned_data.get('tipo')
 		err=[]
-		# raise forms.ValidationError(self.cleaned_data['tablas'])
+		#raise forms.ValidationError(self.cleaned_data['curiosidades_es'].name)
 		if (tipo=='INT'):
 			if (self.cleaned_data['imagen_copa'] is None):
 				err.append('Para los campeonatos internacionales es necesario subir una imagen de copa')

@@ -31,12 +31,10 @@
 		<div class="central">
 			<span class="titulo">{{ campeonato.titulo_es }}</span>
 			<div class="videobox">
-				<video id="videocentral" type="video/avi" muted>
+				<video id="videocentral" type="video/avi" muted autoplay>
 					<source src="{{ campeonato.video1.url }}" type="video/mp4">
 				</video>
 			<img src="{% static 'img/stop.png' %}" id="stop" class="control">
-			<img src="{% static 'img/play.png' %}" id="play" class="play">
-			<img src="{% static 'img/reload.png' %}" id="reload" class="control">
 			</div>
 		</div>
 		<div class="media">
@@ -48,7 +46,7 @@
 			<div class="video vid1" id="activevid" 
 					{% if not campeonato.video3 %} style="transform:translateX(45px) translateY(15px)" {% endif %}
 				>
-				<video id="video1" type="video/avi" muted>
+				<video id="video1" type="video/avi" muted autoplay>
 					<source src="{{ campeonato.video2.url }}" type="video/mp4">
 				</video>
 				<img src="{% static 'img/play.png' %}" class="play">
@@ -56,21 +54,21 @@
 			{% endif %}
 			{% if campeonato.video3 %}
 			<div class="video vid2" id="othervid">
-				<video id="video2" type="video/avi" muted>
+				<video id="video2" type="video/avi" muted autoplay>
 					<source src="{{ campeonato.video3.url }}" type="video/mp4">
 				</video>
 			</div>
 			{% endif %}
 			<div class="tablas">
-				<a href="{% url 'tablas' campeonato.id 'jugadores' %}"><div id="jugadores"><img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas</div></a>
-				<a href="{% url 'tablas' campeonato.id 'campania' %}"><div id="campania"><img src="{% static 'img/campania.png' %}"><span>></span> Resultados</div></a>
-				<a href="{% url 'tablas' campeonato.id 'posiciones' %}"><div id="posiciones"><img src="{% static 'img/posiciones.png' %}"><span>></span>Tabla de Posiciones</div></a>
+				<a href="{% url 'tablas' campeonato.id 'jugadores' lenguaje %}"><div id="jugadores"><img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas</div></a>
+				<a href="{% url 'tablas' campeonato.id 'campania' lenguaje %}"><div id="campania"><img src="{% static 'img/campania.png' %}"><span>></span> Resultados</div></a>
+				<a href="{% url 'tablas' campeonato.id 'posiciones' lenguaje %}"><div id="posiciones"><img src="{% static 'img/posiciones.png' %}"><span>></span>Tabla de Posiciones</div></a>
 			</div>
 			
 		</div>
 		<div class="right" id="rightdatos">
 			<div class="typesetter">
-				<div class="selector" id="lang_active"><img src="{% static 'img/es.png' %}" id="es"></div>
+				<div class="selector" id="lang"><img src="{% static 'img/es.png' %}" id="es"></div>
 				<div class="selector" id="lang"><img src="{% static 'img/en.png' %}" id="en"></div>
 				<div class="selector" id="lang"><img src="{% static 'img/por.png' %}" id="por"></div>
 			</div>
@@ -85,116 +83,36 @@
 <script type="text/javascript" src="{% static 'js/jquery.velocity.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.colorbox-min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.touchSwipe.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/contextuales.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/datos.js' %}"></script>
 <script type="text/javascript">
-	$("#body_datos").swipe({
-		swipeUp:function(event,direction,distance,duration,fingerCount){
-			window.location.href = "{% url 'index' %}";
-		},
-		swipeLeft:function(event,direction,distance,duration,fingerCount){
-			window.location.href = "{% url 'index' %}";
-		},
-		fingers:'all'
-	});
-	$(document).ready(function() {
-		$("#videocentral").on('click', function(e){
-			var $video = $(this).get(0);
-			if ($video.paused){
-				$video.play();
-			}else {
-				$video.pause();
-			}
-		});
-		$("#videocentral").bind('pause', function(e) {			
-			$('#play').velocity({opacity:1});
-		});
-		$("#videocentral").bind('play', function(e) {			
-			$('#play').velocity({opacity:0});
-		});
-		$("#videocentral").bind('ended', function(e) {			
-			$('#play').velocity({opacity:1});
-		});
-		$('#play').on('click', function(){
-			$('#videocentral').get(0).play();
-		});
-		$('#stop').on('click', function(){
-			$('#videocentral').get(0).pause();
-		});		
-		$('#reload').on('click', function(){
-			$('#videocentral').get(0).pause();
-			$('#videocentral').get(0).currentTime = '0';
-			$('#videocentral').get(0).play();
-		});
-		$('.selector').click(function(){
-			if ($(this).attr('id') == 'copas_active' || $(this).attr('id') == 'copas' ){
-				$objActivo = $("#copas_active");			
-				$objActivo.find(".titulo").animate({opacity:0, 'margin-top':40});	
-				$objActivo.find(".flecha").animate({opacity:0, 'margin-top':40});	
-				$objActivo.attr('id','copas');
-				$(this).attr('id','copas_active');
-				$(this).find(".titulo").animate({opacity:0.7, 'margin-top':97});	
-				$(this).find(".flecha").animate({opacity:0.7, 'margin-top':50});	
-			}else{
-				$objActivo = $("#lang_active");
-				$objActivo.find("img").animate({opacity:0.4});		
-				$objActivo.attr('id','lang');
-				$(this).attr('id','lang_active');
-				$(this).find("img").animate({opacity:1});	
-				var lenguaje = $(this).find("img").attr('id');
-				if(lenguaje=='es'){
-					$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas');
-					$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span style="margin-left: 27px;">></span> Resultados');
-					$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Tabla de Posiciones');
-					$('#curiosidades_texto').text('CURIOSIDADES');
+	var traducir_contenido_dinamico_es = function(){
+		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas');
+		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span style="margin-left: 27px;">></span> Resultados');
+		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Tabla de Posiciones');
+					
+		$('.titulo').text('{{ campeonato.titulo_es }}');
+		$('.divtext > p').text('{{ campeonato.get_curiosidades_es }}');
+	};
+	var traducir_contenido_dinamico_en = function(){
+		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonists');
+		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 13px;">></span> Results');
+		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Scores');
+					
+		$('.titulo').text('{{ campeonato.titulo_en }}');
+		$('.divtext > p').text('{{ campeonato.get_curiosidades_en }}');
+	};
+	var traducir_contenido_dinamico_por = function(){
+		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas');
+		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 28px;">></span> Resultados');
+		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> POSIÇÕES');
+					
+		$('.titulo').text('{{ campeonato.titulo_por }}');
+		$('.divtext > p').text('{{ campeonato.get_curiosidades_por }}');
 
-					$('.titulo').text('{{ campeonato.titulo_es }}');
-					$('.divtext > p').text('{{ campeonato.get_curiosidades_es }}');
-				};
-				if(lenguaje=='en'){
-					$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonists');
-					$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 13px;">></span> Results');
-					$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Scores');
-					$('#curiosidades_texto').text('CURIOSITIES');	
-
-					$('.titulo').text('{{ campeonato.titulo_en }}');
-					$('.divtext > p').text('{{ campeonato.get_curiosidades_en }}');
-
-				};
-				if(lenguaje=='por'){
-					$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas');
-					$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 28px;">></span> Resultados');
-					$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> POSIÇÕES');
-					$('#curiosidades_texto').html('<br>TRIVIA');
-
-					$('.titulo').text('{{ campeonato.titulo_por }}');
-					$('.divtext > p').text('{{ campeonato.get_curiosidades_por }}');
-				};
-			}
-		});
-		$("#formacion").colorbox({retinaImage:true,className:'modal',closeButton:true, overlayClose:true});
-		$('.video').on('click',function(){
-			$("#videocentral").get(0).pause();
-			if ($(this).attr('id') == 'activevid'){
-				$(this).find('img').remove();
-				$(this).velocity({
-					perspective: '+=300px',
-					rotateY: '+=360deg',
-					translateX:-503,
-					translateY:-26,
-					scaleX: 2.53,
-					scaleY: 4.62,
-					opacity:0.3,
-					duration: 500,
-					});
-				$(this).css("z-index", "0");
-				//CAMBIO EL SRC DEL SELECCIONADO EN EL ACTIVO				
-				var $videoCentral = $('#videocentral'),
-					$videoCentralSRC = $('source', $videoCentral).attr('src'),	
-					$video1 = $('#video1'),
-					$video1SRC = $('source', $video1).attr('src'),	
-					$video2 = $('#video2'),
-					$video2SRC = $('source', $video2).attr('src');					
-				$('#videocentral source').attr('src', $video1SRC);
-				{% if campeonato.video3 %}
+	};
+	var loadVideos = function(){
+		{% if campeonato.video3 %}
 					$('#video1 source').attr('src', $video2SRC);
 					$('#video2 source').attr('src', $videoCentralSRC);
 				{% else %}
@@ -218,10 +136,8 @@
 				$segundo.css("z-index", "3");
 				$(this).attr('id', 'othervid');
 				$segundo.attr('id', 'activevid');
-				$segundo.append('<img src="{% static 'img/play.png' %}" class="play">');
 				
 				{% else %}
-				$(this).append('<img src="{% static 'img/play.png' %}" class="play">');
 				
 					$(this).velocity({
 					scaleX: 1,
@@ -233,13 +149,17 @@
 					});
 				{% endif %}
 
-				$videoCentral.get(0).play();
-			};
-		});
-	});
-	$("#1").css('opacity',1);
-	$("#a1").css('opacity',1);
-	$("img").mousedown(function(){	return false; 	});
+	};
+	var lenguaje_pantalla = "{{ lenguaje }}";
+	toggleTranslation(lenguaje_pantalla);
+	setup_datos(
+		traducir_contenido_dinamico_es,
+		traducir_contenido_dinamico_en,
+		traducir_contenido_dinamico_por,
+		lenguaje_pantalla,
+		loadVideos,
+		traducirLinks);
 </script>
 </html>
+
 
