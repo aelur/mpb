@@ -2,6 +2,7 @@
 from django.db import models
 from django.conf import settings
 import datetime, xlrd
+import os
 
 class campeonato(models.Model):		
 
@@ -28,17 +29,17 @@ class campeonato(models.Model):
 							default='',
 							verbose_name='Imagen del Equipo')
 
-	curiosidades_es = models.FileField(upload_to=settings.MEDIA_ROOT,  
+	curiosidades_es = models.FileField(upload_to='',  
 							verbose_name='Curiosidades - Español',
 							default='',
 							blank=True,
 							help_text='Texto de curiosidades - obligatorio si es nacional.')
-	curiosidades_en = models.FileField(upload_to=settings.MEDIA_ROOT,  
+	curiosidades_en = models.FileField(upload_to='',  
 							verbose_name='Curiosidades - Inglés',
 							default='',
 							blank=True,
 							help_text='Texto de curiosidades - obligatorio si es nacional.')
-	curiosidades_por = models.FileField(upload_to=settings.MEDIA_ROOT,  
+	curiosidades_por = models.FileField(upload_to='',  
 							verbose_name='Curiosidades - Portugués',
 							default='',
 							blank=True,
@@ -52,7 +53,7 @@ class campeonato(models.Model):
 	videoArgentina = models.FileField(upload_to='',
 							blank=True,
 							verbose_name='Video de la Argentina')
-	tablas = models.FileField(upload_to=settings.MEDIA_ROOT, 
+	tablas = models.FileField(upload_to='', 
 			help_text="Archivo Excel XLSX con información de: posiciones del campeonato (pestaña 'posiciones'), "+
 							"jugadores (pestaña 'jugadores'), y la campaña (pestaña 'campania').")
 
@@ -98,27 +99,23 @@ class campeonato(models.Model):
 	def get_jugadores(self):
 		return self.leer_tablas('jugadores')
 
+	def get_curiosidades(self, curiosidades):
+		if (not bool(curiosidades)):
+			return ''
+		path = os.path.join(settings.PROJECT_PATH,curiosidades.url[1:])
+		with open(path) as fp:
+			return fp.read().replace('\n', '<br>').replace('\r', '<br>')
+			
 	def get_curiosidades_es(self):
-		if (not bool(self.curiosidades_es)):
-			return ''
-		path = self.curiosidades_es.url
-		with open(path) as fp:
-			return fp.read().replace('\n', '<br>').replace('\r', '<br>')
+		return self.get_curiosidades(self.curiosidades_es)
 	def get_curiosidades_en(self):
-		if (not bool(self.curiosidades_en)):
-			return ''
-		path = self.curiosidades_en.url
-		with open(path) as fp:
-			return fp.read().replace('\n', '<br>').replace('\r', '<br>')
+		return self.get_curiosidades(self.curiosidades_en)
 	def get_curiosidades_por(self):
-		if (not bool(self.curiosidades_por)):
-			return ''
-		path = self.curiosidades_por.url
-		with open(path) as fp:
-			return fp.read().replace('\n', '<br>').replace('\r', '<br>')
+		return self.get_curiosidades(self.curiosidades_por)
 
 	def leer_tablas(self, nombre_tabla):
-		wb = xlrd.open_workbook(self.tablas.url)
+		path = os.path.join(settings.PROJECT_PATH, self.tablas.url[1:])
+		wb = xlrd.open_workbook(path)
 		for s in wb.sheets():
 			if s.name != nombre_tabla:
 				continue

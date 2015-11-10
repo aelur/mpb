@@ -75,7 +75,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'mpb.wsgi.application'
 
 
@@ -103,16 +102,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+	
+# C:\Users\Agustina\Desktop\mpb\mpb\museointeractivo\static
+STATIC_PATH = os.path.join(PROJECT_PATH,'museointeractivo/static/')
+# C:\Users\Agustina\Desktop\mpb\mpb\static
+STATIC_ROOT = os.path.join(PROJECT_PATH, "static/")
 
-STATIC_PATH = os.path.join(PROJECT_PATH,'/static/')
-
-STATIC_ROOT = os.path.join(PROJECT_PATH, "/static/")
-
-STATIC_URL = os.path.join(PROJECT_PATH,'/static/')
+STATIC_URL = '/static/'
 
 #STATICFILES_DIRS = (
 #     STATIC_PATH,
 # )
 
+# C:\Users\Agustina\Desktop\mpb\mpb\media
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media/') # Absolute path to the media directory
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media') # Absolute path to the media directory
