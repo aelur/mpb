@@ -20,3 +20,8 @@ def tablas(request, campeonato_id, tabla_sel, lenguaje):
 	camp = campeonato.objects.get(pk=campeonato_id)
 	context = {	'campeonato': camp, 'tabla_activa' : tabla_sel, 'lenguaje' : lenguaje}
 	return render(request, 'museointeractivo/tablas.html', context)
+def datos_test(request, campeonato_id, lenguaje):
+	if lenguaje is None:
+		lenguaje = 'es'
+	context = {	'campeonato': campeonato.objects.get(pk=campeonato_id), 'lenguaje' : lenguaje }
+	return render(request, 'museointeractivo/datos_impress.html', context)

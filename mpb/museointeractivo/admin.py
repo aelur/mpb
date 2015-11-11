@@ -82,8 +82,8 @@ class campeonatoForm(forms.ModelForm):
 		videoMundo = self.cleaned_data['videoMundo']
 		videoArgentina = self.cleaned_data['videoArgentina']
 		if (extensionEsInvalida(videoBoca.name,'mp4') or
-			(videoMundo is not None and extensionEsInvalida(videoMundo.name,'mp4') ) or
-			(videoArgentina is not None and extensionEsInvalida(videoArgentina.name,'mp4') ) ):
+			(videoMundo and extensionEsInvalida(videoMundo.name,'mp4') ) or
+			(videoArgentina and extensionEsInvalida(videoArgentina.name,'mp4') ) ):
 			err.append('Los videos deben tener la extension mp4.')
 
 		if err:

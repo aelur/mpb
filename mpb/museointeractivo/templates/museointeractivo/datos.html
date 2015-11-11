@@ -9,14 +9,14 @@
     <LINK href="{% static 'css/colorbox.css' %}" rel="stylesheet" type="text/css">
   </head>
 <body style="background:url('{% static 'img/BG.jpg' %}')  no-repeat center center fixed">	
-<div id="body_datos">
+<div class="body_datos">
 	<div class="TOPBAR">
 		<!-- <div id="datos">
 			<div class="left"><img src="img/logo.png" class="logo"></div>
 		</div> -->
 		<a href="{% url 'index' %}"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
 		<div class="curiosidades">	<div class="light"></div>	
-				<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}">
+				<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
 				<span class="anio">{{ campeonato.anio }}</span>
 				{% if campeonato.tipo != 'NAC' %}
 				<img src="{{ campeonato.imagen_campo.url }}" style="width: 145%;height: auto;bottom: -70%;left: -80px;position: absolute;animation:none;">
@@ -46,7 +46,7 @@
 			{% if campeonato.videoMundo %}
 				<div class="video vid1"
 					{% if not campeonato.videoArgentina %} 
-						style="transform:translateX(45px) translateY(15px)" 
+						style="transform:translateX(134px) translateY(15px)" 
 					{% endif %}>
 				<video id="video1" type="video/avi" muted autoplay preload>
 					<source src="{{ campeonato.videoMundo.url }}" type="video/mp4">
@@ -55,7 +55,10 @@
 			</div>
 			{% endif %}
 			{% if campeonato.videoArgentina %}
-			<div class="video vid2">
+			<div class="video vid2"
+					{% if not campeonato.videoMundo %} 
+						style="transform:translateX(134px) translateY(15px)" 
+					{% endif %}>
 				<video id="video2" type="video/avi" muted autoplay preload>
 					<source src="{{ campeonato.videoArgentina.url }}" type="video/mp4">
 				</video>
@@ -91,8 +94,8 @@
 <script type="text/javascript">
 	var traducir_contenido_dinamico_es = function(){
 		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas');
-		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span style="margin-left: 27px;">></span> Resultados');
-		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Tabla de Posiciones');
+		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span style="margin-left: 24px;">></span> Resultados');
+		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span style="margin-left: 16px;">></span> Tabla de Posiciones');
 
 		$(".vid1").find("span").text("{{ campeonato.anio }} en el mundo");
 		$(".vid2").find("span").text("La Argentina en el año {{ campeonato.anio }}");
@@ -102,9 +105,9 @@
 		$('.divtext > p').text('{{ campeonato.get_curiosidades_es }}');
 	};
 	var traducir_contenido_dinamico_en = function(){
-		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonists');
+		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span style="margin-left: 32px;">></span> Protagonists');
 		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 13px;">></span> Results');
-		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Scores');
+		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span style="margin-left: 10px;">></span> Scores');
 		
 		$(".vid1").find("span").text("{{ campeonato.anio }} in the world");
 		$(".vid2").find("span").text("Argentina in the year {{ campeonato.anio }}");
@@ -114,9 +117,9 @@
 		$('.divtext > p').text('{{ campeonato.get_curiosidades_en }}');
 	};
 	var traducir_contenido_dinamico_por = function(){
-		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas');
-		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 28px;">></span> Resultados');
-		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> POSIÇÕES');
+		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span style="margin-left: 38px;">></span> Protagonistas');
+		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span style="margin-left: 26px;">></span> Resultados');
+		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span style="margin-left: 17px;">></span> POSIÇÕES');
 		
 		$(".vid1").find("span").text("{{ campeonato.anio }} em todo o mundo");
 		$(".vid2").find("span").text("Argentina em {{ campeonato.anio }}");
@@ -126,45 +129,6 @@
 		$('.divtext > p').text('{{ campeonato.get_curiosidades_por }}');
 
 	};
-	var loadVideos = function(){
-		{% if campeonato.video3 %}
-					$('#video1 source').attr('src', $video2SRC);
-					$('#video2 source').attr('src', $videoCentralSRC);
-				{% else %}
-					$('#video1 source').attr('src', $videoCentralSRC);
-				{% endif %}
-				$videoCentral.get(0).load();
-				{% if campeonato.video3 %}
-				$(this).velocity({
-					scaleX: 1,
-					scaleY: 1,
-					translateX:25,
-					translateY:45,
-					opacity: 0.4,			
-				});
-				$segundo = $('#othervid');
-				$segundo.velocity({
-					translateX: 0,
-					translateY: 15,
-					opacity: 1
-				});
-				$segundo.css("z-index", "3");
-				$(this).attr('id', 'othervid');
-				$segundo.attr('id', 'activevid');
-				
-				{% else %}
-				
-					$(this).velocity({
-					scaleX: 1,
-					scaleY: 1,
-					translateX:45,
-					translateY:15,
-					opacity: 1,
-
-					});
-				{% endif %}
-
-	};
 	var lenguaje_pantalla = "{{ lenguaje }}";
 	toggleTranslation(lenguaje_pantalla);
 	setup_datos(
@@ -172,7 +136,6 @@
 		traducir_contenido_dinamico_en,
 		traducir_contenido_dinamico_por,
 		lenguaje_pantalla,
-		loadVideos,
 		traducirLinks);
 </script>
 </html>

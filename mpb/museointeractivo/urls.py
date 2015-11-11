@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^(?P<lenguaje>(en|es|por))/$', views.index, name='index'),
     url(r'^$', views.index, name='index'),
     url(r'^datos/(?P<campeonato_id>[0-9]+)/(?P<lenguaje>(es|por|en))/$', views.datos, name='datos'),
+    url(r'^datos_test/(?P<campeonato_id>[0-9]+)/(?P<lenguaje>(es|por|en))/$', views.datos_test, name='datos_test'),
     url(r'^tablas/(?P<campeonato_id>[0-9]+)/(?P<tabla_sel>(jugadores|campania|posiciones))/(?P<lenguaje>(es|por|en))/$', views.tablas, name='tablas'),
 ] 

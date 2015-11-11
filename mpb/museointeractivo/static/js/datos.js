@@ -34,7 +34,6 @@ var setup_datos = function(
 	traducir_contenido_dinamico_en,
 	traducir_contenido_dinamico_por,
 	lenguaje_pantalla,
-	loadVideos,
 	traducirLinks){
 
 	traducir(lenguaje_pantalla,
@@ -46,10 +45,61 @@ var setup_datos = function(
 
 	$("#1").css('opacity',1);
 	$("#a1").css('opacity',1);
-
-	$(document).ready(function() {
+	
+	
+	var cargarVideo = function(video){
+		$(video).get(0).pause();
+		$(video).get(0).currentTime = '0';
+		$(video).get(0).play();
+	};
+	
+	$('#video1').on('click', function(){
+		var $videoCentral = $('#videocentral');
+		$videoCentral.get(0).pause();
 		
-		$("#videocentral").on('click', function(e){
+		var $videoCentralSRC = $('source', $videoCentral).attr('src'),	
+		$video1SRC = $('source', $(this)).attr('src');
+		
+		$('#videocentral source').attr('src', $video1SRC);
+		$('source', $(this)).attr('src', $videoCentralSRC);
+		
+		$('.videobox span').velocity({opacity:0, scaleX: 1.1, scaleY: 1.1},{ duration: 2});
+		$('.vid1 span').velocity({opacity:0, scaleX: 1.1, scaleY: 1.1},{ duration: 2});
+		var $titulo = $('.videobox span').text();
+		$('.videobox span').text($('.vid1 span').text());
+		$('.videobox span').velocity({opacity:0.8, scaleX: 1, scaleY: 1},{ duration: 200});
+		$('.vid1 span').text($titulo);
+		$('.vid1 span').velocity({opacity:0.8, scaleX: 1, scaleY: 1},{ duration: 200});
+		
+		cargarVideo($videoCentral);
+		cargarVideo($(this));
+	});
+	$('#video2').on('click', function(){
+		var $videoCentral = $('#videocentral');
+		$videoCentral.get(0).pause();
+		
+		var $videoCentralSRC = $('source', $videoCentral).attr('src'),	
+		$video2SRC = $('source', $(this)).attr('src');
+		
+		$('#videocentral source').attr('src', $video2SRC);
+		$('source', $(this)).attr('src', $videoCentralSRC);
+		
+		$('.videobox span').velocity({opacity:0, scaleX: 1.1, scaleY: 1.1},{ duration: 2});
+		$('.vid2 span').velocity({opacity:0, scaleX: 1.1, scaleY: 1.1},{ duration: 2});
+		var $titulo = $('.videobox span').text();
+		$('.videobox span').text($('.vid2 span').text());
+		$('.videobox span').velocity({opacity:0.8, scaleX: 1, scaleY: 1},{ duration: 200});
+		$('.vid2 span').text($titulo);
+		$('.vid2 span').velocity({opacity:0.8, scaleX: 1, scaleY: 1},{ duration: 200});
+		
+		cargarVideo($videoCentral);
+		cargarVideo($(this));
+		
+	});
+	
+	$(document).ready(function() {
+		$('.animada').attr('style','animation: pulse 1s infinite;');
+		/* $("#videocentral").on('click', function(e){
 			var $video = $(this).get(0);
 			if ($video.paused){
 				$video.play();
@@ -69,7 +119,7 @@ var setup_datos = function(
 		});
 		$('#play').on('click', function(){
 			$('#videocentral').get(0).play();
-		});
+		}); */
 
 		/*$('#stop').on('click', function(){
 			$('#videocentral').get(0).pause();
@@ -105,7 +155,7 @@ var setup_datos = function(
 				}
 			});
 		$("#formacion").colorbox({retinaImage:true,className:'modal',closeButton:true, overlayClose:true});
-		$('.video').on('click',function(){
+		/* $('.video').on('click',function(){
 			$("#videocentral").get(0).pause();
 			if ($(this).attr('id') == 'activevid'){
 					$(this).find('img').remove();
@@ -132,6 +182,6 @@ var setup_datos = function(
 
 					$videoCentral.get(0).play();
 				};
-			});
+			}); */
 	});
 }

@@ -10,12 +10,14 @@ var traducir = function(lenguaje,
 	traducir_contenido_dinamico_por,
 	lenguaje_pantalla,
 	traducirLinks){
+	
 	if(lenguaje=='es'){
 		$('.todos').text('TODOS');
 		$('.nac').text('NACIONALES');
 		$('.int').text('INTERNACIONALES');
 		$('.nombre').text($('#copas_active').find('.titulo').text());
 		traducir_contenido_dinamico_es();
+		
 		lenguaje_pantalla='es';
 	}
 	if(lenguaje=='en'){
@@ -24,6 +26,10 @@ var traducir = function(lenguaje,
 		$('.int').text('INTERNATIONALS');
 		$('.nombre').text($('#copas_active').find('.titulo').text());
 		traducir_contenido_dinamico_en();
+		
+		$('.todos').animate({'margin-left':-58});
+		$('.int').animate({'margin-left':-114});
+		$('.nac').animate({'margin-left':-90});
 		lenguaje_pantalla='en';
 	}
 	if(lenguaje=='por'){
@@ -33,7 +39,12 @@ var traducir = function(lenguaje,
 		$('.nombre').text($('#copas_active').find('.titulo').text());
 		traducir_contenido_dinamico_por();
 		lenguaje_pantalla='por';
+		
+		$('.todos').animate({'margin-left':-74});
+		$('.int').animate({'margin-left':-114});
+		$('.nac').animate({'margin-left':-90});
 	}
+	
 	traducirLinks(lenguaje_pantalla);
 }
 

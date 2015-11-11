@@ -18,12 +18,11 @@ body{
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 }
-#body_datos{
-	width: 100%;
-	height:100%;
-	position: absolute;
-	top: 50px;
-	left: 0px;
+.body_datos{
+	width: 1920px;
+    height: 1080px;
+	/* top: 50px;
+	left: 0px; */
 	overflow: hidden;  
 	background-size: cover !important;
 	animation: bounceInDown 2s linear;
@@ -38,14 +37,11 @@ body{
 	background-size: cover !important;
 	animation: bounceInUp 2s linear;
 }
-#body_tabla{
+.body_tabla{
+	overflow-y: scroll;
 	overflow-x: hidden;
-	position: absolute;
-	padding-tops: 90px;
-	width: 100%;
-	height:100%;
 }
-#body_tabla::-webkit-scrollbar{
+.body_tabla::-webkit-scrollbar{
 	display: none;
 }
 .fondo_campeonato{
@@ -183,7 +179,7 @@ body{
 .button{
 	font-family: Arial;
 	color: white;
-	font-size: 50px;
+	font-size: 90px;
 	top: 50px;
 	transform: translate(0, -50px);
 }
@@ -298,7 +294,8 @@ body{
 	position: absolute;
 	width: 20%;
 	height: 600px;
-    margin-left:130px;
+    margin-left:94px;
+	margin-top: 50px;
 	text-align: center;
 }
 .curiosidades .title{
@@ -347,11 +344,10 @@ body{
 	color: white;
 	font-family: myriad;
 	letter-spacing: 3px;    
-	width: 650px;
+	width: 700px;
     position: absolute;
-    left: 46%;
-    transform: translateX(-46%);
-    margin-top: 20px;
+    left: 25%;
+    bottom: -790%;
 }
 .central .subtitulo{
     font-size: 20px;
@@ -361,7 +357,7 @@ body{
 	width: 23%;
 	position: absolute;
 	right: 0px;
-    margin-right: 10%;
+    margin-right: 12%;
     margin-top: 7%;
 	padding: 5px;
 	text-align: center;
@@ -370,7 +366,7 @@ body{
 	width: 30px;
     height: auto;
     float: right;
-    bottom: -79%;
+    bottom: -87%;
     position: relative;
     padding-right: 10px;
     padding-bottom: 8px;
@@ -388,14 +384,16 @@ video {
 .video{
 	margin-top: 20px;
     position: absolute;
-    width: 250px;
-    height: 250px;
+    width: 270px;
+    height: 216px;
     background: rgba(255,255,255,0.2);
 	overflow: hidden;
-	border: 1px solid rgba(255,255,255,0.8);	
+	border: 1px solid rgba(255,255,255,0.2);	
+	border-radius: 10px;
 	text-align: center;
 	overflow:hidden;
 	text-align: center;
+	animation:  fadeIn 2s ease;
 }
 .control{
 	width: 30px;
@@ -410,9 +408,7 @@ video {
     right: 38%;
     top: 50%;
     transform: translate(0,-50%);
-    position: absolute;
-	animation: zoomIn 1s ease;
-}
+    position: absolute;}
 #curiosidtablas{
 	width:200px !important;
 }
@@ -434,23 +430,23 @@ video {
 .vid2{
     transform: translateX(282px) translateY(24px);
 }
-.vid2 span{
-    bottom: 73px !important;	
-}
 .video span, .videobox span{
 	font-family: myriad;
     text-transform: uppercase;
     color: white;
     opacity: 0.7;
-    font-size: 20pt;
+    font-size: 120%;
     position: relative;
     bottom: 57px;
     background-color: rgba(43,35,133,1);
     display: inherit;
-
+}
+.videobox span{
+	font-size: 200%;
+	padding-left: 20px;
 }
 .media .imgbox{
-	width: 532px;
+	width: 552px;
     height: 331px;
     background: rgba(255,255,255,0.2);
 	overflow: hidden;
@@ -459,9 +455,10 @@ video {
 }
 .videobox{
     margin-top: 30px;
-    width: 600px;
-    height: 480px;
-	border: 1px solid rgba(255,255,255,0.8);
+    width: 700px;
+    height: 560px;
+	border: 1px solid rgba(255,255,255,0.2);	
+	border-radius: 20px;
 	overflow: hidden;
 }
 .videobox video{
@@ -499,8 +496,8 @@ video {
 .tablas{
     width: 104%;
     position: absolute;
-    bottom: -130%;
-    right:4%;
+    bottom: -120%;
+    right:-14%;
 }
 .tablas img{
     width: 65px;
@@ -666,10 +663,7 @@ tr:nth-child(even) {
 .arrowback{
 	position:fixed;
 	z-index:10;
-}
-.arrowback:hover{
-	position: fixed;
-	-webkit-filter: drop-shadow(0px 0px 15px  rgba(255,255,255,0.8)) !important;
+	animation: swing 4s infinite;
 }
 #timelinebar{
 	margin-top: 100px !important;

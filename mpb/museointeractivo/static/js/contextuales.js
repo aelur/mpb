@@ -2,9 +2,9 @@
 $("img").mousedown(function(){	return false; 	});
 
 //Deshabilitar menu contextual
-$(document).on("contextmenu",function(){
-    return false;
-});
+//$(document).on("contextmenu",function(){
+//    return false;
+//});
 
 //Seleccionar lenguaje
 var toggleTranslation = function (lenguaje){
