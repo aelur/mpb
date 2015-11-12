@@ -49,23 +49,21 @@ var traducir = function(lenguaje,
 }
 
 
+var prevCentroCarousel;
+
 var setup_timeline = function(datos_campeonatos,
 	traducir_contenido_dinamico_es,
 	traducir_contenido_dinamico_en,
 	traducir_contenido_dinamico_por,
 	lenguaje_pantalla,
 	traducirLinks){
-			
-			traducir(lenguaje_pantalla,
-					traducir_contenido_dinamico_es,
-					traducir_contenido_dinamico_en,
-					traducir_contenido_dinamico_por,
-					lenguaje_pantalla,
-					traducirLinks);
-
-
-	var prevCentroCarousel = $('.carousel-center').attr('alt');
-
+	
+	var default_starter = $.grep(datos_campeonatos,function(elem,index){
+		return elem.anio=="2000";
+	})[0];
+	if (typeof default_starter != 'undefined'){
+		default_starter = default_starter.id;
+	}
 	// OPCIONES DEL CAROUSEL
 	var opciones = {
 			horizon: 110,
@@ -78,6 +76,9 @@ var setup_timeline = function(datos_campeonatos,
 			edgeFadeEnabled: true,
 			animationEasing: 'linear',
 			linkHandling: 2,
+			preloadImages: false,
+			forcedImageWidth:200,
+			forcedImageHeight: 200,
 			movingFromCenter: function($newCenterItem){	
 				$objTexto = $("#" + $newCenterItem.attr('alt'));
 				$objTexto.stop(true,true).animate({fontSize: 9,opacity: 0});
@@ -86,33 +87,35 @@ var setup_timeline = function(datos_campeonatos,
 				prevCentroCarousel = $('.carousel-center').attr('alt');
 			},
 			movedToCenter: function($newCenterItem){
-
 				var indexCentro =$newCenterItem.attr('alt');
 				$objTexto = $("#" + indexCentro);
 				$objTexto.stop(true,true).animate({fontSize: 18,opacity: .9});
 				$objANIO = $("#a" + indexCentro);
-				$objANIO.stop(true,true).animate({opacity: 1});	
+				$objANIO.stop(true,true).animate({opacity: 1});
+				
+				//Si es internacional tengo que mover el año y el titulo mas abajo
 				var tipo = $.grep(datos_campeonatos, function(elem,index){
 					return elem.id ==  indexCentro;
-				})[0].tipo;
-	
-				if(tipo=='INT') $objANIO.css({'transform': 'translate(-50%,570%)'});			
+				})[0].tipo;	
+				if(tipo=='INT') $objANIO.css({'transform': 'translate(-50%,570%)'});					
 				
-				
-				if(!( tipo=='NAC' && 
-					getNombreUnico(datos_campeonatos[indexCentro-1].urlbg) ==  
-									datos_campeonatos[prevCentroCarousel-1].urlbg) )
+				var urlbg_nuevo = $.grep(datos_campeonatos, function(elem,index){
+					return elem.id ==  indexCentro;
+				})[0].urlbg;
+				var urlbg_viejo = $.grep(datos_campeonatos, function(elem,index){
+					return elem.id ==  prevCentroCarousel;
+				})[0].urlbg;				
+				if(!( tipo=='NAC' && urlbg_viejo == urlbg_nuevo) )
 				$(".fondo_campeonato").css("background", 
-						"url("
-						+datos_campeonatos[indexCentro-1].urlbg
-						+") no-repeat center center fixed");		
+						"url("+urlbg_nuevo+") no-repeat center center fixed");		
 			}
 	};
 	
 	var filtrar = function(tipo, carousel){
 		var filtrados;
 		var primero;
-		if (tipo=='>TODOS') {
+		tipo = tipo[1];
+		if (tipo=='T' || tipo == 'A') {
 			filtrados = datos_campeonatos;
 			if (typeof default_starter == 'undefined'){
 				primero = filtrados[0].id;
@@ -124,8 +127,8 @@ var setup_timeline = function(datos_campeonatos,
 				});
 			};
 		}else{
-			if (tipo == '>INTERNACIONALES') tipo = 'INT';
-			if (tipo == '>NACIONALES') tipo = 'NAC';
+			if (tipo == 'I') tipo = 'INT';
+			if (tipo == 'N') tipo = 'NAC';
 			filtrados = $.grep(datos_campeonatos, function(elem, index){
 				return (elem.tipo==tipo);
 			});
@@ -142,6 +145,7 @@ var setup_timeline = function(datos_campeonatos,
 						+"<em id="+elemento.id+">"+elemento.titulo+"</em></div>"
 				$("#carousel").append(html_nuevo);
 			});
+		
 		var elem = $.grep(filtrados, function(e,i){return (e.id==primero)})[0];
 		$('em').css('opacity',0);
 		$('.anio').css('opacity',0);
@@ -152,19 +156,12 @@ var setup_timeline = function(datos_campeonatos,
 		if (typeof carousel != 'undefined') carousel.reload(opciones);
 	} 
 
-	var default_starter = $.grep(datos_campeonatos,function(elem,index){
-		return elem.anio=="2000";
-	})[0];
-	if (typeof default_starter == 'undefined'){
-		default_starter = 1;
-	} else {
-		default_starter = default_starter.id;
-	}
-
 	$(document).ready(function() {
 		//Levantar Carousel	
 		var carousel = $("#carousel").waterwheelCarousel(opciones);
-			
+		
+		prevCentroCarousel = $('.carousel-center').attr('alt');
+		
 		// Swipe del Carousel
 		$("#carousel").swipe({
 			swipeLeft:function(event,direction,distance,duration,fingerCount){
@@ -177,13 +174,13 @@ var setup_timeline = function(datos_campeonatos,
 		});
 		
 		$('#prev').bind('click', function () {
-		carousel.prev();
-		return false
+			carousel.prev();
+			return false
 		});
 	
 		$('#next').bind('click', function () {
-		carousel.next();
-		return false;
+			carousel.next();
+			return false;
 		});
 			
 		$('.selector').click(function(){
@@ -214,6 +211,12 @@ var setup_timeline = function(datos_campeonatos,
 					traducirLinks);
 			}
 		});
+		traducir(lenguaje_pantalla,
+			traducir_contenido_dinamico_es,
+			traducir_contenido_dinamico_en,
+			traducir_contenido_dinamico_por,
+			lenguaje_pantalla,
+			traducirLinks);
 	});
 	
 	filtrar('>TODOS');

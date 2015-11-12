@@ -197,7 +197,6 @@ body{
     height:400px;
 	height: 250px;
 	overflow-x:hidden;
-	overflow-Y: hidden;
     text-align: center;
  	left: 50%;
 	transform: translate(-50%, 0); 
