@@ -110,17 +110,79 @@ var setup_datos = function(
 			$impressslide.goto(2);
 		});
 	});
+	$("a.juglink").swipe({
+		swipeDown:function(event,direction,distance,duration,fingerCount){
+			$impressslide.goto(2);
+		},
+		threshold: 1,
+		fingers:'all'
+	});
 	$('a.poslink').each(function(){
 		$(this).bind("click", function (e) {
 			e.preventDefault();
 			$impressslide.goto(3);
 		});
+	});	
+	$(".poslink").swipe({
+		swipeDown:function(event,direction,distance,duration,fingerCount){
+			$impressslide.goto(3);
+		},
+		threshold: 30,
+		fingers:'all'
 	});
 	$('a.camplink').each(function(){
 		$(this).bind("click", function (e) {
 			e.preventDefault();
 			$impressslide.goto(1);
 		});
+	});	
+	$(".camplink").swipe({
+		swipeDown:function(event,direction,distance,duration,fingerCount){
+			$impressslide.goto(1);
+		},
+		threshold: 30,
+		fingers:'all'
+	});
+	
+	$(".body_tabla").swipe({
+		swipeDown:function(event,direction,distance,duration,fingerCount){
+			$impressslide.next();
+		},
+		swipeUp:function(event,direction,distance,duration,fingerCount){
+			$impressslide.goto(0);
+		},
+		threshold: 20,
+		fingers:'all'
+	});
+	$("#bodyjugadores").swipe({		
+		swipeLeft:function(event,direction,distance,duration,fingerCount){
+			$impressslide.goto(1);
+		},
+		swipeRight:function(event,direction,distance,duration,fingerCount){
+			$impressslide.goto(3);
+		},
+		threshold: 30,
+		fingers:'all'
+		});
+	$("#bodyposiciones").swipe({
+		swipeLeft:function(event,direction,distance,duration,fingerCount){
+			$impressslide.goto(2);
+		},
+		swipeRight:function(event,direction,distance,duration,fingerCount){
+			$impressslide.goto(1);
+		},
+		threshold: 30,
+		fingers:'all'
+	});
+	$("#bodyresultados").swipe({
+		swipeLeft:function(event,direction,distance,duration,fingerCount){
+			$impressslide.goto(2);
+		},
+		swipeRight:function(event,direction,distance,duration,fingerCount){
+			$impressslide.goto(3);
+		},
+		threshold: 30,
+		fingers:'all'
 	});
 	
 	$('a.pantalladatos').each(function(){
@@ -179,10 +241,7 @@ var setup_datos = function(
 		cargarVideo($(this));
 		
 	});
-	$(window).unload(function() { 
-	alert('lala');
-		$('#impress').animate({opacity:0});
-	});
+	
 	$(document).ready(function() {
 		$('.animada').attr('style','animation: pulse 1s infinite;');
 

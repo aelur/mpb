@@ -165,13 +165,69 @@ var setup_timeline = function(datos_campeonatos,
 		// Swipe del Carousel
 		$("#carousel").swipe({
 			swipeLeft:function(event,direction,distance,duration,fingerCount){
-				carousel.prev();
+				var numero_pasadas = Math.round(distance/200);
+				for (var i = 0; i < numero_pasadas; i++){
+					carousel.prev();
+				};
+				console.log(distance);
 			},
 			swipeRight:function(event,direction,distance,duration,fingerCount){
 				carousel.next();
+				console.log(distance);
 			},
+			threshold: 20,
 			fingers:'all'
 		});
+		
+		//swipe del filtro
+			$('.left .typesetter').swipe({
+		swipeLeft:function(event,direction,distance,duration,fingerCount){
+			var trigger = $(event.target);
+			console.log(trigger);
+			//defino a que voy a cambiar
+			var nuevo;
+			if (trigger.attr('id') == 'todos') return;
+			if (trigger.attr('id') == 'int') nuevo = $('#todos').parent();
+			if (trigger.attr('id') == 'nac') nuevo = $('#int').parent();
+			trigger = trigger.parent();
+			trigger.find(".titulo").animate({opacity:0, 'margin-top':40});	
+			trigger.find(".flecha").animate({opacity:0, 'margin-top':40});	
+			trigger.find("img").animate({opacity:0, 'margin-left':10});	
+			trigger.find("img").animate({'margin-left':0});	
+			trigger.attr('id','copas');
+			
+			nuevo.attr('id','copas_active');
+			nuevo.find(".titulo").animate({opacity:0.7, 'margin-top':97});	
+			nuevo.find(".flecha").animate({opacity:0.7, 'margin-top':50});	
+				
+			$('.nombre').text($('#copas_active').find('.titulo').text());
+			var tipo = nuevo.find('span').text();
+			filtrar(tipo, carousel);			
+		},
+		swipeRight:function(event,direction,distance,duration,fingerCount){
+			var trigger =$(event.target);
+			//defino a que voy a cambiar
+			var nuevo;
+			if (trigger.attr('id') == 'nac') return;
+			if (trigger.attr('id') == 'int') nuevo = $('#nac').parent();
+			if (trigger.attr('id') == 'todos') nuevo = $('#int').parent();
+			trigger = trigger.parent();
+			trigger.find(".titulo").animate({opacity:0, 'margin-top':40});	
+			trigger.find(".flecha").animate({opacity:0, 'margin-top':40});	
+			trigger.find("img").animate({opacity:0, 'margin-left':10});	
+			trigger.find("img").animate({'margin-left':0});	
+			trigger.attr('id','copas');
+			
+			nuevo.attr('id','copas_active');
+			nuevo.find(".titulo").animate({opacity:0.7, 'margin-top':97});	
+			nuevo.find(".flecha").animate({opacity:0.7, 'margin-top':50});	
+				
+			$('.nombre').text($('#copas_active').find('.titulo').text());
+			var tipo = nuevo.find('span').text();
+			filtrar(tipo, carousel);	
+		},
+		threshold: 5
+	});
 		
 		$('#prev').bind('click', function () {
 			carousel.prev();

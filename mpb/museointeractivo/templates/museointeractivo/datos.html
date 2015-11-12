@@ -86,7 +86,7 @@
 	</div>
 	
 	<div class="step slide" data-x="0" data-y="3000" data-z="-100" data-rotate-x="-90">
-		<div class="body_datos body_tabla">
+		<div class="body_datos body_tabla" id="bodyresultados">
 		
 		<a href="#" class="pantalladatos"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
 		
@@ -143,7 +143,7 @@
 	</div>
 	
 	<div class="step slide" data-x="-2500" data-y="3000" data-z="-150" data-rotate-y="90" >
-		<div class="body_datos body_tabla">
+		<div class="body_datos body_tabla" id="bodyjugadores">
 		<a href="#" class="pantalladatos"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
 		<div class="TOPBAR">
 			<div class="curiosidades" id="curiosidtablas">	
@@ -195,7 +195,7 @@
 	
 	<div class="step slide" data-x="-6500" data-y="3000" data-z="-200" data-rotate-x="90">
 		<a href="#" class="pantalladatos"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
-		<div class="body_datos body_tabla">
+		<div class="body_datos body_tabla" id="bodyposiciones">
 			<div class="TOPBAR">
 				<div class="curiosidades" id="curiosidtablas">	
 						<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
