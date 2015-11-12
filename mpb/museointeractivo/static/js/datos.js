@@ -1,4 +1,9 @@
-
+var toggleTranslation_multipleSelectors = function (lenguaje){
+	$("."+lenguaje).each(function(){
+			$(this).parent().addClass("lang_active");
+			$(this).animate({opacity:1});
+		});
+} 
 
 var traducir = function(lenguaje,
 	traducir_contenido_dinamico_es,
@@ -6,21 +11,75 @@ var traducir = function(lenguaje,
 	traducir_contenido_dinamico_por,
 	lenguaje_pantalla,
 	traducirLinks){
-	if (lenguaje != 'es' && lenguaje != 'por' && lenguaje != 'en'){
-		lenguaje = $("#lang_active").find("img").attr('id');	
-	}
 	if(lenguaje=='es'){
 		$('#curiosidades_texto').text('CURIOSIDADES');
+		$('#text_resultados').text('Resultados');
+		$('#text_fecha').text('Fecha');
+		$('#text_jornada').text('Jornada');
+		$('#text_equipos').text('Equipos');
+		$('#text_res').text('Resultados');
+		$('#text_estadio').text('Estadio');
+		$('#text_jugadores').text('Jugador');
+		$('#text_partidos').text('Partidos Jugados');
+		$('#text_goles').text('Goles');
+		$('#text_protagonistas').text('Protagonistas');
+		$('#text_posiciones').text('Posiciones');
+		$('#text_equipos').text('Equipos');
+		$('#text_puntos').text('Pts.');
+		$('#text_jugados').text('Jugados');
+		$('#text_ganados').text('Ganados');
+		$('#text_empatados').text('Empatados');
+		$('#text_perdidos').text('Perdidos');
+		$('#text_golesfavor').text('Goles a Favor');
+		$('#text_golescontra').text('Goles En Contra');
 		traducir_contenido_dinamico_es();
 		lenguaje_pantalla='es';
 	};
 	if(lenguaje=='en'){
-		$('#curiosidades_texto').text('CURIOSITIES');	
+		$('#curiosidades_texto').text('CURIOSITIES');
+		$('#text_resultados').text('Results');
+		$('#text_fecha').text('Date');
+		$('#text_jornada').text('Round');
+		$('#text_equipos').text('Teams');
+		$('#text_res').text('Results');
+		$('#text_estadio').text('Stadium');
+		$('#text_jugadores').text('Player');
+		$('#text_partidos').text('Matches Played');
+		$('#text_goles').text('Goals');
+		$('#text_protagonistas').text('Protagonists');
+		$('#text_posiciones').text('Scores');
+		$('#text_equipos2').text('Teams');
+		$('#text_puntos').text('Pts.');
+		$('#text_jugados').text('Played');
+		$('#text_ganados').text('Won');
+		$('#text_empatados').text('Tied');
+		$('#text_perdidos').text('Lost');
+		$('#text_golesfavor').text('Goals Scored');
+		$('#text_golescontra').text('Goals Against');
 		traducir_contenido_dinamico_en();
 		lenguaje_pantalla='en';
 	};
 	if(lenguaje=='por'){
 		$('#curiosidades_texto').html('<br>TRIVIA');
+		$('#text_resultados').text('Resultados');
+		$('#text_fecha').text('Data');
+		$('#text_jornada').text('Volta');
+		$('#text_equipos').text('Equipos');
+		$('#text_res').text('Resultados');
+		$('#text_estadio').text('Estádio');
+		$('#text_jugadores').text('Jogador');
+		$('#text_partidos').text('Partidas Jogadas');
+		$('#text_goles').text('Gols');
+		$('#text_protagonistas').text('Protagonistas');
+		$('#text_posiciones').text('posições');
+		$('#text_equipos2').text('Equipes');
+		$('#text_puntos').text('Pts.');
+		$('#text_jugados').text('Jogados');
+		$('#text_ganados').text('Ganhou');
+		$('#text_empatados').text('empatados');
+		$('#text_perdidos').text('Perdidos');
+		$('#text_golesfavor').text('Gols a Favor');
+		$('#text_golescontra').text('Gols Em Contra');
 		traducir_contenido_dinamico_por();
 		lenguaje_pantalla='por';
 	};
@@ -34,7 +93,8 @@ var setup_datos = function(
 	traducir_contenido_dinamico_en,
 	traducir_contenido_dinamico_por,
 	lenguaje_pantalla,
-	traducirLinks){
+	traducirLinks,
+	$impressslide){
 
 	traducir(lenguaje_pantalla,
 		traducir_contenido_dinamico_es,
@@ -42,10 +102,33 @@ var setup_datos = function(
 		traducir_contenido_dinamico_por,
 		lenguaje_pantalla,
 		traducirLinks);
-
-	$("#1").css('opacity',1);
-	$("#a1").css('opacity',1);
 	
+	
+	$('a.juglink').each(function(){
+		$(this).bind("click", function (e) {
+			e.preventDefault();
+			$impressslide.goto(2);
+		});
+	});
+	$('a.poslink').each(function(){
+		$(this).bind("click", function (e) {
+			e.preventDefault();
+			$impressslide.goto(3);
+		});
+	});
+	$('a.camplink').each(function(){
+		$(this).bind("click", function (e) {
+			e.preventDefault();
+			$impressslide.goto(1);
+		});
+	});
+	
+	$('a.pantalladatos').each(function(){
+		$(this).bind("click", function (e) {
+			e.preventDefault();
+			$impressslide.goto(0);
+		});
+	});
 	
 	var cargarVideo = function(video){
 		$(video).get(0).pause();
@@ -96,9 +179,43 @@ var setup_datos = function(
 		cargarVideo($(this));
 		
 	});
-	
+	$(window).unload(function() { 
+	alert('lala');
+		$('#impress').animate({opacity:0});
+	});
 	$(document).ready(function() {
 		$('.animada').attr('style','animation: pulse 1s infinite;');
+
+		$('.selector').click(function(){
+			if ($(this).attr('id') == 'copas_active' || $(this).attr('id') == 'copas' ){
+				$objActivo = $("#copas_active");			
+				$objActivo.find(".titulo").animate({opacity:0, 'margin-top':40});	
+				$objActivo.find(".flecha").animate({opacity:0, 'margin-top':40});	
+				$objActivo.attr('id','copas');
+				$(this).attr('id','copas_active');
+				$(this).find(".titulo").animate({opacity:0.7, 'margin-top':97});	
+				$(this).find(".flecha").animate({opacity:0.7, 'margin-top':50});	
+			}else{
+				$('.lang_active').each(function(){
+					$(this).find("img").animate({opacity:0.4});
+					$(this).removeClass('lang_active');
+				});
+				$('.'+$(this).find('img').attr('class')).each(function(){
+					$(this).animate({opacity:1});
+					$(this).parent().addClass('lang_active');
+				});					
+				var lenguaje = $(this).find("img").attr('class');
+					traducir(lenguaje,
+						traducir_contenido_dinamico_es,
+						traducir_contenido_dinamico_en,
+						traducir_contenido_dinamico_por,
+						lenguaje_pantalla,
+						traducirLinks);
+				       
+				}
+			});
+		$("#formacion").colorbox({retinaImage:true,className:'modal',closeButton:true, overlayClose:true});
+		
 		/* $("#videocentral").on('click', function(e){
 			var $video = $(this).get(0);
 			if ($video.paused){
@@ -120,7 +237,6 @@ var setup_datos = function(
 		$('#play').on('click', function(){
 			$('#videocentral').get(0).play();
 		}); */
-
 		/*$('#stop').on('click', function(){
 			$('#videocentral').get(0).pause();
 		});		
@@ -129,32 +245,6 @@ var setup_datos = function(
 			$('#videocentral').get(0).currentTime = '0';
 			$('#videocentral').get(0).play();
 		});*/
-		
-		$('.selector').click(function(){
-			if ($(this).attr('id') == 'copas_active' || $(this).attr('id') == 'copas' ){
-				$objActivo = $("#copas_active");			
-				$objActivo.find(".titulo").animate({opacity:0, 'margin-top':40});	
-				$objActivo.find(".flecha").animate({opacity:0, 'margin-top':40});	
-				$objActivo.attr('id','copas');
-				$(this).attr('id','copas_active');
-				$(this).find(".titulo").animate({opacity:0.7, 'margin-top':97});	
-				$(this).find(".flecha").animate({opacity:0.7, 'margin-top':50});	
-			}else{
-				$objActivo = $("#lang_active");
-				$objActivo.find("img").animate({opacity:0.4});		
-				$objActivo.attr('id','lang');
-				$(this).attr('id','lang_active');
-				$(this).find("img").animate({opacity:1});
-				var lenguaje = $(this).find("img").attr('id');	
-				traducir(lenguaje,
-					traducir_contenido_dinamico_es,
-					traducir_contenido_dinamico_en,
-					traducir_contenido_dinamico_por,
-					lenguaje_pantalla,
-					traducirLinks);
-				}
-			});
-		$("#formacion").colorbox({retinaImage:true,className:'modal',closeButton:true, overlayClose:true});
 		/* $('.video').on('click',function(){
 			$("#videocentral").get(0).pause();
 			if ($(this).attr('id') == 'activevid'){

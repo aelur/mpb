@@ -9,79 +9,250 @@
     <LINK href="{% static 'css/colorbox.css' %}" rel="stylesheet" type="text/css">
   </head>
 <body style="background:url('{% static 'img/BG.jpg' %}')  no-repeat center center fixed">	
-<div class="body_datos">
-	<div class="TOPBAR">
-		<!-- <div id="datos">
-			<div class="left"><img src="img/logo.png" class="logo"></div>
-		</div> -->
-		<a href="{% url 'index' %}"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
-		<div class="curiosidades">	<div class="light"></div>	
-				<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
-				<span class="anio">{{ campeonato.anio }}</span>
-				{% if campeonato.tipo != 'NAC' %}
-				<img src="{{ campeonato.imagen_campo.url }}" style="width: 145%;height: auto;bottom: -70%;left: -80px;position: absolute;animation:none;">
-				{% else %}
-					<img src="{% static 'img/preg.png' %}" id="preg">
-					<span class="title" id="curiosidades_texto">Curiosidades</span>
-					<div class="divtext">
-						<p>{{ campeonato.get_curiosidades_es }}</p>
-					</div>
-				{% endif%}
-		</div>
-		<div class="central">
-			<span class="titulo">{{ campeonato.titulo_es }}</span>
-			<div class="videobox">
-				<video id="videocentral" type="video/avi" muted autoplay preload>
-					<source src="{{ campeonato.videoBoca.url }}" type="video/mp4">
-				</video>
-				<span>Boca Campeón</span>
-			</div>
-		</div>
-		<div class="media">
-			<a href="{% if campeonato.imagen_formacion %}{{ campeonato.imagen_formacion.url }}{% endif %}" id="formacion">
-			<div class="imgbox" style="background: url('{% if campeonato.imagen_formacion %}{{ campeonato.imagen_formacion.url }}{% endif %}')">
-				<img src="{% static 'img/lupa.png' %}" class="lupa">
-			</div></a>
+<div id="impress">
 
-			{% if campeonato.videoMundo %}
-				<div class="video vid1"
-					{% if not campeonato.videoArgentina %} 
-						style="transform:translateX(134px) translateY(15px)" 
-					{% endif %}>
-				<video id="video1" type="video/avi" muted autoplay preload>
-					<source src="{{ campeonato.videoMundo.url }}" type="video/mp4">
-				</video>
-				<span></span>
-			</div>
-			{% endif %}
-			{% if campeonato.videoArgentina %}
-			<div class="video vid2"
-					{% if not campeonato.videoMundo %} 
-						style="transform:translateX(134px) translateY(15px)" 
-					{% endif %}>
-				<video id="video2" type="video/avi" muted autoplay preload>
-					<source src="{{ campeonato.videoArgentina.url }}" type="video/mp4">
-				</video>
-				<span>La Argentina en el año {{ campeonato.anio }}</span>
-			</div>
-			{% endif %}
-			<div class="tablas">
-				<a href="{% url 'tablas' campeonato.id 'jugadores' lenguaje %}"><div id="jugadores"><img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas</div></a>
-				<a href="{% url 'tablas' campeonato.id 'campania' lenguaje %}"><div id="campania"><img src="{% static 'img/campania.png' %}"><span>></span> Resultados</div></a>
-				<a href="{% url 'tablas' campeonato.id 'posiciones' lenguaje %}"><div id="posiciones"><img src="{% static 'img/posiciones.png' %}"><span>></span>Tabla de Posiciones</div></a>
+	<div class="step slide" data-x="0" data-y="0" data-scale="3">
+		<div class="body_datos">
+			<div class="TOPBAR">
+				<a href="{% url 'index' %}"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
+				<div class="curiosidades">	<div class="light"></div>	
+					<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
+					<span class="anio">{{ campeonato.anio }}</span>
+					{% if campeonato.tipo != 'NAC' %}
+						<img src="{{ campeonato.imagen_campo.url }}" style="width: 145%;height: auto;bottom: -70%;left: -80px;position: absolute;animation:none;">
+					{% else %}
+						<img src="{% static 'img/preg.png' %}" id="preg">
+						<span class="title" id="curiosidades_texto">Curiosidades</span>
+						<div class="divtext">
+							<p>{{ campeonato.get_curiosidades_es }}</p>
+						</div>
+					{% endif%}
+				</div>
+				<div class="central">
+					<span class="titulo">{{ campeonato.titulo_es }}</span>
+					<div class="videobox">
+						<video id="videocentral" type="video/avi" muted autoplay preload>
+							<source src="{{ campeonato.videoBoca.url }}" type="video/mp4">
+						</video>
+						<span>Boca Campeón</span>
+					</div>
+				</div>
+				<div class="media">
+				<a href="{% if campeonato.imagen_formacion %}{{ campeonato.imagen_formacion.url }}{% endif %}" id="formacion">
+				<div class="imgbox" style="background: url('{% if campeonato.imagen_formacion %}{{ campeonato.imagen_formacion.url }}{% endif %}')">
+					<img src="{% static 'img/lupa.png' %}" class="lupa">
+				</div></a>
+	
+				{% if campeonato.videoMundo %}
+					<div class="video vid1"
+						{% if not campeonato.videoArgentina %} 
+							style="transform:translateX(134px) translateY(15px)" 
+						{% endif %}>
+					<video id="video1" type="video/avi" muted autoplay preload>
+						<source src="{{ campeonato.videoMundo.url }}" type="video/mp4">
+					</video>
+					<span></span>
+				</div>
+				{% endif %}
+				{% if campeonato.videoArgentina %}
+				<div class="video vid2"
+						{% if not campeonato.videoMundo %} 
+							style="transform:translateX(134px) translateY(15px)" 
+						{% endif %}>
+					<video id="video2" type="video/avi" muted autoplay preload>
+						<source src="{{ campeonato.videoArgentina.url }}" type="video/mp4">
+					</video>
+					<span>La Argentina en el año {{ campeonato.anio }}</span>
+				</div>
+				{% endif %}
+				<div class="tablas">
+					<a href="" class="juglink"><div id="jugadores"><img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas</div></a>
+					<a href="" class="camplink"><div id="campania"><img src="{% static 'img/campania.png' %}"><span>></span> Resultados</div></a>
+					<a href="" class="poslink"><div id="posiciones"><img src="{% static 'img/posiciones.png' %}"><span>></span>Tabla de Posiciones</div></a>
+				</div>
+				
 			</div>
 			
-		</div>
-		<div class="right" id="rightdatos">
-			<div class="typesetter">
-				<div class="selector" id="lang"><img src="{% static 'img/es.png' %}" id="es"></div>
-				<div class="selector" id="lang"><img src="{% static 'img/en.png' %}" id="en"></div>
-				<div class="selector" id="lang"><img src="{% static 'img/por.png' %}" id="por"></div>
+			<div class="right" id="rightdatos">
+				<div class="typesetter">
+					<div class="selector"><img src="{% static 'img/es.png' %}" class="es"></div>
+					<div class="selector"><img src="{% static 'img/en.png' %}" class="en"></div>
+					<div class="selector"><img src="{% static 'img/por.png' %}" class="por"></div>
+				</div>
+			</div>
+			
 			</div>
 		</div>
 	</div>
 	
-</div>	
+	<div class="step slide" data-x="0" data-y="3000" data-z="-100" data-rotate-x="-90">
+		<div class="body_datos body_tabla">
+		
+		<a href="#" class="pantalladatos"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
+		
+		<div class="TOPBAR">
+			<div class="curiosidades" id="curiosidtablas">	
+				<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
+				<span class="anio">{{ campeonato.anio}}</span>
+			</div>
+			<div class="central" id="centraltablas">
+				<span class="titulo">{{ campeonato.titulo_es }}</span>
+			</div>
+				
+		</div>
+		
+		<div class="right" id="rightdatos">
+			<div class="typesetter">
+				<div class="selector"><img src="{% static 'img/es.png' %}" class="es"></div>
+				<div class="selector"><img src="{% static 'img/en.png' %}" class="en"></div>
+				<div class="selector"><img src="{% static 'img/por.png' %}" class="por"></div>
+			</div>
+		</div>
+		
+		<div class="tabla resultados" id="tablaresultados">
+			<table>
+			<tr>
+				<th colspan="5" id="text_resultados">Resultados</th>    
+			</tr>
+			<tr id="campos">
+				<th id="text_fecha">Fecha</th>
+				<th id="text_jornada">Jornada</th>
+				<th id="text_equipos">Equipos</th>
+				<th id="text_res">Resultados</th>
+				<th id="text_estadio">Estadio</th>
+			</tr>
+			{% for partido in campeonato.get_datos_campania %}
+				<tr>
+				<td class="middle">{{partido.0}}</td>
+				<td class="middle">{{partido.1}}</td>
+				<td>{{partido.2}}</td>
+				<td class="middle yellow">{{partido.3}}</td>
+				<td>{{partido.4}}</td>
+				</tr>
+			{% endfor %}
+			</table>
+		</div>
+		
+		<div class="tablaimg resultados">
+			<img src="{% static 'img/campania.png' %}" id="imgcampania">
+			<a href="#" class="juglink"><img src="{% static 'img/jugadores.png' %}" id="imgjugadores" ></a>
+			<a href="#" class="poslink"><img src="{% static 'img/posiciones.png' %}" id="imgposiciones"></a>
+		</div>
+		
+		</div>
+	</div>
+	
+	<div class="step slide" data-x="-2500" data-y="3000" data-z="-150" data-rotate-y="90" >
+		<div class="body_datos body_tabla">
+		<a href="#" class="pantalladatos"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
+		<div class="TOPBAR">
+			<div class="curiosidades" id="curiosidtablas">	
+					<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
+					<span class="anio">{{ campeonato.anio}}</span>
+			</div>
+			<div class="central" id="centraltablas">
+				<span class="titulo">{{ campeonato.titulo_es }}</span>
+			</div>
+				
+		</div>
+		
+		<div class="right" id="rightdatos">
+			<div class="typesetter">
+				<div class="selector"><img src="{% static 'img/es.png' %}" class="es"></div>
+				<div class="selector"><img src="{% static 'img/en.png' %}" class="en"></div>
+				<div class="selector"><img src="{% static 'img/por.png' %}" class="por"></div>
+			</div>
+		</div>
+		
+		<div class="tabla jugadores" id="tablajugadores">
+			<table>
+			<tr>
+				<th colspan="5" id="text_protagonistas">Protagonistas</th>    
+			</tr>
+			<tr id="campos">
+				<th id="text_jugadores">Jugadores</th>
+				<th id="text_partidos">Partidos</th>
+				<th id="text_goles">Goles</th>
+			</tr>
+			{% for jugador in campeonato.get_datos_jugadores %}
+				<tr>
+				<td>{{jugador.0}}</td>
+				<td class="middle yellow">{{jugador.1}}</td>
+				<td class="middle">{{jugador.2}}</td>
+				</tr>
+			{% endfor %}
+			</table>
+		</div>
+		</div>
+		
+		<div class="tablaimg jugadores">
+			<img src="{% static 'img/jugadores.png' %}" id="imgjugadores" >
+			<a href="#" class="camplink"><img src="{% static 'img/campania.png' %}" id="imgcampania"></a>
+			<a href="#" class="poslink"><img src="{% static 'img/posiciones.png' %}" id="imgposiciones"></a>
+		</div>
+		
+	</div>
+	
+	<div class="step slide" data-x="-6500" data-y="3000" data-z="-200" data-rotate-x="90">
+		<a href="#" class="pantalladatos"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
+		<div class="body_datos body_tabla">
+			<div class="TOPBAR">
+				<div class="curiosidades" id="curiosidtablas">	
+						<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
+						<span class="anio">{{ campeonato.anio}}</span>
+				</div>
+				<div class="central" id="centraltablas">
+					<span class="titulo">{{ campeonato.titulo_es }}</span>
+				</div>
+			</div>
+			
+			<div class="right" id="rightdatos">
+				<div class="typesetter">
+					<div class="selector"><img src="{% static 'img/es.png' %}" class="es"></div>
+					<div class="selector"><img src="{% static 'img/en.png' %}" class="en"></div>
+					<div class="selector"><img src="{% static 'img/por.png' %}" class="por"></div>
+				</div>
+			</div>
+		
+			<div class="tabla posiciones" id="tablaposiciones">
+			<table>
+			<tr>
+				<th colspan="8" id="text_posiciones">Tabla de Posiciones</th>    
+			</tr>
+			<tr id="campos">
+				<th id="text_equipos2">Equipos</th>
+				<th id="text_puntos">Pts.</th>
+				<th id="text_jugados">Jugados</th>
+				<th id="text_ganados">Ganados</th>
+				<th id="text_empatados">Empatados</th>
+				<th id="text_perdidos">Perdidos</th>
+				<th id="text_golesfavor">Goles A Favor</th>
+				<th id="text_golescontra">Goles En Contra</th>
+			</tr>
+			{% for equipo in campeonato.get_datos_posiciones %}
+				<tr>
+				<td>{{equipo.0}}</td>
+				<td class="middle yellow">{{equipo.1}}</td>
+				<td class="middle">{{equipo.2}}</td>
+				<td class="middle">{{equipo.3}}</td>
+				<td class="middle">{{equipo.4}}</td>
+				<td class="middle">{{equipo.5}}</td>
+				<td class="middle">{{equipo.6}}</td>
+				<td class="middle">{{equipo.7}}</td>
+				</tr>
+			{% endfor %}
+			</table>
+		</div>
+			
+			<div class="tablaimg posiciones">
+				<a href="#" class="camplink"><img src="{% static 'img/campania.png' %}" id="imgcampania"></a>
+				<a href="#" class="juglink"><img src="{% static 'img/jugadores.png' %}" id="imgjugadores" ></a>
+				<img src="{% static 'img/posiciones.png' %}" id="imgposiciones">
+			</div>
+		</div>
+	</div>
+	 
+</div>		
 </body>
 
 
@@ -91,11 +262,12 @@
 <script type="text/javascript" src="{% static 'js/jquery.touchSwipe.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/contextuales.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/datos.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/impress.js' %}"></script>
 <script type="text/javascript">
 	var traducir_contenido_dinamico_es = function(){
 		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas');
-		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span style="margin-left: 24px;">></span> Resultados');
-		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span style="margin-left: 16px;">></span> Tabla de Posiciones');
+		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span style="margin-left: 27px;">></span> Resultados');
+		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Tabla de Posiciones');
 
 		$(".vid1").find("span").text("{{ campeonato.anio }} en el mundo");
 		$(".vid2").find("span").text("La Argentina en el año {{ campeonato.anio }}");
@@ -105,9 +277,9 @@
 		$('.divtext > p').text('{{ campeonato.get_curiosidades_es }}');
 	};
 	var traducir_contenido_dinamico_en = function(){
-		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span style="margin-left: 32px;">></span> Protagonists');
+		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonists');
 		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 13px;">></span> Results');
-		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span style="margin-left: 10px;">></span> Scores');
+		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Scores');
 		
 		$(".vid1").find("span").text("{{ campeonato.anio }} in the world");
 		$(".vid2").find("span").text("Argentina in the year {{ campeonato.anio }}");
@@ -117,9 +289,9 @@
 		$('.divtext > p').text('{{ campeonato.get_curiosidades_en }}');
 	};
 	var traducir_contenido_dinamico_por = function(){
-		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span style="margin-left: 38px;">></span> Protagonistas');
-		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span style="margin-left: 26px;">></span> Resultados');
-		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span style="margin-left: 17px;">></span> POSIÇÕES');
+		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas');
+		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 28px;">></span> Resultados');
+		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> POSIÇÕES');
 		
 		$(".vid1").find("span").text("{{ campeonato.anio }} em todo o mundo");
 		$(".vid2").find("span").text("Argentina em {{ campeonato.anio }}");
@@ -130,14 +302,21 @@
 
 	};
 	var lenguaje_pantalla = "{{ lenguaje }}";
-	toggleTranslation(lenguaje_pantalla);
+	
+	var $impressslide = impress();
+	$impressslide.init();
+	
+	toggleTranslation_multipleSelectors(lenguaje_pantalla);
 	setup_datos(
 		traducir_contenido_dinamico_es,
 		traducir_contenido_dinamico_en,
 		traducir_contenido_dinamico_por,
 		lenguaje_pantalla,
-		traducirLinks);
+		traducirLinks,
+		$impressslide);
+		
 </script>
+
 </html>
 
 

@@ -157,7 +157,7 @@ body{
 	height: 54px;
 	padding-right: 16px;
     padding-left: 1px;
-	opacity: 0;
+	opacity: 0.4;
 }
 #lang img{
 	opacity: 0.4 !important;
@@ -221,6 +221,16 @@ body{
     position: absolute;
 	bottom: 25px;
  }
+ 
+ @keyframes glowing {
+  0%{
+    -webkit-filter: drop-shadow(0px 0px 8px rgba(0, 231, 255, 0));
+  }
+  50%{
+    -webkit-filter: drop-shadow(0px 0px 8px rgba(0, 231, 255, 0.8));
+  }
+}
+
 @keyframes glow{
 	0%{		
 		text-shadow: #FFF 0 0 5px;
@@ -413,10 +423,9 @@ video {
 	width:200px !important;
 }
 #centraltablas{
-	margin-top: 100px !important;
-	margin-left: 65%;
-	left: 0%;
-	width: 100%;
+    bottom: -90%;
+	width: 1200px;
+    left: 16%;
 }
 .videobox .play{
     right: 45%;
@@ -499,6 +508,14 @@ video {
     bottom: -120%;
     right:-14%;
 }
+@keyframes rebotar{
+	0%{
+		bottom: -50%;
+	}
+	60%{
+		bottom: -64%;
+	}
+}
 .tablas img{
     width: 65px;
     padding: 8px;
@@ -510,6 +527,7 @@ video {
     position: absolute;
 	opacity: 0.6;
     bottom: -50%;
+	animation: rebotar 1s infinite;
 }
 .tablas img:hover{
     -webkit-filter: drop-shadow(0px 0px 5px rgba(255,255,255,1)) !important;
@@ -644,21 +662,15 @@ tr:nth-child(even) {
 }
 .jugadores{
     width: 40%;
-	z-index:0;
 	opacity:1;
-	display: none;
 }
 .posiciones{
     width: 60%;  
-	z-index:0;
 	opacity:1;	
-	display: none;
 }
 .resultados{
-	z-index:0;
 	opacity:1;
 	width:60%;
-	display: none;
 }
 .arrowback{
 	position:fixed;
@@ -668,4 +680,104 @@ tr:nth-child(even) {
 #timelinebar{
 	margin-top: 100px !important;
 	margin-left: 50px !important;
+}
+@keyframes zoomInPlus {
+  0% {
+    transform: scale(.9);
+  }
+  50% {
+    transform: scale(.8);
+  }
+  80% {
+    transform: scale(1.1);
+  }
+  90% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+@keyframes fadeInAndOut {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+.tablaimg.posiciones #imgjugadores{
+	width: 100px;
+	opacity: 0.5;
+    right: 87%;
+    top: 79%;
+	position: fixed;
+	animation: zoomInPlus 2s linear infinite;
+    -webkit-filter: drop-shadow(0px 0px 5px rgba(255,255,255,1)) !important;
+}
+.tablaimg.posiciones #imgposiciones{
+	width: 25%;
+    opacity: 0.2;
+    transform: translateX(199%) translateY(-20%);
+	animation: fadeInAndOut 2s linear infinite;
+}
+.tablaimg.posiciones #imgcampania{
+	opacity: 0.5;
+	width: 100px;
+	position: fixed;
+    right: 8%;
+    top: 78%;
+	animation: zoomInPlus 2s linear infinite;
+    -webkit-filter: drop-shadow(0px 0px 5px rgba(255,255,255,1)) !important;
+}
+.tablaimg.resultados #imgjugadores{
+	width: 100px;
+	opacity: 0.5;
+	position: fixed;
+    right: 87%;
+    top: 79%;
+	animation: zoomInPlus 2s linear infinite;
+    -webkit-filter: drop-shadow(0px 0px 5px rgba(255,255,255,1)) !important;
+}
+.tablaimg.resultados #imgcampania{
+	width: 22%;
+    opacity: 0.2;
+    transform: translateX(221%) translateY(-13%);
+	animation: fadeInAndOut 2s linear infinite;
+}
+.tablaimg.resultados #imgposiciones{
+	opacity: 0.5;
+	width: 100px;
+	position: fixed;
+    right: 8%;
+    top: 78%;
+	animation: zoomInPlus 2s linear infinite;
+    -webkit-filter: drop-shadow(0px 0px 5px rgba(255,255,255,1)) !important;
+}
+.tablaimg.jugadores #imgjugadores{
+	width: 20%;
+    opacity: 0.2;
+    transform: translateX(436%) translateY(-13%);
+	animation: fadeInAndOut 2s linear infinite;
+}
+.tablaimg.jugadores #imgposiciones{
+	width: 100px;
+	opacity: 0.5;
+	position: fixed;
+    right: 8%;
+    top: 78%;
+	animation: zoomInPlus 2s linear infinite;
+    -webkit-filter: drop-shadow(0px 0px 5px rgba(255,255,255,1)) !important;
+}
+.tablaimg.jugadores #imgcampania{
+	opacity: 0.5;
+	width: 100px;
+	position: fixed;
+    right: 87%;
+    top: 79%;
+	animation: zoomInPlus 2s linear infinite;
+    -webkit-filter: drop-shadow(0px 0px 5px rgba(255,255,255,1)) !important;
 }
