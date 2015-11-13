@@ -110,11 +110,15 @@ var setup_datos = function(
 			$impressslide.goto(2);
 		});
 	});
-	$("a.juglink").swipe({
+	$('#swipejugadores').bind("click", function (e) {
+			e.preventDefault();
+			$impressslide.goto(2);
+		});
+	$("#swipejugadores").swipe({
 		swipeDown:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(2);
 		},
-		threshold: 1,
+		threshold: 10,
 		fingers:'all'
 	});
 	$('a.poslink').each(function(){
@@ -123,11 +127,15 @@ var setup_datos = function(
 			$impressslide.goto(3);
 		});
 	});	
-	$(".poslink").swipe({
+	$('#swipeposiciones').bind("click", function (e) {
+			e.preventDefault();
+			$impressslide.goto(3);
+		});
+	$("#swipeposiciones").swipe({
 		swipeDown:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(3);
 		},
-		threshold: 30,
+		threshold: 10,
 		fingers:'all'
 	});
 	$('a.camplink').each(function(){
@@ -136,14 +144,17 @@ var setup_datos = function(
 			$impressslide.goto(1);
 		});
 	});	
-	$(".camplink").swipe({
+	$('#swipecampania').bind("click", function (e) {
+			e.preventDefault();
+			$impressslide.goto(1);
+		});
+	$("#swipecampania").swipe({
 		swipeDown:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(1);
 		},
-		threshold: 30,
+		threshold: 10,
 		fingers:'all'
 	});
-	
 	$(".body_tabla").swipe({
 		swipeDown:function(event,direction,distance,duration,fingerCount){
 			$impressslide.next();

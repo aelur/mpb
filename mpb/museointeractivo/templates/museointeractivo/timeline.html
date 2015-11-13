@@ -17,11 +17,21 @@
 		<div class="left">
 			<img src="{% static 'img/logo.png' %}" class="responsive">
 			<div class="typesetter">
-				<div class="selector" id="copas_active"><img src="{% static 'img/todos.png' %}" id="todos"><span class="flecha">></span><span class="titulo todos">TODOS</span></div>
-				<div class="selector" id="copas"><img src="{% static 'img/int.png' %}" id="int">
-				<span class="flecha">></span><span class="titulo int">INTERNACIONALES</span></div>
-				<div class="selector" id="copas"><img src="{% static 'img/nac.png' %}" id="nac">
-				<span class="flecha">></span><span class="titulo nac">NACIONALES</span></div>
+				<div class="selector filtro" id="copas_active" style="margin-left: 0px;">
+					<img src="{% static 'img/todos.png' %}" id="todos">
+					<span class="flecha">></span>
+					<span class="titulo todos">TODOS</span>
+				</div>
+				<div class="selector filtro" id="copas" style="margin-left: 74px;">
+					<img src="{% static 'img/int.png' %}" id="int">
+					<span class="flecha">></span>
+					<span class="titulo int">INTERNACIONALES</span>
+				</div>
+				<div class="selector filtro" id="copas"  style="margin-left: 147px;">
+					<img src="{% static 'img/nac.png' %}" id="nac">
+					<span class="flecha">></span>
+					<span class="titulo nac">NACIONALES</span>
+				</div>
 			</div>
 		</div>
 		<div class="right" id="tl">
@@ -38,6 +48,9 @@
 		<div id="prev" class="button prev"><</div>
 		<div id="next" class="button next">></div>
 	</div>
+	
+	
+	
 	<div id="carousel">
 	
 	</div>

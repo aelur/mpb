@@ -328,7 +328,12 @@
 
       // Depth will be reverse distance from center
       var newDepth = options.flankingItems + 2 - newDistanceFromCenter;
-
+		
+		
+      if(newPosition==0){
+		newDepth = newDepth +2;
+		$item.parent().find('.anio').css('z-index',9);
+	}
       $item.data('width',newWidth);
       $item.data('height',newHeight);
       $item.data('top',newTop);
@@ -359,7 +364,6 @@
             // Animation for the item has completed, call method
             itemAnimationComplete($item, newPosition);
           });
-
       } else {
         $item.data('currentPosition', newPosition)
         // Move the item to the 'hidden' position if hasn't been moved yet
@@ -620,6 +624,67 @@
         setupCarousel();
         setupStarterRotation();
       });
+	  
+	   /**
+     * The event handler when an image within the carousel is clicked
+     * This function will rotate the carousel the correct number of rotations
+     * to get the clicked item to the center, or will fire the custom event
+     * the user passed in if the center item is clicked
+     */
+    $(this).find('img').bind("click", function () {
+      var itemPosition = $(this).data().currentPosition;
+
+      if (options.imageNav == false) {
+        return;
+      }
+      // Don't allow hidden items to be clicked
+      if (Math.abs(itemPosition) >= options.flankingItems + 1) {
+        return;
+      }
+      // Do nothing if the carousel is already moving
+      if (data.currentlyMoving) {
+        return;
+      }
+
+      data.previousCenterItem = data.currentCenterItem;
+
+      // Remove autoplay
+      autoPlay(true);
+      options.autoPlay = 0;
+      
+      var rotations = Math.abs(itemPosition);
+      if (itemPosition == 0) {
+        options.clickedCenter($(this));
+      } else {
+        // Fire the 'moving' callbacks
+        options.movingFromCenter(data.currentCenterItem);
+        options.movingToCenter($(this));
+        if (itemPosition < 0) {
+          data.currentDirection = 'backward';
+          rotateCarousel(rotations);
+        } else if (itemPosition > 0) {
+          data.currentDirection = 'forward';
+          rotateCarousel(rotations);
+        }
+      }
+    });
+
+
+    /**
+     * The user may choose to wrap the images is link tags. If they do this, we need to
+     * make sure that they aren't active for certain situations
+     */
+    $(this).find('a').bind("click", function (event) {
+      var isCenter = $(this).find('img').data('currentPosition') == 0;
+      // should we disable the links?
+      if (options.linkHandling === 1 || // turn off all links
+          (options.linkHandling === 2 && !isCenter)) // turn off all links except center
+      {
+        event.preventDefault();
+        return false;
+      }
+    });
+
     }
     
     this.next = function() {

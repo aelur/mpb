@@ -28,7 +28,6 @@ var traducir = function(lenguaje,
 		traducir_contenido_dinamico_en();
 		
 		$('.todos').animate({'margin-left':-58});
-		$('.int').animate({'margin-left':-114});
 		$('.nac').animate({'margin-left':-90});
 		lenguaje_pantalla='en';
 	}
@@ -41,7 +40,6 @@ var traducir = function(lenguaje,
 		lenguaje_pantalla='por';
 		
 		$('.todos').animate({'margin-left':-74});
-		$('.int').animate({'margin-left':-114});
 		$('.nac').animate({'margin-left':-90});
 	}
 	
@@ -84,6 +82,7 @@ var setup_timeline = function(datos_campeonatos,
 				$objTexto.stop(true,true).animate({fontSize: 9,opacity: 0});
 				$objANIO = $("#a" + $newCenterItem.attr('alt'));
 				$objANIO.stop(true,true).animate({opacity: 0});
+				$objANIO.css('z-index',0);
 				prevCentroCarousel = $('.carousel-center').attr('alt');
 			},
 			movedToCenter: function($newCenterItem){
@@ -92,7 +91,7 @@ var setup_timeline = function(datos_campeonatos,
 				$objTexto.stop(true,true).animate({fontSize: 18,opacity: .9});
 				$objANIO = $("#a" + indexCentro);
 				$objANIO.stop(true,true).animate({opacity: 1});
-				
+				$objANIO.css('z-index',9);
 				//Si es internacional tengo que mover el año y el titulo mas abajo
 				var tipo = $.grep(datos_campeonatos, function(elem,index){
 					return elem.id ==  indexCentro;
@@ -107,7 +106,8 @@ var setup_timeline = function(datos_campeonatos,
 				})[0].urlbg;				
 				if(!( tipo=='NAC' && urlbg_viejo == urlbg_nuevo) )
 				$(".fondo_campeonato").css("background", 
-						"url("+urlbg_nuevo+") no-repeat center center fixed");		
+						"url("+urlbg_nuevo+") no-repeat center center fixed");	
+				
 			}
 	};
 	
@@ -136,6 +136,7 @@ var setup_timeline = function(datos_campeonatos,
 			opciones.startingItem = 1;
 		};
 		$("#carousel").empty();
+		$("#carousel").append("<div id='swipecarousel'></div>");
 		$.each(filtrados, function(index, elemento){
 				var html_nuevo = "<div id=div_camp"+elemento.id+">"
 						+"<a href='"+elemento.url+"'><img src="
@@ -158,45 +159,43 @@ var setup_timeline = function(datos_campeonatos,
 
 	$(document).ready(function() {
 		//Levantar Carousel	
-		var carousel = $("#carousel").waterwheelCarousel(opciones);
-		
+		var carousel = $("#carousel").waterwheelCarousel(opciones);		
 		prevCentroCarousel = $('.carousel-center').attr('alt');
-		
 		// Swipe del Carousel
-		$("#carousel").swipe({
+		$("#swipecarousel").swipe({
 			swipeLeft:function(event,direction,distance,duration,fingerCount){
-				var numero_pasadas = Math.round(distance/200);
-				for (var i = 0; i < numero_pasadas; i++){
-					carousel.prev();
-				};
-				console.log(distance);
+				carousel.next();
 			},
 			swipeRight:function(event,direction,distance,duration,fingerCount){
-				carousel.next();
-				console.log(distance);
+				carousel.prev();
 			},
-			threshold: 20,
+			threshold: 10,
 			fingers:'all'
 		});
-		
+		$("#swipecarousel").on('click', function(e){
+			console.log(e);
+		});
 		//swipe del filtro
 			$('.left .typesetter').swipe({
 		swipeLeft:function(event,direction,distance,duration,fingerCount){
-			var trigger = $(event.target);
-			console.log(trigger);
+			//traigo la imagen sobre la que se deslizo
+			$trigger = $(event.target);
+			//no hago nada si la imagen no es la activa
+			if ($trigger.parent().attr('id') != 'copas_active') return;
 			//defino a que voy a cambiar
 			var nuevo;
-			if (trigger.attr('id') == 'todos') return;
-			if (trigger.attr('id') == 'int') nuevo = $('#todos').parent();
-			if (trigger.attr('id') == 'nac') nuevo = $('#int').parent();
-			trigger = trigger.parent();
-			trigger.find(".titulo").animate({opacity:0, 'margin-top':40});	
-			trigger.find(".flecha").animate({opacity:0, 'margin-top':40});	
-			trigger.find("img").animate({opacity:0, 'margin-left':10});	
-			trigger.find("img").animate({'margin-left':0});	
-			trigger.attr('id','copas');
+			if ($trigger.attr('id') == 'todos') return;
+			if ($trigger.attr('id') == 'int') nuevo = $('#todos').parent();
+			if ($trigger.attr('id') == 'nac') nuevo = $('#int').parent();
+			$trigger = $trigger.parent();
+			$trigger.find(".titulo").animate({opacity:0, 'margin-top':40});	
+			$trigger.find(".flecha").animate({opacity:0, 'margin-top':40});	
+			$trigger.find("img").animate({opacity:0, 'margin-right':30});	
+			$trigger.find("img").animate({'margin-right':0});	
+			$trigger.attr('id','copas');
 			
 			nuevo.attr('id','copas_active');
+			nuevo.find("img").animate({opacity:1});	
 			nuevo.find(".titulo").animate({opacity:0.7, 'margin-top':97});	
 			nuevo.find(".flecha").animate({opacity:0.7, 'margin-top':50});	
 				
@@ -205,20 +204,24 @@ var setup_timeline = function(datos_campeonatos,
 			filtrar(tipo, carousel);			
 		},
 		swipeRight:function(event,direction,distance,duration,fingerCount){
-			var trigger =$(event.target);
+			//traigo la imagen sobre la que se deslizo
+			$trigger =$(event.target);
+			//no hago nada si la imagen no es la activa			
+			if ($trigger.parent().attr('id') != 'copas_active') return;
 			//defino a que voy a cambiar
 			var nuevo;
-			if (trigger.attr('id') == 'nac') return;
-			if (trigger.attr('id') == 'int') nuevo = $('#nac').parent();
-			if (trigger.attr('id') == 'todos') nuevo = $('#int').parent();
-			trigger = trigger.parent();
-			trigger.find(".titulo").animate({opacity:0, 'margin-top':40});	
-			trigger.find(".flecha").animate({opacity:0, 'margin-top':40});	
-			trigger.find("img").animate({opacity:0, 'margin-left':10});	
-			trigger.find("img").animate({'margin-left':0});	
-			trigger.attr('id','copas');
+			if ($trigger.attr('id') == 'nac') return;
+			if ($trigger.attr('id') == 'int') nuevo = $('#nac').parent();
+			if ($trigger.attr('id') == 'todos') nuevo = $('#int').parent();
+			$trigger = $trigger.parent();
+			$trigger.find(".titulo").animate({opacity:0, 'margin-top':40});	
+			$trigger.find(".flecha").animate({opacity:0, 'margin-top':40});	
+			$trigger.find("img").animate({opacity:0, 'margin-left':30});	
+			$trigger.find("img").animate({'margin-left':0});	
+			$trigger.attr('id','copas');
 			
 			nuevo.attr('id','copas_active');
+			nuevo.find("img").animate({opacity:1});	
 			nuevo.find(".titulo").animate({opacity:0.7, 'margin-top':97});	
 			nuevo.find(".flecha").animate({opacity:0.7, 'margin-top':50});	
 				
