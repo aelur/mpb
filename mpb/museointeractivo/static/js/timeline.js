@@ -172,9 +172,6 @@ var setup_timeline = function(datos_campeonatos,
 			threshold: 10,
 			fingers:'all'
 		});
-		$("#swipecarousel").on('click', function(e){
-			console.log(e);
-		});
 		//swipe del filtro
 			$('.left .typesetter').swipe({
 		swipeLeft:function(event,direction,distance,duration,fingerCount){

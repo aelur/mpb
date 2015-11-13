@@ -12,7 +12,6 @@
 <div id="body_timeline" >
 	<div class="fondo_campeonato"></div>
 	<div class="nombre">TODOS</div>
-	
 	<div class="TOPBAR" id="timelinebar">
 		<div class="left">
 			<img src="{% static 'img/logo.png' %}" class="responsive">
@@ -61,7 +60,8 @@
 <script type="text/javascript" src="{% static 'js/jquery.touchSwipe.js' %}"></script>
 <script type="text/javascript"  src="{% static 'js/timeline.js' %}"></script>
 <script type="text/javascript"  src="{% static 'js/contextuales.js' %}"></script>
-<script>
+<script type="text/javascript"  src="{% static 'js/jquery.velocity.min.js' %}"></script>
+<script>	
 	var traducir_contenido_dinamico_es = function(){
 		{% for campeonato in campeonatos %}
 			$('#{{campeonato.id}}').text("{{ campeonato.titulo_es }}");	
@@ -98,5 +98,21 @@
 		traducir_contenido_dinamico_por,
 		lenguaje_pantalla,
 		traducirLinks);
+		
+	
+	$('a').click(function (event) {
+		event.preventDefault();
+		var link = $(this).attr("href");
+		$('#body_timeline')
+			.velocity({translateY: "10%", opacity:0.7}, {duration:300})
+			.velocity({
+			  translateY: "-150%"
+			 ,opacity: 0
+			},{ 
+				duration: 500, 
+				easing: "ease-out" ,
+				complete: function(elements) { location.href = link;}
+				});		
+	});
 </script>
 </html>

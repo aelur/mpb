@@ -25,7 +25,7 @@ body{
 	left: 0px; */
 	overflow: hidden;  
 	background-size: cover !important;
-	animation: bounceInDown 2s linear;
+	animation: bounceInUp 2s linear;
 }
 #body_timeline{
 	width: 100%;
@@ -35,7 +35,7 @@ body{
 	left: 0px;
 	overflow: hidden;  
 	background-size: cover !important;
-	animation: bounceInUp 2s linear;
+	animation: bounceInDown 2s ease-out;
 }
 .body_tabla{
 	overflow-y: scroll;

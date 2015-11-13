@@ -286,6 +286,22 @@ var setup_datos = function(
 			});
 		$("#formacion").colorbox({retinaImage:true,className:'modal',closeButton:true, overlayClose:true});
 		
+		
+		
+		$('#backtotimeline').click(function (event) {
+			event.preventDefault();
+			var link = $(this).attr("href");
+			$('.body_datos')
+				.velocity({translateY: "-10%", opacity:0.7}, {duration:300})
+				.velocity({
+				translateY: "150%"
+				,opacity: 0
+				},{ 
+					duration: 500, 
+					easing: "ease-out" ,
+					complete: function(elements) { location.href = link;}
+					});		
+		});
 		/* $("#videocentral").on('click', function(e){
 			var $video = $(this).get(0);
 			if ($video.paused){
