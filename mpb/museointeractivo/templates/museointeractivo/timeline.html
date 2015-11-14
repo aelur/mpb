@@ -62,6 +62,8 @@
 <script type="text/javascript"  src="{% static 'js/contextuales.js' %}"></script>
 <script type="text/javascript"  src="{% static 'js/jquery.velocity.min.js' %}"></script>
 <script>	
+		$('#body_timeline')
+			.velocity({translateY: "-150%"}, {duration:1});
 	var traducir_contenido_dinamico_es = function(){
 		{% for campeonato in campeonatos %}
 			$('#{{campeonato.id}}').text("{{ campeonato.titulo_es }}");	
@@ -98,7 +100,6 @@
 		traducir_contenido_dinamico_por,
 		lenguaje_pantalla,
 		traducirLinks);
-		
 	
 	$('a').click(function (event) {
 		event.preventDefault();

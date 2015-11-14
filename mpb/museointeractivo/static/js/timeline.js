@@ -152,9 +152,22 @@ var setup_timeline = function(datos_campeonatos,
 		$('.anio').css('opacity',0);
 		$("#"+primero).css('opacity',1);
 		$("#a"+primero).css('opacity',1);
+		
 		$(".fondo_campeonato").css({"background": 
 							"url("+elem.urlbg+") no-repeat center center fixed"});
-		if (typeof carousel != 'undefined') carousel.reload(opciones);
+		if (typeof carousel != 'undefined') {
+			carousel.reload(opciones);
+			$("#swipecarousel").swipe({
+				swipeLeft:function(event,direction,distance,duration,fingerCount){
+					carousel.next();
+				},
+				swipeRight:function(event,direction,distance,duration,fingerCount){
+					carousel.prev();
+				},
+				threshold: 10,
+				fingers:'all'
+			});
+		};
 	} 
 
 	$(document).ready(function() {
@@ -273,6 +286,16 @@ var setup_timeline = function(datos_campeonatos,
 			traducir_contenido_dinamico_por,
 			lenguaje_pantalla,
 			traducirLinks);
+			
+		 $('#body_timeline')
+		 .velocity({translateY: "30%", opacity:0.7}, {duration:700})
+		.velocity({
+		   translateY: "0%"
+		   ,opacity: 1
+			},{ 
+			duration: 300, 
+			easing: "ease-out" 
+			});		
 	});
 	
 	filtrar('>TODOS');
