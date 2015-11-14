@@ -288,9 +288,10 @@ var setup_timeline = function(datos_campeonatos,
 			traducirLinks);
 			
 		 $('#body_timeline')
-		 .velocity({translateY: "30%", opacity:0.7}, {duration:700})
+		 .velocity({translateY: "30%", opacity:0.7, translateZ:"0%"}, {duration:1200})
 		.velocity({
 		   translateY: "0%"
+		   , translateZ:"0%"
 		   ,opacity: 1
 			},{ 
 			duration: 300, 
