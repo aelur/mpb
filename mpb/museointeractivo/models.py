@@ -145,9 +145,66 @@ class campeonato(models.Model):
 					y += 1
 				filas.append(columnas)
 			return filas
+	
 
+	def get_observaciones_posiciones(self):
+		tabla = self.get_datos_posiciones()
+		lista_obs = []
+		for fila in tabla:
+			observaciones = fila[8]
+			if (observaciones != '' and observaciones != '0' and observaciones != 0 and observaciones is not None):
+				lista_obs.append(observaciones)
+		return lista_obs
+	
+	def get_observaciones_partidos(self):
+		tabla = self.get_datos_campania()
+		lista_obs = []
+		for fila in tabla:
+			observaciones = fila[5]
+			if (observaciones != '' and observaciones != '0' and observaciones != 0 and observaciones is not None):
+				lista_obs.append(observaciones)
+		return lista_obs
 	def get_datos_jugadores(self):
-		return (self.leer_tablas('jugadores'))
+		tabla = (self.leer_tablas('jugadores'))
+		dt = ''
+		arqueros = []
+		defensores = []
+		mediocampistas = []
+		delanteros = []
+		for fila in tabla:
+			if (fila[3].upper() == 'DT' or fila[3].upper() == 'D.T.' or fila[3].upper() == 'TECNICO'):
+				dt = fila
+			if (fila[3].upper() == 'ARQUERO'):
+				arqueros.append(fila)
+			if (fila[3].upper() == 'DEFENSOR'):
+				defensores.append(fila)
+			if (fila[3].upper() == 'MEDIOCAMPISTA'):
+				mediocampistas.append(fila)
+			if (fila[3].upper() == 'DELANTERO'):
+				delanteros.append(fila)
+		datos = {'dt':dt, 'arqueros': arqueros, 'defensores': defensores, 'mediocampistas': mediocampistas, 'delanteros': delanteros}
+		return datos
+		
+	def get_arqueros(self):
+		datos = self.get_datos_jugadores()
+		return (datos['arqueros'])
+	
+	def get_mediocampistas(self):
+		datos = self.get_datos_jugadores()		
+		return (datos['mediocampistas'])
+		
+	def get_defensores(self):
+		datos = self.get_datos_jugadores()
+		return (datos['defensores'])
+		
+	def get_delanteros(self):
+		datos = self.get_datos_jugadores()
+		return (datos['delanteros'])
+		
+	def get_dt(self):
+		datos = self.get_datos_jugadores()
+		return (datos['dt'])
+		
 	def get_datos_posiciones(self):
 		return (self.leer_tablas('posiciones'))
 	def get_datos_campania(self):

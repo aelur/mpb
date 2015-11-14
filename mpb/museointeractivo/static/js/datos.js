@@ -32,6 +32,11 @@ var traducir = function(lenguaje,
 		$('#text_perdidos').text('Perdidos');
 		$('#text_golesfavor').text('Goles a Favor');
 		$('#text_golescontra').text('Goles En Contra');
+		$('#arqueros').text('Arqueros');
+		$('#defensores').text('Defensores');
+		$('#mediocampistas').text('Mediocampistas');
+		$('#delanteros').text('Delanteros');
+		$('#dt').text('Director técnico');
 		traducir_contenido_dinamico_es();
 		lenguaje_pantalla='es';
 	};
@@ -56,6 +61,11 @@ var traducir = function(lenguaje,
 		$('#text_perdidos').text('Lost');
 		$('#text_golesfavor').text('Goals Scored');
 		$('#text_golescontra').text('Goals Against');
+		$('#arqueros').text('goalkeepers');
+		$('#defensores').text('Defenders');
+		$('#mediocampistas').text('midfielders');
+		$('#delanteros').text('strikers');
+		$('#dt').text('Coach');
 		traducir_contenido_dinamico_en();
 		lenguaje_pantalla='en';
 	};
@@ -80,6 +90,11 @@ var traducir = function(lenguaje,
 		$('#text_perdidos').text('Perdidos');
 		$('#text_golesfavor').text('Gols a Favor');
 		$('#text_golescontra').text('Gols Em Contra');
+		$('#arqueros').text('Arqueiros');
+		$('#defensores').text('Defensors');
+		$('#mediocampistas').text('meio-campistas');
+		$('#delanteros').text('dianteiros');
+		$('#dt').text('treinador');
 		traducir_contenido_dinamico_por();
 		lenguaje_pantalla='por';
 	};
@@ -115,7 +130,7 @@ var setup_datos = function(
 			$impressslide.goto(2);
 		});
 	$("#swipejugadores").swipe({
-		swipeDown:function(event,direction,distance,duration,fingerCount){
+		swipeUp:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(2);
 		},
 		threshold: 10,
@@ -132,7 +147,7 @@ var setup_datos = function(
 			$impressslide.goto(3);
 		});
 	$("#swipeposiciones").swipe({
-		swipeDown:function(event,direction,distance,duration,fingerCount){
+		swipeUp:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(3);
 		},
 		threshold: 10,
@@ -149,50 +164,54 @@ var setup_datos = function(
 			$impressslide.goto(1);
 		});
 	$("#swipecampania").swipe({
-		swipeDown:function(event,direction,distance,duration,fingerCount){
+		swipeUp:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(1);
 		},
 		threshold: 10,
 		fingers:'all'
 	});
-	$(".body_tabla").swipe({
+	$(".swipeup").swipe({
 		swipeDown:function(event,direction,distance,duration,fingerCount){
-			$impressslide.next();
-		},
-		swipeUp:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(0);
 		},
 		threshold: 20,
 		fingers:'all'
 	});
 	$("#bodyjugadores").swipe({		
-		swipeLeft:function(event,direction,distance,duration,fingerCount){
+		swipeRight:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(1);
 		},
-		swipeRight:function(event,direction,distance,duration,fingerCount){
+		swipeLeft:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(3);
 		},
-		threshold: 30,
+		threshold: 10,
 		fingers:'all'
 		});
 	$("#bodyposiciones").swipe({
-		swipeLeft:function(event,direction,distance,duration,fingerCount){
+		swipeRight:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(2);
 		},
-		swipeRight:function(event,direction,distance,duration,fingerCount){
+		swipeLeft:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(1);
 		},
-		threshold: 30,
+		threshold: 10,
+		fingers:'all'
+	});
+	$("#bodydatos").swipe({
+		swipeDown:function(event,direction,distance,duration,fingerCount){
+			$('#backtotimeline').click();
+		},
+		threshold: 10,
 		fingers:'all'
 	});
 	$("#bodyresultados").swipe({
-		swipeLeft:function(event,direction,distance,duration,fingerCount){
+		swipeRight:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(2);
 		},
-		swipeRight:function(event,direction,distance,duration,fingerCount){
+		swipeLeft:function(event,direction,distance,duration,fingerCount){
 			$impressslide.goto(3);
 		},
-		threshold: 30,
+		threshold: 10,
 		fingers:'all'
 	});
 	

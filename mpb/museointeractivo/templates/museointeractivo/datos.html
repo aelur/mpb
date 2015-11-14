@@ -10,7 +10,7 @@
   </head>
 <body style="background:url('{% static 'img/BG.jpg' %}')  no-repeat center center fixed">	
 <div id="impress">
-
+	
 	<div class="step slide" data-x="0" data-y="0" data-scale="3">
 		<div class="body_datos" id="bodydatos">
 			<div class="TOPBAR">
@@ -72,7 +72,7 @@
 				<div class="tablas">
 					<a href="" class="juglink"><div id="jugadores"><img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas</div></a>
 					<a href="" class="camplink"><div id="campania"><img src="{% static 'img/campania.png' %}"><span>></span> Resultados</div></a>
-					<a href="" class="poslink"><div id="posiciones"><img src="{% static 'img/posiciones.png' %}"><span>></span>Tabla de Posiciones</div></a>
+					{% if campeonato.get_datos_posiciones %}<a href="" class="poslink"><div id="posiciones"><img src="{% static 'img/posiciones.png' %}"><span>></span>Tabla de Posiciones</div></a>{% endif %}
 				</div>
 				
 			</div>
@@ -89,10 +89,14 @@
 		</div>
 	</div>
 	
+	<!--RESULTADOS-->
 	<div class="step slide" data-x="0" data-y="3000" data-z="-100" data-rotate-x="-90">
+		<div class="swipeup"></div>
 		<div class="body_datos body_tabla" id="bodyresultados">
 		
-		<a href="#" class="pantalladatos"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
+		<img src="{% static 'img/arrow_up.png' %}" class="arrow_up">
+		<img src="{% static 'img/arrow_left.png' %}" class="arrow_left">
+		<img src="{% static 'img/arrow_right.png' %}" class="arrow_right">
 		
 		<div class="TOPBAR">
 			<div class="curiosidades" id="curiosidtablas">	
@@ -112,7 +116,6 @@
 				<div class="selector"><img src="{% static 'img/por.png' %}" class="por"></div>
 			</div>
 		</div>
-		
 		<div class="tabla resultados" id="tablaresultados">
 			<table>
 			<tr>
@@ -134,21 +137,32 @@
 				<td>{{partido.4}}</td>
 				</tr>
 			{% endfor %}
+			{% for observacion in campeonato.get_observaciones_partidos %}
+			<tr>
+				<td colspan="5">{{observacion}}</td>
+			</tr>
+			{% endfor %}
 			</table>
 		</div>
 		
 		<div class="tablaimg resultados">
 			<img src="{% static 'img/campania.png' %}" id="imgcampania">
 			<a href="#" class="juglink"><img src="{% static 'img/jugadores.png' %}" id="imgjugadores" ></a>
-			<a href="#" class="poslink"><img src="{% static 'img/posiciones.png' %}" id="imgposiciones"></a>
+			{% if campeonato.get_datos_posiciones %}<a href="#" class="poslink"><img src="{% static 'img/posiciones.png' %}" id="imgposiciones"></a>{% endif %}
 		</div>
 		
 		</div>
 	</div>
 	
+	<!--JUGADORES-->
 	<div class="step slide" data-x="-2500" data-y="3000" data-z="-150" data-rotate-y="90" >
+		<div class="swipeup"></div>
 		<div class="body_datos body_tabla" id="bodyjugadores">
-		<a href="#" class="pantalladatos"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
+		
+		<img src="{% static 'img/arrow_up.png' %}" class="arrow_up">
+		<img src="{% static 'img/arrow_left.png' %}" class="arrow_left">
+		<img src="{% static 'img/arrow_right.png' %}" class="arrow_right">
+		
 		<div class="TOPBAR">
 			<div class="curiosidades" id="curiosidtablas">	
 					<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
@@ -178,13 +192,47 @@
 				<th id="text_partidos">Partidos</th>
 				<th id="text_goles">Goles</th>
 			</tr>
-			{% for jugador in campeonato.get_datos_jugadores %}
+				<tr  class="separador"><td colspan="3" id="arqueros">Arqueros</td></tr>
+			{% for jugador in campeonato.get_arqueros %}
 				<tr>
 				<td>{{jugador.0}}</td>
 				<td class="middle yellow">{{jugador.1}}</td>
 				<td class="middle">{{jugador.2}}</td>
 				</tr>
 			{% endfor %}
+				<tr  class="separador"><td colspan="3" id="defensores">Defensores</td></tr>
+			{% for jugador in campeonato.get_defensores %}
+				<tr>
+				<td>{{jugador.0}}</td>
+				<td class="middle yellow">{{jugador.1}}</td>
+				<td class="middle">{{jugador.2}}</td>
+				</tr>
+			{% endfor %}
+			<tr  class="separador"><td colspan="3" id="mediocampistas">Mediocampistas</td></tr>
+			{% for jugador in campeonato.get_mediocampistas %}
+				<tr>
+				<td>{{jugador.0}}</td>
+				<td class="middle yellow">{{jugador.1}}</td>
+				<td class="middle">{{jugador.2}}</td>
+				</tr>
+			{% endfor %}
+			
+				<tr  class="separador"><td colspan="3" id="delanteros">Delanteros</td></tr>
+			{% for jugador in campeonato.get_delanteros %}
+				<tr>
+				<td>{{jugador.0}}</td>
+				<td class="middle yellow">{{jugador.1}}</td>
+				<td class="middle">{{jugador.2}}</td>
+				</tr>
+			{% endfor %}
+			
+				<tr  class="separador"><td colspan="3" id="dt">Director Técnico</td></tr>
+			<tr>
+			<td>{{ campeonato.get_dt.0 }}</td>
+			<td class="middle yellow">{{ campeonato.get_dt.1 }}</td>
+			<td class="middle">{{ campeonato.get_dt.2 }}</td>
+			</tr>
+			
 			</table>
 		</div>
 		</div>
@@ -192,13 +240,19 @@
 		<div class="tablaimg jugadores">
 			<img src="{% static 'img/jugadores.png' %}" id="imgjugadores" >
 			<a href="#" class="camplink"><img src="{% static 'img/campania.png' %}" id="imgcampania"></a>
-			<a href="#" class="poslink"><img src="{% static 'img/posiciones.png' %}" id="imgposiciones"></a>
+			{% if campeonato.get_datos_posiciones %}<a href="#" class="poslink"><img src="{% static 'img/posiciones.png' %}" id="imgposiciones"></a>{% endif %}
 		</div>
 		
 	</div>
 	
+	<!--POSICIONES-->
+	{% if campeonato.get_datos_posiciones %}
 	<div class="step slide" data-x="-6500" data-y="3000" data-z="-200" data-rotate-x="90">
-		<a href="#" class="pantalladatos"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
+		<div class="swipeup"></div>
+		<img src="{% static 'img/arrow_up.png' %}" class="arrow_up">
+		<img src="{% static 'img/arrow_left.png' %}" class="arrow_left">
+		<img src="{% static 'img/arrow_right.png' %}" class="arrow_right">
+	
 		<div class="body_datos body_tabla" id="bodyposiciones">
 			<div class="TOPBAR">
 				<div class="curiosidades" id="curiosidtablas">	
@@ -245,6 +299,11 @@
 				<td class="middle">{{equipo.7}}</td>
 				</tr>
 			{% endfor %}
+			{% for observacion in campeonato.get_observaciones_posiciones %}
+			<tr>
+				<td colspan="8">{{observacion}}</td>
+			</tr>
+			{% endfor %}
 			</table>
 		</div>
 			
@@ -255,6 +314,7 @@
 			</div>
 		</div>
 	</div>
+	{% endif %}
 	 
 </div>		
 </body>
@@ -319,8 +379,8 @@
 		traducirLinks,
 		$impressslide);
 		$('#videocentral').get(0).play();
-		if(typeof $('#video1') != 'undefined') $('#video1').get(0).play();
-		if(typeof $('#video2') != 'undefined') $('#video2').get(0).play();
+		if(typeof $('#video1').get(0) != 'undefined') $('#video1').get(0).play();
+		if(typeof $('#video2').get(0) != 'undefined') $('#video2').get(0).play();
 </script>
 
 </html>

@@ -45,6 +45,10 @@ body{
 .body_tabla::-webkit-scrollbar{
 	display: none;
 }
+
+.tabla::-webkit-scrollbar{
+	display: none;
+}
 .fondo_campeonato{
 	position: absolute;
 	width: 100%;
@@ -618,6 +622,8 @@ a:hover{
  	padding-bottom: 50px;
  	left:50%;
  	transform: translate(-50%,0);
+	height: 800px; 
+	overflow-y: scroll;
 }
 .tablaimg{
 	position: absolute;
@@ -637,6 +643,7 @@ table {
 	background: -webkit-linear-gradient(left,black -20%, rgb(8,67,143) , black 120%); 
 	width: 100%;
 	border: 1px solid #043a76;
+	margin-bottom: 40px;
 }
 td{
 	color: white;
@@ -646,9 +653,66 @@ td{
 	padding-bottom: 5px;
 	border: 1px solid #040e27;
 }
+.swipeup{
+	width: 100%;
+	height: 234px;
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.arrow_up{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top:1%;
+	opacity:0.4;
+	animation: flotarup 1s infinite;
+}
+@keyframes flotarup {
+	50%{
+		top:2%;
+	}
+}
+@keyframes flotarright {
+	50%{
+		right:2%;
+	}
+}
+@keyframes flotarleft {
+	50%{
+		left:2%;
+	}
+}
+.arrow_left{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left:1%;
+	opacity:0.4;
+	animation: flotarleft 1s infinite;
+}
+.arrow_right{
+	position: absolute;
+	top: 50%;
+	right: 1%;
+	transform: translateY(-50%);
+	opacity:0.4;
+	animation: flotarright 1s infinite;
+}
+.separador{
+	background: #040e27 !important; 
+}
+.separador td{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 75px;
+	color: #f7b52a !important;
+	text-transform: uppercase;
+}
 th {
 	text-transform: uppercase;
-	font-size: 26px;
+	font-size: 40px;
 	color: #f7b52a; 
 	text-align: center;
 	padding-top: 5px;
