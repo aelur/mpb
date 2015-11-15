@@ -156,15 +156,18 @@ var setup_datos = function(
 	$('a.camplink').each(function(){
 		$(this).bind("click", function (e) {
 			e.preventDefault();
+			$('#bodydatos').animate({opacity:0});
 			$impressslide.goto(1);
 		});
 	});	
 	$('#swipecampania').bind("click", function (e) {
 			e.preventDefault();
+			$('#bodydatos').animate({opacity:0});
 			$impressslide.goto(1);
 		});
 	$("#swipecampania").swipe({
 		swipeUp:function(event,direction,distance,duration,fingerCount){
+			$('#body_datos').animate({opacity:0});
 			$impressslide.goto(1);
 		},
 		threshold: 10,
@@ -172,6 +175,7 @@ var setup_datos = function(
 	});
 	$(".swipeup").swipe({
 		swipeDown:function(event,direction,distance,duration,fingerCount){
+			$('#bodydatos').animate({opacity:1});
 			$impressslide.goto(0);
 		},
 		threshold: 20,
@@ -179,6 +183,7 @@ var setup_datos = function(
 	});
 	$("#bodyjugadores").swipe({		
 		swipeRight:function(event,direction,distance,duration,fingerCount){
+			$('#bodydatos').animate({opacity:0});
 			$impressslide.goto(1);
 		},
 		swipeLeft:function(event,direction,distance,duration,fingerCount){
@@ -192,6 +197,7 @@ var setup_datos = function(
 			$impressslide.goto(2);
 		},
 		swipeLeft:function(event,direction,distance,duration,fingerCount){
+			$('#bodydatos').animate({opacity:0});
 			$impressslide.goto(1);
 		},
 		threshold: 10,
@@ -218,6 +224,7 @@ var setup_datos = function(
 	$('a.pantalladatos').each(function(){
 		$(this).bind("click", function (e) {
 			e.preventDefault();
+			$('#bodydatos').animate({opacity:1});
 			$impressslide.goto(0);
 		});
 	});
@@ -238,14 +245,6 @@ var setup_datos = function(
 		$('#videocentral source').attr('src', $video1SRC);
 		$('source', $(this)).attr('src', $videoCentralSRC);
 		
-		$('.videobox span').velocity({opacity:0, scaleX: 1.1, scaleY: 1.1},{ duration: 2});
-		$('.vid1 span').velocity({opacity:0, scaleX: 1.1, scaleY: 1.1},{ duration: 2});
-		var $titulo = $('.videobox span').text();
-		$('.videobox span').text($('.vid1 span').text());
-		$('.videobox span').velocity({opacity:0.8, scaleX: 1, scaleY: 1},{ duration: 200});
-		$('.vid1 span').text($titulo);
-		$('.vid1 span').velocity({opacity:0.8, scaleX: 1, scaleY: 1},{ duration: 200});
-		
 		cargarVideo($videoCentral);
 		cargarVideo($(this));
 	});
@@ -258,15 +257,7 @@ var setup_datos = function(
 		
 		$('#videocentral source').attr('src', $video2SRC);
 		$('source', $(this)).attr('src', $videoCentralSRC);
-		
-		$('.videobox span').velocity({opacity:0, scaleX: 1.1, scaleY: 1.1},{ duration: 2});
-		$('.vid2 span').velocity({opacity:0, scaleX: 1.1, scaleY: 1.1},{ duration: 2});
-		var $titulo = $('.videobox span').text();
-		$('.videobox span').text($('.vid2 span').text());
-		$('.videobox span').velocity({opacity:0.8, scaleX: 1, scaleY: 1},{ duration: 200});
-		$('.vid2 span').text($titulo);
-		$('.vid2 span').velocity({opacity:0.8, scaleX: 1, scaleY: 1},{ duration: 200});
-		
+				
 		cargarVideo($videoCentral);
 		cargarVideo($(this));
 		
@@ -304,7 +295,6 @@ var setup_datos = function(
 				}
 			});
 		$("#formacion").colorbox({retinaImage:true,className:'modal',closeButton:true, overlayClose:true});
-		
 		
 		
 		$('#backtotimeline').click(function (event) {

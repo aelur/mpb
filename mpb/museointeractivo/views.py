@@ -6,7 +6,7 @@ from museointeractivo.models import campeonato
 def index(request,lenguaje=None):
 	if lenguaje is None:
 		lenguaje = 'es'
-	campeonatos = campeonato.objects.all()
+	campeonatos = campeonato.objects.order_by('anio')
 	context = {'campeonatos' : campeonatos, 'lenguaje': lenguaje}
 	return render(request, 'museointeractivo/timeline.html', context)
 def datos(request, campeonato_id, lenguaje):

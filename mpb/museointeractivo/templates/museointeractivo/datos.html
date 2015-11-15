@@ -34,7 +34,6 @@
 						<video id="videocentral" type="video/mp4" muted autoplay>
 							<source src="{{ campeonato.videoBoca.url }}" type="video/mp4">
 						</video>
-						<span>Boca Campeón</span>
 					</div>
 				</div>
 				<div class="media">
@@ -51,7 +50,6 @@
 					<video id="video1" type="video/mp4" muted autoplay>
 						<source src="{{ campeonato.videoMundo.url }}" type="video/mp4">
 					</video>
-					<span></span>
 				</div>
 				{% endif %}
 				{% if campeonato.videoArgentina %}
@@ -62,7 +60,6 @@
 					<video id="video2" type="video/mp4" muted autoplay>
 						<source src="{{ campeonato.videoArgentina.url }}" type="video/mp4">
 					</video>
-					<span>La Argentina en el año {{ campeonato.anio }}</span>
 				</div>
 				{% endif %}
 				
@@ -143,6 +140,28 @@
 			</tr>
 			{% endfor %}
 			</table>
+			
+			{% if campeonato.get_datos_particulares_campania %}
+			<table style="width:550px; left: 25%; position: absolute;">
+				{% for partido in campeonato.get_datos_particulares_campania %}
+					{% if forloop.first %} 
+					<tr class="separador">
+						<td colspan="2" class="yellow" style="padding: 5px;">{{partido.0}}</td>
+					</tr>
+					{% elif forloop.counter == 2%}
+					<tr>
+						<td style="text-transform:uppercase; text-align=center;"><b>{{partido.0}}</b></td>
+						<td style="text-transform:uppercase; text-align=center;"><b>{{partido.1}}</b></td>
+					</tr>
+					{% else %}
+					<tr>
+						<td style="padding-left:25px;">{{partido.0}}</td>
+						<td style="padding-left:25px;">{{partido.1}}</td>
+					</tr>
+					{% endif %}					
+				{% endfor %}
+			</table>
+			{% endif %}
 		</div>
 		
 		<div class="tablaimg resultados">
@@ -225,14 +244,14 @@
 				<td class="middle">{{jugador.2}}</td>
 				</tr>
 			{% endfor %}
-			
+			{% if  campeonato.get_dt %}
 				<tr  class="separador"><td colspan="3" id="dt">Director Técnico</td></tr>
+			{% for dt in campeonato.get_dt %}
 			<tr>
-			<td>{{ campeonato.get_dt.0 }}</td>
-			<td class="middle yellow">{{ campeonato.get_dt.1 }}</td>
-			<td class="middle">{{ campeonato.get_dt.2 }}</td>
+				<td colspan="3">{{ dt.0 }}</td>
 			</tr>
-			
+			{% endfor %}
+			{% endif %}
 			</table>
 		</div>
 		</div>
@@ -288,16 +307,20 @@
 				<th id="text_golescontra">Goles En Contra</th>
 			</tr>
 			{% for equipo in campeonato.get_datos_posiciones %}
-				<tr>
-				<td>{{equipo.0}}</td>
-				<td class="middle yellow">{{equipo.1}}</td>
-				<td class="middle">{{equipo.2}}</td>
-				<td class="middle">{{equipo.3}}</td>
-				<td class="middle">{{equipo.4}}</td>
-				<td class="middle">{{equipo.5}}</td>
-				<td class="middle">{{equipo.6}}</td>
-				<td class="middle">{{equipo.7}}</td>
-				</tr>
+				{% if equipo.1 == 0 and equipo.2 == 0 %}
+					<tr  class="separador"><td colspan="8">{{equipo.0}}</td></tr>
+				{% else %}
+					<tr>
+					<td>{{equipo.0}}</td>
+					<td class="middle yellow">{{equipo.1}}</td>
+					<td class="middle">{{equipo.2}}</td>
+					<td class="middle">{{equipo.3}}</td>
+					<td class="middle">{{equipo.4}}</td>
+					<td class="middle">{{equipo.5}}</td>
+					<td class="middle">{{equipo.6}}</td>
+					<td class="middle">{{equipo.7}}</td>
+					</tr>
+				{% endif %}
 			{% endfor %}
 			{% for observacion in campeonato.get_observaciones_posiciones %}
 			<tr>
@@ -333,10 +356,6 @@
 		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span style="margin-left: 27px;">></span> Resultados');
 		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Tabla de Posiciones');
 
-		$(".vid1").find("span").text("{{ campeonato.anio }} en el mundo");
-		$(".vid2").find("span").text("La Argentina en el año {{ campeonato.anio }}");
-		$(".videobox").find("span").text("Boca Campeón");
-
 		$('.titulo').text('{{ campeonato.titulo_es }}');
 		$('.divtext > p').text('{{ campeonato.get_curiosidades_es }}');
 	};
@@ -345,10 +364,6 @@
 		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 13px;">></span> Results');
 		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Scores');
 		
-		$(".vid1").find("span").text("{{ campeonato.anio }} in the world");
-		$(".vid2").find("span").text("Argentina in the year {{ campeonato.anio }}");
-		$(".videobox").find("span").text("Boca, the Champion");
-
 		$('.titulo').text('{{ campeonato.titulo_en }}');
 		$('.divtext > p').text('{{ campeonato.get_curiosidades_en }}');
 	};
@@ -357,10 +372,6 @@
 		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 28px;">></span> Resultados');
 		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> POSIÇÕES');
 		
-		$(".vid1").find("span").text("{{ campeonato.anio }} em todo o mundo");
-		$(".vid2").find("span").text("Argentina em {{ campeonato.anio }}");
-		$(".videobox").find("span").text("Boca, campeão");
-
 		$('.titulo').text('{{ campeonato.titulo_por }}');
 		$('.divtext > p').text('{{ campeonato.get_curiosidades_por }}');
 

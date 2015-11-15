@@ -1,3 +1,33 @@
+var clickearImg = function(direccion, distancia){
+	if (distancia == 0) return;
+	var imagenes_carousel = $('#carousel').find('img');
+	var imagen_centro = $('.carousel-center');
+	var total_imagenes = imagenes_carousel.length;
+	if (distancia > total_imagenes) distancia = total_imagenes;
+	var indexCentro = 0;
+	for (var x = 0; x <= (total_imagenes-1) ; x++){
+		if (imagenes_carousel[x].getAttribute('alt') == imagen_centro.attr('alt'))
+			indexCentro = x;
+	}
+	var index_imagen;
+	if (direccion == "izq") {
+		if (distancia > indexCentro) {
+			index_imagen = 0;
+		}else{
+			index_imagen = (indexCentro - (distancia-1));
+		}
+	}else {
+		var aux = distancia + indexCentro;
+		if ( aux >= total_imagenes) {
+			index_imagen = total_imagenes - 1;
+		}else{
+			index_imagen = distancia + indexCentro - 1 ;
+		}
+	}	
+	if (index_imagen == indexCentro) return
+	imagenes_carousel[index_imagen].click();
+}
+
 var getNombreUnico= function(dato){
  	var url = dato;
     var nombre = url.substr(url.lastIndexOf("/") + 1);
@@ -73,6 +103,7 @@ var setup_timeline = function(datos_campeonatos,
 			separation: 150,
 			edgeFadeEnabled: true,
 			animationEasing: 'linear',
+			flankingItems: 5,
 			linkHandling: 2,
 			preloadImages: false,
 			forcedImageWidth:200,
@@ -177,10 +208,12 @@ var setup_timeline = function(datos_campeonatos,
 		// Swipe del Carousel
 		$("#swipecarousel").swipe({
 			swipeLeft:function(event,direction,distance,duration,fingerCount){
-				carousel.next();
+				var distancia = Math.round(distance/200);
+				clickearImg("der",distancia);
 			},
 			swipeRight:function(event,direction,distance,duration,fingerCount){
-				carousel.prev();
+				var distancia = Math.round(distance/200);
+				clickearImg("izq",distancia);
 			},
 			threshold: 10,
 			fingers:'all'

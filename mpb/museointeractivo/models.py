@@ -128,12 +128,18 @@ class campeonato(models.Model):
 					for col in range(s.ncols):
 						header.append(s.cell(row,col).value)
 					continue
+				if (s.cell(row,0).value == ''):
+					continue
 				columnas = []
 				y = 0
 				for col in range(s.ncols):
 					valor =s.cell(row,col).value
 					if (header[y]=='DIA') or (header[y]=='Dia'):
-						valor = datetime.datetime(*xlrd.xldate_as_tuple(valor, wb.datemode)).strftime('%d/%m/%Y')
+						try:
+							valor = datetime.datetime(*xlrd.xldate_as_tuple(valor, wb.datemode)).strftime('%d/%m/%Y')
+						except Exception, e:
+							print e
+							valor = valor
 					else:
 						if (type(valor) == float):
 							valor = str(valor)
@@ -166,14 +172,15 @@ class campeonato(models.Model):
 		return lista_obs
 	def get_datos_jugadores(self):
 		tabla = (self.leer_tablas('jugadores'))
-		dt = ''
+		dt = []
 		arqueros = []
 		defensores = []
 		mediocampistas = []
 		delanteros = []
 		for fila in tabla:
+			print fila
 			if (fila[3].upper() == 'DT' or fila[3].upper() == 'D.T.' or fila[3].upper() == 'TECNICO'):
-				dt = fila
+				dt.append(fila)
 			if (fila[3].upper() == 'ARQUERO'):
 				arqueros.append(fila)
 			if (fila[3].upper() == 'DEFENSOR'):
@@ -207,5 +214,18 @@ class campeonato(models.Model):
 		
 	def get_datos_posiciones(self):
 		return (self.leer_tablas('posiciones'))
+		
 	def get_datos_campania(self):
-		return (self.leer_tablas('campania'))
+		datos = self.leer_tablas('campania')
+		datos_partidos = []
+		for partido in datos:
+			if ("/" in partido[0]):
+				datos_partidos.append(partido)
+		return datos_partidos
+	def get_datos_particulares_campania(self):
+		datos = self.leer_tablas('campania')
+		datos_partidos = []
+		for partido in datos:
+			if (not "/" in partido[0]):
+				datos_partidos.append(partido)
+		return datos_partidos

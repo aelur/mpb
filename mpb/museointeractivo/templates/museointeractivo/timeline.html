@@ -94,13 +94,6 @@
 	var lenguaje_pantalla= '{{ lenguaje }}';
 	toggleTranslation(lenguaje_pantalla);
 	
-	setup_timeline(datos_campeonatos,
-		traducir_contenido_dinamico_es,
-		traducir_contenido_dinamico_en,
-		traducir_contenido_dinamico_por,
-		lenguaje_pantalla,
-		traducirLinks);
-	
 	$('a').click(function (event) {
 		event.preventDefault();
 		var link = $(this).attr("href");
@@ -116,5 +109,14 @@
 				complete: function(elements) { location.href = link;}
 				});		
 	});
+	
+	setup_timeline(datos_campeonatos,
+		traducir_contenido_dinamico_es,
+		traducir_contenido_dinamico_en,
+		traducir_contenido_dinamico_por,
+		lenguaje_pantalla,
+		traducirLinks);
+	
+	
 </script>
 </html>
