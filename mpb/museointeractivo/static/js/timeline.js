@@ -1,8 +1,11 @@
-var clickearImg = function(direccion, distancia){
+var clickearImg = function(direccion, distancia, corte){
 	if (distancia == 0) return;
 	var imagenes_carousel = $('#carousel').find('img');
 	var imagen_centro = $('.carousel-center');
 	var total_imagenes = imagenes_carousel.length;
+	var corte_nuevo = Math.floor(total_imagenes/2);
+	if (corte > corte_nuevo) corte = corte_nuevo;
+	if (distancia > corte) distancia = corte;
 	if (distancia > total_imagenes) distancia = total_imagenes;
 	var indexCentro = 0;
 	for (var x = 0; x <= (total_imagenes-1) ; x++){
@@ -10,21 +13,23 @@ var clickearImg = function(direccion, distancia){
 			indexCentro = x;
 	}
 	var index_imagen;
+	var movimiento;
 	if (direccion == "izq") {
-		if (distancia > indexCentro) {
-			index_imagen = 0;
+		movimiento = indexCentro - distancia;
+		if (movimiento < 0 ) {
+			index_imagen = total_imagenes + movimiento;
 		}else{
-			index_imagen = (indexCentro - (distancia-1));
+			index_imagen = movimiento;
 		}
 	}else {
-		var aux = distancia + indexCentro;
-		if ( aux >= total_imagenes) {
-			index_imagen = total_imagenes - 1;
+		movimiento = indexCentro + distancia;
+		if ( movimiento >= total_imagenes) {
+			index_imagen = movimiento - total_imagenes;
 		}else{
-			index_imagen = distancia + indexCentro - 1 ;
+			index_imagen = movimiento;
 		}
 	}	
-	if (index_imagen == indexCentro) return
+	if (index_imagen == indexCentro) return;
 	imagenes_carousel[index_imagen].click();
 }
 
@@ -190,10 +195,12 @@ var setup_timeline = function(datos_campeonatos,
 			carousel.reload(opciones);
 			$("#swipecarousel").swipe({
 				swipeLeft:function(event,direction,distance,duration,fingerCount){
-					carousel.next();
+					var distancia = Math.round(distance/200);
+					clickearImg("der",distancia,opciones.flankingItems);
 				},
 				swipeRight:function(event,direction,distance,duration,fingerCount){
-					carousel.prev();
+					var distancia = Math.round(distance/200);
+					clickearImg("izq",distancia, opciones.flankingItems);
 				},
 				threshold: 10,
 				fingers:'all'
@@ -209,11 +216,11 @@ var setup_timeline = function(datos_campeonatos,
 		$("#swipecarousel").swipe({
 			swipeLeft:function(event,direction,distance,duration,fingerCount){
 				var distancia = Math.round(distance/200);
-				clickearImg("der",distancia);
+				clickearImg("der",distancia,opciones.flankingItems);
 			},
 			swipeRight:function(event,direction,distance,duration,fingerCount){
 				var distancia = Math.round(distance/200);
-				clickearImg("izq",distancia);
+				clickearImg("izq",distancia, opciones.flankingItems);
 			},
 			threshold: 10,
 			fingers:'all'
