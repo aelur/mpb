@@ -296,11 +296,13 @@ var setup_timeline = function(datos_campeonatos,
 			if ($(this).attr('id') == 'copas_active' || $(this).attr('id') == 'copas' ){
 				$objActivo = $("#copas_active");			
 				$objActivo.find(".titulo").animate({opacity:0, 'margin-top':40});	
-				$objActivo.find(".flecha").animate({opacity:0, 'margin-top':40});	
+				$objActivo.find(".flecha").animate({opacity:0, 'margin-top':40});					
+				$("#copas_active").find("img").animate({opacity:0});	
 				$objActivo.attr('id','copas');
 				$(this).attr('id','copas_active');
 				$(this).find(".titulo").animate({opacity:0.7, 'margin-top':97});	
-				$(this).find(".flecha").animate({opacity:0.7, 'margin-top':50});	
+				$(this).find(".flecha").animate({opacity:0.7, 'margin-top':50});					
+				$(this).find("img").animate({opacity:1});	
 				
 				$('.nombre').text($('#copas_active').find('.titulo').text());
 				var tipo = $(this).find('span').text();

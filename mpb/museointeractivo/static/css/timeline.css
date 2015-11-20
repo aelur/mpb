@@ -20,9 +20,7 @@ body{
 }
 .body_datos{
 	width: 1920px;
-    height: 1080px;
-	/* top: 50px;
-	left: 0px; */
+    height: 960px;
 	overflow: hidden;  
 	background-size: cover !important;
 	animation: bounceInUp 2s linear;
@@ -251,6 +249,10 @@ body{
 	width: 200px;
 	height: auto;
 	transition: all 0.5s ease;
+ }
+ .selector{
+ 
+	z-index: 3 !important;
  }
  .selector.filtro{
 	position:absolute;
@@ -840,8 +842,8 @@ tr:nth-child(even) {
 	opacity: 0.5;
 	width: 100px;
 	position: fixed;
-    right: 8%;
-    top: 78%;
+    right: 87%;
+    top: 41%;
 	animation: zoomInPlus 2s linear infinite;
     -webkit-filter: drop-shadow(0px 0px 5px rgba(255,255,255,1)) !important;
 }
@@ -850,7 +852,7 @@ tr:nth-child(even) {
 	opacity: 0.5;
 	position: fixed;
     right: 87%;
-    top: 79%;
+    top: 39%;
 	animation: zoomInPlus 2s linear infinite;
     -webkit-filter: drop-shadow(0px 0px 5px rgba(255,255,255,1)) !important;
 }
@@ -860,12 +862,22 @@ tr:nth-child(even) {
     transform: translateX(221%) translateY(-13%);
 	animation: fadeInAndOut 2s linear infinite;
 }
+.subtituloslink{
+	top: 52%;
+    opacity: 0.5;
+	position: fixed;
+	color: white;
+	text-transform: uppercase;
+	font-size: 20px;
+	font-family: myriad;
+	text-shadow: #FFF 0 0 5px;
+}
 .tablaimg.resultados #imgposiciones{
 	opacity: 0.5;
 	width: 100px;
 	position: fixed;
     right: 8%;
-    top: 78%;
+    top: 41%;
 	animation: zoomInPlus 2s linear infinite;
     -webkit-filter: drop-shadow(0px 0px 5px rgba(255,255,255,1)) !important;
 }
@@ -887,9 +899,9 @@ tr:nth-child(even) {
 .tablaimg.jugadores #imgcampania{
 	opacity: 0.5;
 	width: 100px;
-	position: fixed;
-    right: 87%;
-    top: 79%;
+	position: fixed;    
+	right: 8%;
+    top: 41%;
 	animation: zoomInPlus 2s linear infinite;
     -webkit-filter: drop-shadow(0px 0px 5px rgba(255,255,255,1)) !important;
 }

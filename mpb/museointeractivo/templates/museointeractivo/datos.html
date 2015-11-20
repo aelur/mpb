@@ -14,24 +14,24 @@
 	<div class="step slide" data-x="0" data-y="0" data-scale="3">
 		<div class="body_datos" id="bodydatos">
 			<div class="TOPBAR">
-				<a href="{% url 'index' %}" id="backtotimeline"><img src="{% static 'img/arrowback.png' %}" class="arrowback"></a>
+				 <a href="{% url 'index' %}" id="backtotimeline"><img src="{% static 'img/arrow_up.png' %}" style="top:14%" class="arrow_up"></a>
 				<div class="curiosidades">	<div class="light"></div>	
 					<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
 					<span class="anio">{{ campeonato.anio }}</span>
 					{% if campeonato.tipo != 'NAC' %}
-						<img src="{{ campeonato.imagen_campo.url }}" style="width: 145%;height: auto;bottom: -70%;left: -80px;position: absolute;animation:none;">
+						<img src="{{ campeonato.imagen_campo.url }}" style="width: 110%;height: auto;bottom: -49%;left: -88px;position: absolute;animation:none;">
 					{% else %}
 						<img src="{% static 'img/preg.png' %}" id="preg">
 						<span class="title" id="curiosidades_texto">Curiosidades</span>
 						<div class="divtext">
-							<p>{{ campeonato.get_curiosidades_es }}</p>
+							<p></p>
 						</div>
 					{% endif%}
 				</div>
 				<div class="central">
 					<span class="titulo">{{ campeonato.titulo_es }}</span>
 					<div class="videobox">
-						<video id="videocentral" type="video/mp4" muted autoplay>
+						<video id="videocentral" type="video/mp4" muted autoplay loop>
 							<source src="{{ campeonato.videoBoca.url }}" type="video/mp4">
 						</video>
 					</div>
@@ -47,7 +47,7 @@
 						{% if not campeonato.videoArgentina %} 
 							style="transform:translateX(134px) translateY(15px)" 
 						{% endif %}>
-					<video id="video1" type="video/mp4" muted autoplay>
+					<video id="video1" type="video/mp4" muted autoplay loop>
 						<source src="{{ campeonato.videoMundo.url }}" type="video/mp4">
 					</video>
 				</div>
@@ -57,7 +57,7 @@
 						{% if not campeonato.videoMundo %} 
 							style="transform:translateX(134px) translateY(15px)" 
 						{% endif %}>
-					<video id="video2" type="video/mp4" muted autoplay>
+					<video id="video2" type="video/mp4" muted autoplay loop>
 						<source src="{{ campeonato.videoArgentina.url }}" type="video/mp4">
 					</video>
 				</div>
@@ -91,14 +91,14 @@
 		<div class="swipeup"></div>
 		<div class="body_datos body_tabla" id="bodyresultados">
 		
-		<img src="{% static 'img/arrow_up.png' %}" class="arrow_up">
+		<img src="{% static 'img/arrow_up.png' %}" class="arrow_up"><p class="subtituloslink sub_dat" style="right: 929px;top: 8%;"></p>
 		<img src="{% static 'img/arrow_left.png' %}" class="arrow_left">
-		<img src="{% static 'img/arrow_right.png' %}" class="arrow_right">
+		{% if campeonato.get_datos_posiciones %}<img src="{% static 'img/arrow_right.png' %}" class="arrow_right">{% endif %}
 		
 		<div class="TOPBAR">
 			<div class="curiosidades" id="curiosidtablas">	
 				<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
-				<span class="anio">{{ campeonato.anio}}</span>
+				<span class="anio">{{ campeonato.anio }}</span>
 			</div>
 			<div class="central" id="centraltablas">
 				<span class="titulo">{{ campeonato.titulo_es }}</span>
@@ -166,8 +166,10 @@
 		
 		<div class="tablaimg resultados">
 			<img src="{% static 'img/campania.png' %}" id="imgcampania">
-			<a href="#" class="juglink"><img src="{% static 'img/jugadores.png' %}" id="imgjugadores" ></a>
-			{% if campeonato.get_datos_posiciones %}<a href="#" class="poslink"><img src="{% static 'img/posiciones.png' %}" id="imgposiciones"></a>{% endif %}
+			<a href="#" class="juglink"><img src="{% static 'img/jugadores.png' %}" id="imgjugadores" >
+			<p class="subtituloslink sub_jug" style="left:7%;"></p></a>
+			{% if campeonato.get_datos_posiciones %}<a href="#" class="poslink">
+			<img src="{% static 'img/posiciones.png' %}" id="imgposiciones"><p class="subtituloslink sub_pos" style="right:8%;"></p></a>{% endif %}
 		</div>
 		
 		</div>
@@ -178,8 +180,8 @@
 		<div class="swipeup"></div>
 		<div class="body_datos body_tabla" id="bodyjugadores">
 		
-		<img src="{% static 'img/arrow_up.png' %}" class="arrow_up">
-		<img src="{% static 'img/arrow_left.png' %}" class="arrow_left">
+		<img src="{% static 'img/arrow_up.png' %}" class="arrow_up"><p class="subtituloslink sub_dat" style="right: 929px;top: 8%;"></p>
+		<!-- <img src="{% static 'img/arrow_left.png' %}" class="arrow_left"> -->
 		<img src="{% static 'img/arrow_right.png' %}" class="arrow_right">
 		
 		<div class="TOPBAR">
@@ -258,19 +260,20 @@
 		
 		<div class="tablaimg jugadores">
 			<img src="{% static 'img/jugadores.png' %}" id="imgjugadores" >
-			<a href="#" class="camplink"><img src="{% static 'img/campania.png' %}" id="imgcampania"></a>
-			{% if campeonato.get_datos_posiciones %}<a href="#" class="poslink"><img src="{% static 'img/posiciones.png' %}" id="imgposiciones"></a>{% endif %}
+			<a href="#" class="camplink"><img src="{% static 'img/campania.png' %}" id="imgcampania">
+			<p class="subtituloslink sub_camp" id ="jugtabla" style="right:8%;"></p></a>
+			<!-- {% if campeonato.get_datos_posiciones %}<a href="#" class="poslink"><img src="{% static 'img/posiciones.png' %}" id="imgposiciones"></a>{% endif %} -->
 		</div>
 		
 	</div>
 	
 	<!--POSICIONES-->
 	{% if campeonato.get_datos_posiciones %}
-	<div class="step slide" data-x="-6500" data-y="3000" data-z="-200" data-rotate-x="90">
+	<div class="step slide" data-x="2500" data-y="3000" data-z="-200" data-rotate-x="90">
 		<div class="swipeup"></div>
-		<img src="{% static 'img/arrow_up.png' %}" class="arrow_up">
+		<img src="{% static 'img/arrow_up.png' %}" class="arrow_up"><p class="subtituloslink sub_dat" style="right: 929px;top: 8%;"></p>
+		<!-- <img src="{% static 'img/arrow_right.png' %}" class="arrow_right">  -->
 		<img src="{% static 'img/arrow_left.png' %}" class="arrow_left">
-		<img src="{% static 'img/arrow_right.png' %}" class="arrow_right">
 	
 		<div class="body_datos body_tabla" id="bodyposiciones">
 			<div class="TOPBAR">
@@ -331,9 +334,11 @@
 		</div>
 			
 			<div class="tablaimg posiciones">
-				<a href="#" class="camplink"><img src="{% static 'img/campania.png' %}" id="imgcampania"></a>
-				<a href="#" class="juglink"><img src="{% static 'img/jugadores.png' %}" id="imgjugadores" ></a>
+				<a href="#" class="camplink"><img src="{% static 'img/campania.png' %}" id="imgcampania">
+				<p class="subtituloslink sub_camp" style="left: 142px;"></p></a>
+				<!-- <a href="#" class="juglink"><img src="{% static 'img/jugadores.png' %}" id="imgjugadores" ></a> -->
 				<img src="{% static 'img/posiciones.png' %}" id="imgposiciones">
+				
 			</div>
 		</div>
 	</div>
@@ -355,25 +360,31 @@
 		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas');
 		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span style="margin-left: 27px;">></span> Resultados');
 		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Tabla de Posiciones');
-
+		
+		var texto = '{{ campeonato.get_curiosidades_es|linebreaksbr }}';
+		texto = texto.replace(/<br \/>/g, "<br>");
 		$('.titulo').text('{{ campeonato.titulo_es }}');
-		$('.divtext > p').text('{{ campeonato.get_curiosidades_es }}');
+		$('.divtext > p').html(texto);
 	};
 	var traducir_contenido_dinamico_en = function(){
 		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonists');
 		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 13px;">></span> Results');
 		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> Scores');
 		
+		var texto = '{{ campeonato.get_curiosidades_en|linebreaksbr }}';
+		texto = texto.replace(/<br \/>/g, "<br>");
 		$('.titulo').text('{{ campeonato.titulo_en }}');
-		$('.divtext > p').text('{{ campeonato.get_curiosidades_en }}');
+		$('.divtext > p').html(texto);
 	};
 	var traducir_contenido_dinamico_por = function(){
 		$('#jugadores').html('<img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas');
 		$('#campania').html('<img src="{% static 'img/campania.png' %}"> <span  style="margin-left: 28px;">></span> Resultados');
 		$('#posiciones').html('<img src="{% static 'img/posiciones.png' %}"> <span>></span> POSIÇÕES');
 		
+		var texto = '{{ campeonato.get_curiosidades_por|linebreaksbr }}';
+		texto = texto.replace(/<br \/>/g, "<br>");
 		$('.titulo').text('{{ campeonato.titulo_por }}');
-		$('.divtext > p').text('{{ campeonato.get_curiosidades_por }}');
+		$('.divtext > p').html(texto);
 
 	};
 	var lenguaje_pantalla = "{{ lenguaje }}";

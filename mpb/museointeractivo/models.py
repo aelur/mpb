@@ -104,7 +104,8 @@ class campeonato(models.Model):
 			return ''
 		path = os.path.join(settings.PROJECT_PATH,curiosidades.url[1:])
 		with open(path) as fp:
-			return fp.read().replace('\n', '<br>').replace('\r', '<br>')
+			texto = fp.read()
+			return texto
 			
 	def get_curiosidades_es(self):
 		return self.get_curiosidades(self.curiosidades_es)
@@ -178,7 +179,6 @@ class campeonato(models.Model):
 		mediocampistas = []
 		delanteros = []
 		for fila in tabla:
-			print fila
 			if (fila[3].upper() == 'DT' or fila[3].upper() == 'D.T.' or fila[3].upper() == 'TECNICO'):
 				dt.append(fila)
 			if (fila[3].upper() == 'ARQUERO'):

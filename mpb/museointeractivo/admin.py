@@ -11,7 +11,7 @@ from museointeractivo.models import campeonato
 
 def extensionEsInvalida(nombre, ext):
 	tam = len(ext)
-	nombre = str(nombre)
+	nombre = unicode(nombre)
 	return (nombre[-tam:].upper() != ext.upper())
 
 def validarExcel(excel, err):

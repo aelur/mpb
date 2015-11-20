@@ -37,6 +37,14 @@ var traducir = function(lenguaje,
 		$('#mediocampistas').text('Mediocampistas');
 		$('#delanteros').text('Delanteros');
 		$('#dt').text('Director técnico');
+		$('.sub_jug').text('Protagonistas');
+		$('#bodyjugadores .sub_jug').css('right','8%');
+		$('.sub_pos').text('Posiciones');
+		$('.sub_pos').css('right', '8%');
+		$('.sub_camp').text('Resultados');
+		$('#bodyposiciones .sub_camp').css('left', '142px');
+		$('#jugtabla').css('right','8%');
+		$('.sub_dat').text('Datos');
 		traducir_contenido_dinamico_es();
 		lenguaje_pantalla='es';
 	};
@@ -66,6 +74,13 @@ var traducir = function(lenguaje,
 		$('#mediocampistas').text('midfielders');
 		$('#delanteros').text('strikers');
 		$('#dt').text('Coach');
+		$('.sub_jug').text('Protagonists');
+		$('.sub_pos').text('Scores');
+		$('.sub_pos').css('right', '9%');
+		$('.sub_camp').text('Results');
+		$('#bodyposiciones .sub_camp').css('left', '161px');
+		$('#jugtabla').css('right','171px');
+		$('.sub_dat').text('Data');
 		traducir_contenido_dinamico_en();
 		lenguaje_pantalla='en';
 	};
@@ -95,6 +110,14 @@ var traducir = function(lenguaje,
 		$('#mediocampistas').text('meio-campistas');
 		$('#delanteros').text('dianteiros');
 		$('#dt').text('treinador');
+		$('.sub_jug').text('Protagonistas');
+		$('#bodyjugadores .sub_jug').css('right','8%');
+		$('.sub_pos').text('posições');
+		$('.sub_pos').css('right','164px');
+		$('#bodyposiciones .sub_camp').css('left', '142px');
+		$('#jugtabla').css('right','8%');
+		$('.sub_camp').text('Resultados');
+		$('.sub_dat').text('Data');
 		traducir_contenido_dinamico_por();
 		lenguaje_pantalla='por';
 	};
@@ -182,24 +205,26 @@ var setup_datos = function(
 		fingers:'all'
 	});
 	$("#bodyjugadores").swipe({		
-		swipeRight:function(event,direction,distance,duration,fingerCount){
+		/* swipeRight:function(event,direction,distance,duration,fingerCount){
 			$('#bodydatos').animate({opacity:0});
 			$impressslide.goto(1);
-		},
+		}, */
 		swipeLeft:function(event,direction,distance,duration,fingerCount){
-			$impressslide.goto(3);
+			$('#bodydatos').animate({opacity:0});
+			$impressslide.goto(1);
 		},
 		threshold: 10,
 		fingers:'all'
 		});
 	$("#bodyposiciones").swipe({
 		swipeRight:function(event,direction,distance,duration,fingerCount){
-			$impressslide.goto(2);
-		},
-		swipeLeft:function(event,direction,distance,duration,fingerCount){
 			$('#bodydatos').animate({opacity:0});
 			$impressslide.goto(1);
 		},
+		/* swipeLeft:function(event,direction,distance,duration,fingerCount){
+			$('#bodydatos').animate({opacity:0});
+			$impressslide.goto(1);
+		}, */
 		threshold: 10,
 		fingers:'all'
 	});
@@ -221,6 +246,27 @@ var setup_datos = function(
 		fingers:'all'
 	});
 	
+	$('#step-4 .arrow_right').on('click',function(){
+			$('#bodydatos').animate({opacity:0});
+		$impressslide.goto(1);
+	});
+	$('#step-4 .arrow_left').on('click',function(){
+		$impressslide.goto(2);
+	});
+	$('#step-3 .arrow_right').on('click',function(){
+		$impressslide.goto(3);
+	});
+	$('#step-3 .arrow_left').on('click',function(){
+			$('#bodydatos').animate({opacity:0});
+		$impressslide.goto(1);
+	});
+	$('#step-2 .arrow_right').on('click',function(){
+		$impressslide.goto(3);
+	});
+	$('#step-2 .arrow_left').on('click',function(){
+		$impressslide.goto(2);
+	});
+	
 	$('a.pantalladatos').each(function(){
 		$(this).bind("click", function (e) {
 			e.preventDefault();
@@ -229,38 +275,38 @@ var setup_datos = function(
 		});
 	});
 	
-	var cargarVideo = function(video){
-		$(video).get(0).pause();
-		$(video).get(0).currentTime = '0';
-		$(video).get(0).play();
-	};
 	
 	$('#video1').on('click', function(){
-		var $videoCentral = $('#videocentral');
-		$videoCentral.get(0).pause();
-		
+		var $videoCentral = $('#videocentral');		
 		var $videoCentralSRC = $('source', $videoCentral).attr('src'),	
 		$video1SRC = $('source', $(this)).attr('src');
 		
+		var currentTimeCentralVideo = $videoCentral.get(0).currentTime,
+			currentTimeClickedVideo = $(this).get(0).currentTime;
+			
 		$('#videocentral source').attr('src', $video1SRC);
+		$('#videocentral').get(0).load();
+		$('#videocentral').get(0).currentTime = currentTimeClickedVideo;
 		$('source', $(this)).attr('src', $videoCentralSRC);
+		$(this).get(0).load();
+		$(this).get(0).currentTime = currentTimeCentralVideo;
 		
-		cargarVideo($videoCentral);
-		cargarVideo($(this));
 	});
 	$('#video2').on('click', function(){
 		var $videoCentral = $('#videocentral');
-		$videoCentral.get(0).pause();
-		
 		var $videoCentralSRC = $('source', $videoCentral).attr('src'),	
 		$video2SRC = $('source', $(this)).attr('src');
 		
-		$('#videocentral source').attr('src', $video2SRC);
-		$('source', $(this)).attr('src', $videoCentralSRC);
-				
-		cargarVideo($videoCentral);
-		cargarVideo($(this));
+		var currentTimeCentralVideo = $videoCentral.get(0).currentTime,
+			currentTimeClickedVideo = $(this).get(0).currentTime;
 		
+		$('#videocentral source').attr('src', $video2SRC);
+		$('#videocentral').get(0).load();
+		$('#videocentral').get(0).currentTime = currentTimeClickedVideo;
+		$('source', $(this)).attr('src', $videoCentralSRC);
+		$(this).get(0).load();
+		$(this).get(0).currentTime = currentTimeCentralVideo;
+						
 	});
 	
 	$(document).ready(function() {
