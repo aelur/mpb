@@ -18,6 +18,10 @@ body{
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 }
+a{
+	display: block;
+	z-index: 100;
+}
 .body_datos{
 	width: 1920px;
     height: 960px;
@@ -193,34 +197,26 @@ body{
 .prev{
 	float:left; 
 }
-#carousel {
+.carousel {
 	position: absolute !important;
 	bottom: 5%;
-    width:69%;
+    width:1920px;
     height:250px;
-	overflow-x:hidden;
     text-align: center;
- 	left: 50%;
-	transform: translate(-50%, 0); 
   }
- #carousel img:hover{
- 	width:;
-	transform: scale(1.4);
- }
-
- #carousel  em{	
-	font-style: normal;
+.timeline_titulo{	
+	font-style: initial;
 	font-family: myriad;
-	letter-spacing: 1px;
-	font-size: 18px;
+	letter-spacing: 3px;
+	font-size: 28px;
 	color: white;
 	padding: 1px;
 	margin-bottom: 2px;
 	animation: glow 2s infinite;
 	left: 50%;
     transform: translate(-50%,0);
-    position: absolute;
-	bottom: 25px;
+    position: fixed;
+    bottom: 4%;
  }
  
  @keyframes glowing {
@@ -243,12 +239,13 @@ body{
 		text-shadow: #FFF 0 0 5px;	
 	}
 }
- #carousel  img {
+ .carousel  img {
 	border: none;
 	display: inline;
 	width: 200px;
 	height: auto;
 	transition: all 0.5s ease;
+	opacity: 0.6;
  }
  .selector{
  
@@ -297,14 +294,16 @@ body{
  .anio{
 	position: absolute;
 	font-family: college;
-	font-size: 30px;
+	font-size: 38px;
 	color: white;    
 	left: 50%;
-    transform: translate(-50%,325%);
-    z-index: 9;
+    transform: translateX(-50%);
+    bottom: 15%;
  }
 .carousel-center {
 	animation: tada_spacedout 5s infinite;
+	width: 210px !important;
+	opacity: 1 !important;
 	-webkit-filter: drop-shadow(0px 0px 15px  rgba(255,255,255,0.8)) !important;
 }
 /* 
