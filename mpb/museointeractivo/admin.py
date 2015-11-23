@@ -61,39 +61,41 @@ class campeonatoForm(forms.ModelForm):
 		cleaned_data = super(campeonatoForm, self).clean()
 		tipo = cleaned_data.get('tipo')
 		err=[]
-		#raise forms.ValidationError(self.cleaned_data['curiosidades_es'].name)
-		if (tipo=='INT'):
-			if (self.cleaned_data['imagen_copa'] is None):
-				err.append('Para los campeonatos internacionales es necesario subir una imagen de copa')
-			
-			if (self.cleaned_data['imagen_formacion'] is None):
-				err.append('Para los campeonatos internacionales es necesario subir una imagen de la formacion del equipo.')
-
-			if (self.cleaned_data['imagen_campo'] is None):
-				err.append('Para los campeonatos internacionales es necesario subir una imagen de campo.')
-		else:
-			cur_es = self.cleaned_data['curiosidades_es']
-			cur_por = self.cleaned_data['curiosidades_por']
-			cur_en = self.cleaned_data['curiosidades_en']
-			if (cur_es is None or cur_por is None or cur_en is None):
-				err.append('Para los campeonatos nacionales es necesario subir documentos de curiosidades.')
+		try:
+			if (tipo=='INT'):
+				if (self.cleaned_data['imagen_copa'] is None):
+					err.append('Para los campeonatos internacionales es necesario subir una imagen de copa')
+				
+				if (self.cleaned_data['imagen_formacion'] is None):
+					err.append('Para los campeonatos internacionales es necesario subir una imagen de la formacion del equipo.')
+	
+				if (self.cleaned_data['imagen_campo'] is None):
+					err.append('Para los campeonatos internacionales es necesario subir una imagen de campo.')
 			else:
-				if (extensionEsInvalida(cur_es, 'txt') or extensionEsInvalida(cur_en, 'txt') or extensionEsInvalida(cur_por, 'txt')):
-					err.append('El documento de curiosidades debe estar en formato TXT.')
-		
-		excel = self.cleaned_data['tablas']
-		if (extensionEsInvalida(excel.name,'xlsx')):
-			err.append('El excel con las tablas debe tener la extension XLSX.')
-		validarExcel(excel, err)
-
-		videoBoca = self.cleaned_data['videoBoca']
-		videoMundo = self.cleaned_data['videoMundo']
-		videoArgentina = self.cleaned_data['videoArgentina']
-		if (extensionEsInvalida(videoBoca.name,'mp4') or
-			(videoMundo and extensionEsInvalida(videoMundo.name,'mp4') ) or
-			(videoArgentina and extensionEsInvalida(videoArgentina.name,'mp4') ) ):
-			err.append('Los videos deben tener la extension mp4.')
-
+				cur_es = self.cleaned_data['curiosidades_es']
+				cur_por = self.cleaned_data['curiosidades_por']
+				cur_en = self.cleaned_data['curiosidades_en']
+				if (cur_es is None or cur_por is None or cur_en is None):
+					err.append('Para los campeonatos nacionales es necesario subir documentos de curiosidades.')
+				else:
+					if (extensionEsInvalida(cur_es, 'txt') or extensionEsInvalida(cur_en, 'txt') or extensionEsInvalida(cur_por, 'txt')):
+						err.append('El documento de curiosidades debe estar en formato TXT.')
+			
+			excel = self.cleaned_data['tablas']
+			if (extensionEsInvalida(excel.name,'xlsx')):
+				err.append('El excel con las tablas debe tener la extension XLSX.')
+			validarExcel(excel, err)
+	
+			videoBoca = self.cleaned_data['videoBoca']
+			videoMundo = self.cleaned_data['videoMundo']
+			videoArgentina = self.cleaned_data['videoArgentina']
+			if (extensionEsInvalida(videoBoca.name,'mp4') or
+				(videoMundo and extensionEsInvalida(videoMundo.name,'mp4') ) or
+				(videoArgentina and extensionEsInvalida(videoArgentina.name,'mp4') ) ):
+				err.append('Los videos deben tener la extension mp4.')
+		except Exception,e:
+			err.append(str(e))
+			
 		if err:
 			raise forms.ValidationError(err)
 

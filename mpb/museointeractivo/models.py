@@ -18,13 +18,13 @@ class campeonato(models.Model):
 	imagen_copa = models.ImageField(upload_to='', 
 							default='',
 							blank=True,
-							help_text='Imagen de la copa - obligatorio si es Internacional.')
+							help_text='Imagen de la copa - obligatorio si es Internacional. Resolución: 300x300')
 	imagen_fondo = models.ImageField(upload_to='')
 	imagen_campo = models.ImageField(upload_to='', 
 							default='',
 							blank=True,
 							verbose_name='Imagen de Posiciones',
-							help_text='Gráfico con formación del equipo - obligatorio si es Internacional.')
+							help_text='Gráfico con formación del equipo - obligatorio si es Internacional. Resolución: 600x835')
 	imagen_formacion = models.ImageField(upload_to='', 
 							default='',
 							verbose_name='Imagen del Equipo')
@@ -46,13 +46,16 @@ class campeonato(models.Model):
 							help_text='Texto de curiosidades - obligatorio si es nacional.')
 
 	videoBoca = models.FileField(upload_to='',
-							verbose_name='Video de Boca')
+							verbose_name='Video de Boca.',
+							help_text='Aspect Ratio: 5:4')
 	videoMundo = models.FileField(upload_to='',
 							blank=True,
-							verbose_name='Video del Mundo')
+							verbose_name='Video del Mundo.',
+							help_text='Aspect Ratio: 5:4')
 	videoArgentina = models.FileField(upload_to='',
 							blank=True,
-							verbose_name='Video de la Argentina')
+							verbose_name='Video de la Argentina.',
+							help_text='Aspect Ratio: 5:4')
 	tablas = models.FileField(upload_to='', 
 			help_text="Archivo Excel XLSX con información de: posiciones del campeonato (pestaña 'posiciones'), "+
 							"jugadores (pestaña 'jugadores'), y la campaña (pestaña 'campania').")

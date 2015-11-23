@@ -145,15 +145,18 @@ var setup_datos = function(
 	$('a.juglink').each(function(){
 		$(this).bind("click", function (e) {
 			e.preventDefault();
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(2);
 		});
 	});
 	$('#swipejugadores').bind("click", function (e) {
 			e.preventDefault();
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(2);
 		});
 	$("#swipejugadores").swipe({
 		swipeUp:function(event,direction,distance,duration,fingerCount){
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(2);
 		},
 		threshold: 10,
@@ -162,15 +165,18 @@ var setup_datos = function(
 	$('a.poslink').each(function(){
 		$(this).bind("click", function (e) {
 			e.preventDefault();
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(3);
 		});
 	});	
 	$('#swipeposiciones').bind("click", function (e) {
 			e.preventDefault();
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(3);
 		});
 	$("#swipeposiciones").swipe({
 		swipeUp:function(event,direction,distance,duration,fingerCount){
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(3);
 		},
 		threshold: 10,
@@ -179,18 +185,18 @@ var setup_datos = function(
 	$('a.camplink').each(function(){
 		$(this).bind("click", function (e) {
 			e.preventDefault();
-			$('#bodydatos').animate({opacity:0});
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(1);
 		});
 	});	
 	$('#swipecampania').bind("click", function (e) {
 			e.preventDefault();
-			$('#bodydatos').animate({opacity:0});
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(1);
 		});
 	$("#swipecampania").swipe({
 		swipeUp:function(event,direction,distance,duration,fingerCount){
-			$('#body_datos').animate({opacity:0});
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(1);
 		},
 		threshold: 10,
@@ -201,16 +207,12 @@ var setup_datos = function(
 			$('#bodydatos').animate({opacity:1});
 			$impressslide.goto(0);
 		},
-		threshold: 20,
+		threshold: 3,
 		fingers:'all'
 	});
 	$("#bodyjugadores").swipe({		
-		/* swipeRight:function(event,direction,distance,duration,fingerCount){
-			$('#bodydatos').animate({opacity:0});
-			$impressslide.goto(1);
-		}, */
 		swipeLeft:function(event,direction,distance,duration,fingerCount){
-			$('#bodydatos').animate({opacity:0});
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(1);
 		},
 		threshold: 10,
@@ -218,28 +220,30 @@ var setup_datos = function(
 		});
 	$("#bodyposiciones").swipe({
 		swipeRight:function(event,direction,distance,duration,fingerCount){
-			$('#bodydatos').animate({opacity:0});
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(1);
 		},
-		/* swipeLeft:function(event,direction,distance,duration,fingerCount){
-			$('#bodydatos').animate({opacity:0});
-			$impressslide.goto(1);
-		}, */
 		threshold: 10,
 		fingers:'all'
 	});
-	$("#bodydatos").swipe({
+	$("#bodydatos .swipeup").swipe({
 		swipeDown:function(event,direction,distance,duration,fingerCount){
 			$('#backtotimeline').click();
 		},
-		threshold: 10,
+		threshold: 3,
 		fingers:'all'
 	});
+	$('#step-2 .arrow_up').click(function(){ $('#bodydatos').animate({opacity:1}); $impressslide.goto(0); });
+	$('#step-3 .arrow_up').click(function(){ $('#bodydatos').animate({opacity:1}); $impressslide.goto(0); });
+	$('#step-4 .arrow_up').click(function(){ $('#bodydatos').animate({opacity:1}); $impressslide.goto(0); });
+	
 	$("#bodyresultados").swipe({
 		swipeRight:function(event,direction,distance,duration,fingerCount){
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(2);
 		},
 		swipeLeft:function(event,direction,distance,duration,fingerCount){
+			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(3);
 		},
 		threshold: 10,
@@ -247,23 +251,27 @@ var setup_datos = function(
 	});
 	
 	$('#step-4 .arrow_right').on('click',function(){
-			$('#bodydatos').animate({opacity:0});
+		$('#bodydatos').animate({opacity:0},900);
 		$impressslide.goto(1);
 	});
 	$('#step-4 .arrow_left').on('click',function(){
+		$('#bodydatos').animate({opacity:0},900);
 		$impressslide.goto(2);
 	});
 	$('#step-3 .arrow_right').on('click',function(){
+		$('#bodydatos').animate({opacity:0},900);
 		$impressslide.goto(3);
 	});
 	$('#step-3 .arrow_left').on('click',function(){
-			$('#bodydatos').animate({opacity:0});
+		$('#bodydatos').animate({opacity:0},900);
 		$impressslide.goto(1);
 	});
 	$('#step-2 .arrow_right').on('click',function(){
+		$('#bodydatos').animate({opacity:0},900);
 		$impressslide.goto(3);
 	});
 	$('#step-2 .arrow_left').on('click',function(){
+			$('#bodydatos').animate({opacity:0},900);
 		$impressslide.goto(2);
 	});
 	
@@ -340,8 +348,18 @@ var setup_datos = function(
 				       
 				}
 			});
-		$("#formacion").colorbox({retinaImage:true,className:'modal',closeButton:true, overlayClose:true});
-		
+		$("#formacion").colorbox({
+			className:'modal',
+			closeButton:true, 
+			overlayClose:true,
+			scalePhotos: true,
+			width: '1500px',
+			innerWidth: '1500px',
+			maxWidth: '1500px'				
+			});
+		$('#colorbox').click(function (event){
+			$('#cboxOverlay').click();
+		});
 		
 		$('#backtotimeline').click(function (event) {
 			event.preventDefault();

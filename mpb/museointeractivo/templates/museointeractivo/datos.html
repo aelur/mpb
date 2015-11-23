@@ -13,13 +13,14 @@
 	
 	<div class="step slide" data-x="0" data-y="0" data-scale="3">
 		<div class="body_datos" id="bodydatos">
+		<div class="swipeup" style="height: 300px; top: -11%;"></div>
 			<div class="TOPBAR">
 				 <a href="{% url 'index' %}" id="backtotimeline"><img src="{% static 'img/arrow_up.png' %}" style="top:14%" class="arrow_up"></a>
 				<div class="curiosidades">	<div class="light"></div>	
-					<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
-					<span class="anio">{{ campeonato.anio }}</span>
+					<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada" id="copacur">
+					<span class="anio" style="top: 22%;">{{ campeonato.anio }}</span>
 					{% if campeonato.tipo != 'NAC' %}
-						<img src="{{ campeonato.imagen_campo.url }}" style="width: 110%;height: auto;bottom: -49%;left: -88px;position: absolute;animation:none;">
+						<img src="{{ campeonato.imagen_campo.url }}" style="width: 515px;height: auto;bottom: -59%;left: -120px;position: absolute;animation:none;">
 					{% else %}
 						<img src="{% static 'img/preg.png' %}" id="preg">
 						<span class="title" id="curiosidades_texto">Curiosidades</span>
@@ -65,7 +66,7 @@
 				
 				<div id="swipejugadores" class="swiper"></div>
 				<div id="swipecampania"  class="swiper"></div>
-				<div id="swipeposiciones"class="swiper"></div>
+				{% if campeonato.get_datos_posiciones %}<div id="swipeposiciones"class="swiper"></div>{%endif%}
 				<div class="tablas">
 					<a href="" class="juglink"><div id="jugadores"><img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas</div></a>
 					<a href="" class="camplink"><div id="campania"><img src="{% static 'img/campania.png' %}"><span>></span> Resultados</div></a>
@@ -114,7 +115,7 @@
 			</div>
 		</div>
 		<div class="tabla resultados" id="tablaresultados">
-			<table>
+			<table style="margin-bottom: 0px;">
 			<tr>
 				<th colspan="5" id="text_resultados">Resultados</th>    
 			</tr>
@@ -125,6 +126,9 @@
 				<th id="text_res">Resultados</th>
 				<th id="text_estadio">Estadio</th>
 			</tr>
+			</table>
+			<div class="inner-table">
+			<table>
 			{% for partido in campeonato.get_datos_campania %}
 				<tr>
 				<td class="middle">{{partido.0}}</td>
@@ -162,6 +166,7 @@
 				{% endfor %}
 			</table>
 			{% endif %}
+			</div>
 		</div>
 		
 		<div class="tablaimg resultados">
@@ -204,7 +209,7 @@
 		</div>
 		
 		<div class="tabla jugadores" id="tablajugadores">
-			<table>
+			<table style="margin-bottom: 0px;">
 			<tr>
 				<th colspan="5" id="text_protagonistas">Protagonistas</th>    
 			</tr>
@@ -213,6 +218,9 @@
 				<th id="text_partidos">Partidos</th>
 				<th id="text_goles">Goles</th>
 			</tr>
+			</table>
+			<div class="inner-table">
+			<table>
 				<tr  class="separador"><td colspan="3" id="arqueros">Arqueros</td></tr>
 			{% for jugador in campeonato.get_arqueros %}
 				<tr>
@@ -255,6 +263,7 @@
 			{% endfor %}
 			{% endif %}
 			</table>
+			</div>
 		</div>
 		</div>
 		
@@ -295,7 +304,7 @@
 			</div>
 		
 			<div class="tabla posiciones" id="tablaposiciones">
-			<table>
+			<table style="margin-bottom: 0px;">
 			<tr>
 				<th colspan="8" id="text_posiciones">Tabla de Posiciones</th>    
 			</tr>
@@ -309,6 +318,9 @@
 				<th id="text_golesfavor">Goles A Favor</th>
 				<th id="text_golescontra">Goles En Contra</th>
 			</tr>
+			</table>
+			<div class="inner-table">
+			<table>
 			{% for equipo in campeonato.get_datos_posiciones %}
 				{% if equipo.1 == 0 and equipo.2 == 0 %}
 					<tr  class="separador"><td colspan="8">{{equipo.0}}</td></tr>
@@ -331,6 +343,7 @@
 			</tr>
 			{% endfor %}
 			</table>
+			</div>
 		</div>
 			
 			<div class="tablaimg posiciones">
@@ -350,7 +363,7 @@
 
 <script type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.velocity.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/jquery.colorbox-min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.colorbox.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.touchSwipe.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/contextuales.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/datos.js' %}"></script>

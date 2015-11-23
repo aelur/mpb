@@ -116,10 +116,21 @@
                         <File name="mpb\museointeractivo\static\css\animate.min.css" />
                         <File name="mpb\museointeractivo\static\css\colorbox.css" />
                         <File name="mpb\museointeractivo\static\css\desktop.ini" />
+                        <File name="mpb\museointeractivo\static\css\materialize.css" />
+                        <File name="mpb\museointeractivo\static\css\materialize.min.css" />
+                        <File name="mpb\museointeractivo\static\css\presentation.css" />
+                        <File name="mpb\museointeractivo\static\css\style.css" />
+                        <File name="mpb\museointeractivo\static\css\timeline.css" />
+                        <File name="mpb\museointeractivo\static\css\varsity_regular.ttf" />
+                        <File name="mpb\museointeractivo\static\css\animate.css" />
+                        <File name="mpb\museointeractivo\static\css\animate.min.css" />
+                        <File name="mpb\museointeractivo\static\css\colorbox.css" />
+                        <File name="mpb\museointeractivo\static\css\desktop.ini" />
                         <File name="mpb\museointeractivo\static\css\jquery.bxslider.css" />
                         <File name="mpb\museointeractivo\static\css\materialize.css" />
                         <File name="mpb\museointeractivo\static\css\materialize.min.css" />
                         <File name="mpb\museointeractivo\static\css\presentation.css" />
+                        <File name="mpb\museointeractivo\static\css\slick.css" />
                         <File name="mpb\museointeractivo\static\css\style.css" />
                         <File name="mpb\museointeractivo\static\css\timeline.css" />
                         <File name="mpb\museointeractivo\static\css\varsity_regular.ttf" />
@@ -207,6 +218,9 @@
             </Folder>
             <File name="mpb\db.sqlite3" />
             <File name="mpb\manage.py" />
+            <File name="LICENSE" />
+            <File name="README.md" />
+            <File name="workspace_mpb" />
         </Folder>
         <File name="LICENSE" />
         <File name="README.md" />
