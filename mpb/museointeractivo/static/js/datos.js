@@ -142,7 +142,7 @@ var setup_datos = function(
 		traducirLinks);
 	
 	
-	$('a.juglink').each(function(){
+	$('a.juglink').each(function(){ 
 		$(this).bind("click", function (e) {
 			e.preventDefault();
 			$('#bodydatos').animate({opacity:0},900);
@@ -159,7 +159,7 @@ var setup_datos = function(
 			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(2);
 		},
-		threshold: 10,
+		threshold: 5,
 		fingers:'all'
 	});
 	$('a.poslink').each(function(){
@@ -179,7 +179,7 @@ var setup_datos = function(
 			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(3);
 		},
-		threshold: 10,
+		threshold: 5,
 		fingers:'all'
 	});
 	$('a.camplink').each(function(){
@@ -199,7 +199,7 @@ var setup_datos = function(
 			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(1);
 		},
-		threshold: 10,
+		threshold: 5,
 		fingers:'all'
 	});
 	$(".swipeup").swipe({
@@ -207,7 +207,7 @@ var setup_datos = function(
 			$('#bodydatos').animate({opacity:1});
 			$impressslide.goto(0);
 		},
-		threshold: 3,
+		threshold: 2,
 		fingers:'all'
 	});
 	$("#bodyjugadores").swipe({		
@@ -215,7 +215,7 @@ var setup_datos = function(
 			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(1);
 		},
-		threshold: 10,
+		threshold: 5,
 		fingers:'all'
 		});
 	$("#bodyposiciones").swipe({
@@ -223,16 +223,24 @@ var setup_datos = function(
 			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(1);
 		},
-		threshold: 10,
+		threshold: 5,
 		fingers:'all'
 	});
 	$("#bodydatos .swipeup").swipe({
 		swipeDown:function(event,direction,distance,duration,fingerCount){
 			$('#backtotimeline').click();
 		},
-		threshold: 3,
+		threshold: 2,
 		fingers:'all'
 	});
+	$('#step-2 .arrow_up').swipe({
+			swipeDown:function(e,dir,di,d,f){ $('#bodydatos').animate({opacity:1}); $impressslide.goto(0);}, threshold: 2,fingers:'all'});
+	$('#step-3 .arrow_up').swipe({
+			swipeDown:function(e,dir,di,d,f){ $('#bodydatos').animate({opacity:1}); $impressslide.goto(0);}, threshold: 2,fingers:'all'});
+	$('#step-4 .arrow_up').swipe({
+			swipeDown:function(e,dir,di,d,f){ $('#bodydatos').animate({opacity:1}); $impressslide.goto(0);}, threshold: 2,fingers:'all'});
+	$('#bodydatos .arrow_up').swipe({
+			swipeDown:function(e,dir,di,d,f){ $('#backtotimeline').click(); }, threshold: 2,fingers:'all'});		
 	$('#step-2 .arrow_up').click(function(){ $('#bodydatos').animate({opacity:1}); $impressslide.goto(0); });
 	$('#step-3 .arrow_up').click(function(){ $('#bodydatos').animate({opacity:1}); $impressslide.goto(0); });
 	$('#step-4 .arrow_up').click(function(){ $('#bodydatos').animate({opacity:1}); $impressslide.goto(0); });
@@ -246,7 +254,7 @@ var setup_datos = function(
 			$('#bodydatos').animate({opacity:0},900);
 			$impressslide.goto(3);
 		},
-		threshold: 10,
+		threshold: 5,
 		fingers:'all'
 	});
 	

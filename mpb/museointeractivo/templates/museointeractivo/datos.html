@@ -64,8 +64,8 @@
 				</div>
 				{% endif %}
 				
-				<div id="swipejugadores" class="swiper"></div>
-				<div id="swipecampania"  class="swiper"></div>
+				<div id="swipejugadores" class="swiper" {% if not campeonato.get_datos_posiciones %}style="left:39%;"{% endif %}></div>
+				<div id="swipecampania"  class="swiper" {% if not campeonato.get_datos_posiciones %}style="left:62%;"{% endif %}></div>
 				{% if campeonato.get_datos_posiciones %}<div id="swipeposiciones"class="swiper"></div>{%endif%}
 				<div class="tablas">
 					<a href="" class="juglink"><div id="jugadores"><img src="{% static 'img/jugadores.png' %}"> <span>></span> Protagonistas</div></a>

@@ -1016,7 +1016,6 @@
     };
 
     Slick.prototype.getLeft = function(slideIndex) {
-
         var _ = this,
             targetLeft,
             verticalHeight,
@@ -2298,8 +2297,9 @@
     };
 
     Slick.prototype.swipeHandler = function(event) {
-
-        var _ = this;
+		
+		
+       var _ = this;
 
         if ((_.options.swipe === false) || ('ontouchend' in document && _.options.swipe === false)) {
             return;
@@ -2347,7 +2347,20 @@
         if (!_.dragging || touches && touches.length !== 1) {
             return false;
         }
-
+		
+				/** AGREGADO AGUSTINA **/
+		/**/ var imgCentro = $($('.carousel-center')[0]),
+		/**/ 	 el_centro = imgCentro.attr('alt'),
+		/**/ 	 objTexto = $("#" + el_centro),
+		/**/ 	 objANIO = $("#a" + el_centro);
+	    /**/ 
+		/**/ objTexto.animate({fontSize: 9,opacity: 0});
+		/**/ objANIO.animate({opacity: 0});
+		/**/ objANIO.css('z-index',0);
+	    /**/ 
+		/**/ imgCentro.removeClass('carousel-center');
+		/** AGREGADO AGUSTINA **/
+		
         curLeft = _.getLeft(_.currentSlide);
 
         _.touchObject.curX = touches !== undefined ? touches[0].pageX : event.clientX;

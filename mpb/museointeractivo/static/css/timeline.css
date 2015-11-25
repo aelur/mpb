@@ -216,7 +216,7 @@ a{
 	left: 50%;
     transform: translate(-50%,0);
     position: fixed;
-    bottom: 4%;
+    bottom: 5%;
  }
  
  @keyframes glowing {
@@ -242,7 +242,7 @@ a{
  .carousel  img {
 	border: none;
 	display: inline;
-	width: 200px;
+	width: 180px;
 	height: auto;
 	transition: all 0.5s ease;
 	opacity: 0.6;
@@ -296,9 +296,9 @@ a{
 	font-family: college;
 	font-size: 38px;
 	color: white;    
-	left: 50%;
-    transform: translateX(-50%);
-    bottom: 15%;
+	left: 50.2%;
+    transform: translateX(-50.2%);
+    bottom: 17%;
  }
 .carousel-center {
 	animation: tada_spacedout 5s infinite;
@@ -525,6 +525,9 @@ video {
 .curiosidades .anio{
     top: -5%;
 	font-weight: bold;
+}
+.body_tabla .anio{
+	top: 31% !important;
 }
 .logo{
 	height:80%;    
