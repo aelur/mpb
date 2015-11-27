@@ -294,7 +294,7 @@ var setup_datos = function(
 	
 	$('.vid1').on('click', function(){
 		var videoCentral = $('.videobox').children()[0];
-		$('.videobox').velocity({});
+		$('.videobox').velocity("fadeOut");
 		$('.videobox').empty();
 		$('.videobox').append($(this).children()[0]);		
 		var video = $($('.videobox').children()[0]);
@@ -311,14 +311,19 @@ var setup_datos = function(
 	
 	$('.vid2').on('click', function(){
 		var videoCentral = $('.videobox').children()[0];
+		$('.videobox').velocity("fadeOut");
 		$('.videobox').empty();
 		$('.videobox').append($(this).children()[0]);
 		var video = $($('.videobox').children()[0]);
+		$('.videobox').velocity("fadeIn");
 		video.get(0).play();
 		
+		
+		$('.vid2').velocity("fadeOut");
 		$('.vid2').empty();
 		$('.vid2').append(videoCentral);
 		video = $($('.vid2').children()[0]);
+		$('.vid2').velocity("fadeIn");
 		video.get(0).play();
 						
 	});
