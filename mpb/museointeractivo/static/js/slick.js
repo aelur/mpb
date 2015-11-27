@@ -60,7 +60,7 @@
                 easing: 'linear',
                 edgeFriction: 0.35,
                 fade: false,
-                focusOnSelect: false,
+                focusOnSelect: true,
                 infinite: true,
                 initialSlide: 0,
                 lazyLoad: 'ondemand',

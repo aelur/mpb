@@ -120,7 +120,7 @@ var setup_timeline = function(datos_campeonatos,
 			infinite: false,
 			touchThreshold: 10,
 			swipeToSlide: true,
-			initialSlide: parseInt(datos_campeonatos.length/2)
+			initialSlide: parseInt(datos_campeonatos.length/2),
 	};
 	
 	var filtrar = function(tipo, slick){	
@@ -186,7 +186,6 @@ var setup_timeline = function(datos_campeonatos,
 			
 			animarImagenCentro(elemento_centro,datos_campeonatos,urlbg_viejo);
 		});
-		
 		$('.slick-track').attrchange({
 			trackValues: true,
 			callback: function(event){

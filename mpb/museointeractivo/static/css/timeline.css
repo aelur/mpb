@@ -509,10 +509,15 @@ video {
 }
 .central .titulo{
     font-size: 45px;
+    position: fixed;
+    top: 18%;
 	text-transform: uppercase;
 }
-#body_tabla .central .titulo{
+#centraltablas .titulo{
 	font-size: 50px;
+    position: fixed;
+    top: 13% !important;
+    left: 20% !important;
 }
 .curiosidades #preg{
     width: 80px;

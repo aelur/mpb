@@ -294,14 +294,18 @@ var setup_datos = function(
 	
 	$('.vid1').on('click', function(){
 		var videoCentral = $('.videobox').children()[0];
+		$('.videobox').velocity({});
 		$('.videobox').empty();
-		$('.videobox').append($(this).children()[0]);
+		$('.videobox').append($(this).children()[0]);		
 		var video = $($('.videobox').children()[0]);
+		$('.videobox').velocity("fadeIn");
 		video.get(0).play();
 		
+		$('.vid1').velocity("fadeOut");
 		$('.vid1').empty();
 		$('.vid1').append(videoCentral);
 		video = $($('.vid1').children()[0]);
+		$('.vid1').velocity("fadeIn");
 		video.get(0).play();		
 	});
 	
