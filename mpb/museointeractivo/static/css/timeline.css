@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
     font-family: varsity;
     src: url("../fonts/varsity_regular.ttf");
 }
@@ -508,15 +508,15 @@ video {
     left: 0%;
 }
 .central .titulo{
-    font-size: 45px;
+    font-size: 34px;
     position: fixed;
     top: 18%;
 	text-transform: uppercase;
 }
 #centraltablas .titulo{
-	font-size: 50px;
+	font-size: 37px;
     position: fixed;
-    top: 13% !important;
+    top: 16% !important;
     left: 20% !important;
 }
 .curiosidades #preg{
