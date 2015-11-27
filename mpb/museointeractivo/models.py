@@ -17,8 +17,7 @@ class campeonato(models.Model):
 	anio = models.IntegerField( verbose_name='Año')
 	imagen_copa = models.ImageField(upload_to='', 
 							default='',
-							blank=True,
-							help_text='Imagen de la copa - obligatorio si es Internacional. Resolución: 300x300')
+							help_text='Imagen de la copa - obligatorio. Resolución: 300x300')
 	imagen_fondo = models.ImageField(upload_to='')
 	imagen_campo = models.ImageField(upload_to='', 
 							default='',

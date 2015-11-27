@@ -45,7 +45,8 @@
 	</div>
 	
 	{% for campeonato in campeonatos %}
-		<a href="{% url 'datos' campeonato.id lenguaje %}"><span class="anio" id="a{{campeonato.id}}">{{ campeonato.anio }}</span>
+		<a href="{% url 'datos' campeonato.id lenguaje %}">
+			{% if campeonato.tipo == 'INT' %}<span class="anio" id="a{{campeonato.id}}">{{ campeonato.anio }}</span>{% endif %}
 		<em id="{{campeonato.id}}" class="timeline_titulo">{{ campeonato.titulo_es }}</em></a>
 	{% endfor %}
 	
