@@ -32,8 +32,8 @@
 				<div class="central">
 					<span class="titulo">{{ campeonato.titulo_es }}</span>
 					<div class="videobox">
-						<video id="videocentral" type="video/mp4" muted autoplay loop>
-							<source src="{{ campeonato.videoBoca.url }}" type="video/mp4">
+						<video id="videocentral" type="video/webm" muted autoplay loop>
+							<source src="{{ campeonato.videoBoca.url }}" type="video/webm">
 						</video>
 					</div>
 				</div>
@@ -48,8 +48,8 @@
 						{% if not campeonato.videoArgentina %} 
 							style="transform:translateX(134px) translateY(15px)" 
 						{% endif %}>
-					<video id="video1" type="video/mp4" muted autoplay loop>
-						<source src="{{ campeonato.videoMundo.url }}" type="video/mp4">
+					<video id="video1" type="video/webm" muted autoplay loop>
+						<source src="{{ campeonato.videoMundo.url }}" type="video/webm">
 					</video>
 				</div>
 				{% endif %}
@@ -58,8 +58,8 @@
 						{% if not campeonato.videoMundo %} 
 							style="transform:translateX(134px) translateY(15px)" 
 						{% endif %}>
-					<video id="video2" type="video/mp4" muted autoplay loop>
-						<source src="{{ campeonato.videoArgentina.url }}" type="video/mp4">
+					<video id="video2" type="video/webm" muted autoplay loop>
+						<source src="{{ campeonato.videoArgentina.url }}" type="video/webm">
 					</video>
 				</div>
 				{% endif %}

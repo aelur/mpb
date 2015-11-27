@@ -292,36 +292,30 @@ var setup_datos = function(
 	});
 	
 	
-	$('#video1').on('click', function(){
-		var $videoCentral = $('#videocentral');		
-		var $videoCentralSRC = $('source', $videoCentral).attr('src'),	
-		$video1SRC = $('source', $(this)).attr('src');
+	$('.vid1').on('click', function(){
+		var videoCentral = $('.videobox').children()[0];
+		$('.videobox').empty();
+		$('.videobox').append($(this).children()[0]);
+		var video = $($('.videobox').children()[0]);
+		video.get(0).play();
 		
-		var currentTimeCentralVideo = $videoCentral.get(0).currentTime,
-			currentTimeClickedVideo = $(this).get(0).currentTime;
-			
-		$('#videocentral source').attr('src', $video1SRC);
-		$('#videocentral').get(0).load();
-		$('#videocentral').get(0).currentTime = currentTimeClickedVideo;
-		$('source', $(this)).attr('src', $videoCentralSRC);
-		$(this).get(0).load();
-		$(this).get(0).currentTime = currentTimeCentralVideo;
-		
+		$('.vid1').empty();
+		$('.vid1').append(videoCentral);
+		video = $($('.vid1').children()[0]);
+		video.get(0).play();		
 	});
-	$('#video2').on('click', function(){
-		var $videoCentral = $('#videocentral');
-		var $videoCentralSRC = $('source', $videoCentral).attr('src'),	
-		$video2SRC = $('source', $(this)).attr('src');
+	
+	$('.vid2').on('click', function(){
+		var videoCentral = $('.videobox').children()[0];
+		$('.videobox').empty();
+		$('.videobox').append($(this).children()[0]);
+		var video = $($('.videobox').children()[0]);
+		video.get(0).play();
 		
-		var currentTimeCentralVideo = $videoCentral.get(0).currentTime,
-			currentTimeClickedVideo = $(this).get(0).currentTime;
-		
-		$('#videocentral source').attr('src', $video2SRC);
-		$('#videocentral').get(0).load();
-		$('#videocentral').get(0).currentTime = currentTimeClickedVideo;
-		$('source', $(this)).attr('src', $videoCentralSRC);
-		$(this).get(0).load();
-		$(this).get(0).currentTime = currentTimeCentralVideo;
+		$('.vid2').empty();
+		$('.vid2').append(videoCentral);
+		video = $($('.vid2').children()[0]);
+		video.get(0).play();
 						
 	});
 	
