@@ -3,8 +3,8 @@ var recalcularHorizonte = function(){
 	$.each(imagenes_carousel, function(i,e){ 
 		$(e).removeAttr('style');
 		var pos = $(e).offset().left,
-			dis_al_centro = parseInt( Math.round(Math.abs(960-pos) / 200));
-		if (pos > 960 && dis_al_centro == 0) dis_al_centro = 1;
+			dis_al_centro = parseInt( Math.round(Math.abs(($(document).width()/2)-pos) / 200));
+		if (pos > 1000 && dis_al_centro == 0) dis_al_centro = 1;
 		if (dis_al_centro != 0){
 			$(e).css({
 				opacity: (0.9/dis_al_centro),
@@ -133,9 +133,8 @@ var setup_timeline = function(datos_campeonatos,
 	var elemento_centro = $($('.carousel img')[parseInt(datos_campeonatos.length/2)]).attr('alt');
 	var urlbg_viejo = '';
 	
-	var opciones = {
-			centerPadding: '20px',
-			slidesToShow: 9,
+	var opciones = {			
+			slidesToShow: 10,
 			arrows: false,
 			infinite: false,
 			touchThreshold: 10,
@@ -201,7 +200,7 @@ var setup_timeline = function(datos_campeonatos,
 		$(".carousel").on('afterChange', function(event,slick,currentSlide){
 			// ACTUALIZAMOS EL NUEVO CENTRO
 			var slideActivas = $('.slick-active'),
-				slideCentro = $(slideActivas[parseInt(slideActivas.length / 2)]);
+				slideCentro = $(slideActivas[parseInt(slideActivas.length / 2)-1]);
 			elemento_centro = slideCentro.find('img').attr('alt');
 			
 			animarImagenCentro(elemento_centro,datos_campeonatos,urlbg_viejo);
