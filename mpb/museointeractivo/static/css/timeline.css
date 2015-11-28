@@ -199,8 +199,8 @@ a{
 }
 .carousel {
 	position: absolute !important;
-	bottom: 5%;
-    width:1920px;
+	bottom: 8%;
+    width:2134px;
     height:250px;
     text-align: center;
   }
@@ -243,7 +243,8 @@ a{
 	border: none;
 	display: inline;
 	width: 180px;
-	height: auto;
+	height: auto;    
+	padding-top: 13px;
 	transition: all 0.5s ease;
 	opacity: 0.6;
  }
@@ -487,13 +488,14 @@ video {
     height: 331px;
     background: rgba(255,255,255,0.2);
 	overflow: hidden;
+    border-radius: 10px;
 	border: 1px solid rgba(255,255,255,0.8);	
 	background-size: cover !important ;
 }
 .videobox{
     margin-top: 30px;
     width: 700px;
-    height: 560px;
+    height: 580px;
 	border: 1px solid rgba(255,255,255,0.2);	
 	border-radius: 20px;
 	overflow: hidden;
@@ -501,6 +503,7 @@ video {
 .videobox video{
   width: 92%    !important;
   height: auto   !important;
+    border-radius: 20px;
 }
 .video video{
   width: 100%    !important;
@@ -668,7 +671,7 @@ table {
 	border-collapse: collapse;
 	background: -webkit-linear-gradient(left,black -20%, rgb(8,67,143) , black 120%); 
 	width: 100%;
-	margin-bottom: 40px;
+	margin-bottom: 100px;
 }
 td{
 	color: white;

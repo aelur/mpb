@@ -71,15 +71,15 @@ class campeonatoForm(forms.ModelForm):
 	
 				if (self.cleaned_data['imagen_campo'] is None):
 					err.append('Para los campeonatos internacionales es necesario subir una imagen de campo.')
-			else:
-				cur_es = self.cleaned_data['curiosidades_es']
-				cur_por = self.cleaned_data['curiosidades_por']
-				cur_en = self.cleaned_data['curiosidades_en']
-				if (cur_es is None or cur_por is None or cur_en is None):
-					err.append('Para los campeonatos nacionales es necesario subir documentos de curiosidades.')
-				else:
-					if (extensionEsInvalida(cur_es, 'txt') or extensionEsInvalida(cur_en, 'txt') or extensionEsInvalida(cur_por, 'txt')):
-						err.append('El documento de curiosidades debe estar en formato TXT.')
+			#else:
+			#	cur_es = self.cleaned_data['curiosidades_es']
+			#	cur_por = self.cleaned_data['curiosidades_por']
+			#	cur_en = self.cleaned_data['curiosidades_en']
+			#	if (cur_es is None or cur_por is None or cur_en is None):
+			#		err.append('Para los campeonatos nacionales es necesario subir documentos de curiosidades.')
+			#	else:
+			#		if (extensionEsInvalida(cur_es, 'txt') or extensionEsInvalida(cur_en, 'txt') or extensionEsInvalida(cur_por, 'txt')):
+			#			err.append('El documento de curiosidades debe estar en formato TXT.')
 			
 			excel = self.cleaned_data['tablas']
 			if (extensionEsInvalida(excel.name,'xlsx')):

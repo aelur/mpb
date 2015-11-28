@@ -52,21 +52,21 @@
 	
 	<div id="wrapperCarousel">
 	<div class="carousel">
-		<div class="slide"><div class="filler" style="display: block; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
 		{% for campeonato in campeonatos %}
 			<div class="slide">
 				<a href="{% url 'datos' campeonato.id lenguaje %}">
-					<img src="{% if campeonato.tipo == 'INT' %}{{ campeonato.imagen_copa.url }}{% else %}{% static 'img/estrella.png' %}{% endif %}" alt="{{campeonato.id}}">
+					<img src="{{ campeonato.imagen_copa.url }}" alt="{{campeonato.id}}">
 				</a>
 			</div>
 		{% endfor %}
-		<div class="slide"><div class="filler" style="display: block; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
 	</div>
 	</div>
 </div>

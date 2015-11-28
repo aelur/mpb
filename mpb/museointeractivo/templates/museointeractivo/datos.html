@@ -17,8 +17,8 @@
 			<div class="TOPBAR">
 				 <a href="{% url 'index' %}" id="backtotimeline"><img src="{% static 'img/arrow_up.png' %}" style="top:14%" class="arrow_up"></a>
 				<div class="curiosidades">	<div class="light"></div>	
-					<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada" id="copacur">
-					<span class="anio" style="top: 22%;">{{ campeonato.anio }}</span>
+					<img src="{{campeonato.imagen_copa.url}}" class="animada" id="copacur">
+					{% if campeonato.tipo == 'INT' %}<span class="anio" style="top: 22%;">{{ campeonato.anio }}</span>{% endif %}
 					{% if campeonato.tipo != 'NAC' %}
 						<img src="{{ campeonato.imagen_campo.url }}" style="width: 515px;height: auto;bottom: -59%;left: -120px;position: absolute;animation:none;">
 					{% else %}
@@ -98,8 +98,8 @@
 		
 		<div class="TOPBAR">
 			<div class="curiosidades" id="curiosidtablas">	
-				<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
-				<span class="anio">{{ campeonato.anio }}</span>
+				<img src="{{campeonato.imagen_copa.url}}" class="animada">
+				{% if campeonato.tipo == 'INT' %}<span class="anio">{{ campeonato.anio }}</span>{% endif %}
 			</div>
 			<div class="central" id="centraltablas">
 				<span class="titulo">{{ campeonato.titulo_es }}</span>
@@ -120,23 +120,27 @@
 				<th colspan="5" id="text_resultados">Resultados</th>    
 			</tr>
 			<tr id="campos">
-				<th id="text_fecha">Fecha</th>
-				<th id="text_jornada">Jornada</th>
-				<th id="text_equipos">Equipos</th>
-				<th id="text_res">Resultados</th>
-				<th id="text_estadio">Estadio</th>
+				<th id="text_fecha" width="12%">Fecha</th>
+				<th id="text_jornada" width="6%">Jornada</th>
+				<th id="text_equipos" width="35%">Equipos</th>
+				<th id="text_res" width="12%">Resultados</th>
+				<th id="text_estadio" width="35%">Estadio</th>
 			</tr>
 			</table>
 			<div class="inner-table">
 			<table>
 			{% for partido in campeonato.get_datos_campania %}
-				<tr>
-				<td class="middle">{{partido.0}}</td>
-				<td class="middle">{{partido.1}}</td>
-				<td>{{partido.2}}</td>
-				<td class="middle yellow">{{partido.3}}</td>
-				<td>{{partido.4}}</td>
-				</tr>
+				{% if partido.1 == 0 and partido.2 == 0 %}
+					<tr  class="separador"><td colspan="8">{{ partido.0|cut:"TITULO:" }}</td></tr>
+				{% else %}
+					<tr>
+					<td class="middle" width="12%">{{partido.0}}</td>
+					<td class="middle" width="6%">{{partido.1}}</td>
+					<td width="35%">{{partido.2}}</td>
+					<td class="middle yellow" width="12%">{{partido.3}}</td>
+					<td width="35%">{{partido.4}}</td>
+					</tr>
+				{% endif %}
 			{% endfor %}
 			{% for observacion in campeonato.get_observaciones_partidos %}
 			<tr>
@@ -191,8 +195,8 @@
 		
 		<div class="TOPBAR">
 			<div class="curiosidades" id="curiosidtablas">	
-					<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
-					<span class="anio">{{ campeonato.anio}}</span>
+					<img src="{{campeonato.imagen_copa.url}}" class="animada">
+					{% if campeonato.tipo == 'INT' %}<span class="anio">{{ campeonato.anio}}</span>{% endif %}
 			</div>
 			<div class="central" id="centraltablas">
 				<span class="titulo">{{ campeonato.titulo_es }}</span>
@@ -214,9 +218,9 @@
 				<th colspan="5" id="text_protagonistas">Protagonistas</th>    
 			</tr>
 			<tr id="campos">
-				<th id="text_jugadores">Jugadores</th>
-				<th id="text_partidos">Partidos</th>
-				<th id="text_goles">Goles</th>
+				<th id="text_jugadores" width="70%">Jugadores</th>
+				<th id="text_partidos" width="15%">Partidos</th>
+				<th id="text_goles" width="15%">Goles</th>
 			</tr>
 			</table>
 			<div class="inner-table">
@@ -224,9 +228,9 @@
 				<tr  class="separador"><td colspan="3" id="arqueros">Arqueros</td></tr>
 			{% for jugador in campeonato.get_arqueros %}
 				<tr>
-				<td>{{jugador.0}}</td>
-				<td class="middle yellow">{{jugador.1}}</td>
-				<td class="middle">{{jugador.2}}</td>
+				<td width="70%">{{jugador.0}}</td>
+				<td class="middle yellow" width="15%">{{jugador.1}}</td>
+				<td class="middle" width="15%">{{jugador.2}}</td>
 				</tr>
 			{% endfor %}
 				<tr  class="separador"><td colspan="3" id="defensores">Defensores</td></tr>
@@ -287,8 +291,8 @@
 		<div class="body_datos body_tabla" id="bodyposiciones">
 			<div class="TOPBAR">
 				<div class="curiosidades" id="curiosidtablas">	
-						<img src="{% if campeonato.tipo != 'NAC' %}{{campeonato.imagen_copa.url}}{% else %}{% static 'img/estrella.png' %}{% endif%}" class="animada">
-						<span class="anio">{{ campeonato.anio}}</span>
+						<img src="{{campeonato.imagen_copa.url}}" class="animada">
+						{% if campeonato.tipo == 'INT' %}<span class="anio">{{ campeonato.anio}}</span>{% endif %}
 				</div>
 				<div class="central" id="centraltablas">
 					<span class="titulo">{{ campeonato.titulo_es }}</span>
@@ -309,14 +313,14 @@
 				<th colspan="8" id="text_posiciones">Tabla de Posiciones</th>    
 			</tr>
 			<tr id="campos">
-				<th id="text_equipos2">Equipos</th>
-				<th id="text_puntos">Pts.</th>
-				<th id="text_jugados">Jugados</th>
-				<th id="text_ganados">Ganados</th>
-				<th id="text_empatados">Empatados</th>
-				<th id="text_perdidos">Perdidos</th>
-				<th id="text_golesfavor">Goles A Favor</th>
-				<th id="text_golescontra">Goles En Contra</th>
+				<th id="text_equipos2" width="40%">Equipos</th>
+				<th id="text_puntos" width="5%">Pts.</th>
+				<th id="text_jugados"  width="8%">Jugados</th>
+				<th id="text_ganados"  width="8%">Ganados</th>
+				<th id="text_empatados" width="8%">Empatados</th>
+				<th id="text_perdidos"  width="8%">Perdidos</th>
+				<th id="text_golesfavor"  width="12%">Goles A Favor</th>
+				<th id="text_golescontra" width="12%">Goles En Contra</th>
 			</tr>
 			</table>
 			<div class="inner-table">
@@ -326,14 +330,14 @@
 					<tr  class="separador"><td colspan="8">{{equipo.0}}</td></tr>
 				{% else %}
 					<tr>
-					<td>{{equipo.0}}</td>
-					<td class="middle yellow">{{equipo.1}}</td>
-					<td class="middle">{{equipo.2}}</td>
-					<td class="middle">{{equipo.3}}</td>
-					<td class="middle">{{equipo.4}}</td>
-					<td class="middle">{{equipo.5}}</td>
-					<td class="middle">{{equipo.6}}</td>
-					<td class="middle">{{equipo.7}}</td>
+					<td width="40%">{{equipo.0}}</td>
+					<td class="middle yellow" width="5%">{{equipo.1}}</td>
+					<td class="middle"  width="8%">{{equipo.2}}</td>
+					<td class="middle"  width="8%">{{equipo.3}}</td>
+					<td class="middle"  width="8%">{{equipo.4}}</td>
+					<td class="middle"  width="8%">{{equipo.5}}</td>
+					<td class="middle"  width="12%">{{equipo.6}}</td>
+					<td class="middle"  width="12%">{{equipo.7}}</td>
 					</tr>
 				{% endif %}
 			{% endfor %}

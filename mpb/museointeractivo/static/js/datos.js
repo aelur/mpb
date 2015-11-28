@@ -296,36 +296,28 @@ var setup_datos = function(
 	
 	
 	$('.vid1').on('click', function(){
-		$('.videobox').velocity("fadeOut",{ duration: 200 });
 		var videoCentral = $('.videobox').children()[0];
 		$('.videobox').empty();
 		$('.videobox').append($(this).children()[0]);		
 		var video = $($('.videobox').children()[0]);
 		video.get(0).play();
-		$('.videobox').velocity("fadeIn");
 		
-		$('.vid1').velocity("fadeOut",{ duration: 200 });
 		$('.vid1').empty();
 		$('.vid1').append(videoCentral);
 		video = $($('.vid1').children()[0]);
 		video.get(0).play();		
-		$('.vid1').velocity("fadeIn");
 	});
 	
 	$('.vid2').on('click', function(){
-		$('.videobox').velocity("fadeOut");
 		var videoCentral = $('.videobox').children()[0];
 		$('.videobox').empty();
 		$('.videobox').append($(this).children()[0]);
 		var video = $($('.videobox').children()[0]);
 		video.get(0).play();
-		$('.videobox').velocity("fadeIn");
-		$('.vid2').velocity("fadeOut");
 		$('.vid2').empty();
 		$('.vid2').append(videoCentral);
 		video = $($('.vid2').children()[0]);
-		video.get(0).play();
-		$('.vid2').velocity("fadeIn");						
+		video.get(0).play();				
 	});
 	
 	$(document).ready(function() {

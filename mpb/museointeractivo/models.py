@@ -16,7 +16,7 @@ class campeonato(models.Model):
 							)
 	anio = models.IntegerField( verbose_name='Año')
 	imagen_copa = models.ImageField(upload_to='', 
-							default='',
+							default='/static/img/estrella.png',
 							help_text='Imagen de la copa - obligatorio. Resolución: 300x300')
 	imagen_fondo = models.ImageField(upload_to='')
 	imagen_campo = models.ImageField(upload_to='', 
@@ -25,7 +25,8 @@ class campeonato(models.Model):
 							verbose_name='Imagen de Posiciones',
 							help_text='Gráfico con formación del equipo - obligatorio si es Internacional. Resolución: 600x835')
 	imagen_formacion = models.ImageField(upload_to='', 
-							default='',
+							default='/static/img/equipo.png',
+							blank=True,
 							verbose_name='Imagen del Equipo')
 
 	curiosidades_es = models.FileField(upload_to='',  
@@ -221,13 +222,14 @@ class campeonato(models.Model):
 		datos = self.leer_tablas('campania')
 		datos_partidos = []
 		for partido in datos:
-			if ("/" in partido[0]):
+			if ("/" in partido[0] or "TITULO:" in partido[0]):
 				datos_partidos.append(partido)
 		return datos_partidos
+		
 	def get_datos_particulares_campania(self):
 		datos = self.leer_tablas('campania')
 		datos_partidos = []
 		for partido in datos:
-			if (not "/" in partido[0]):
+			if (not "/" in partido[0] and not  "TITULO:" in partido[0] ):
 				datos_partidos.append(partido)
 		return datos_partidos
