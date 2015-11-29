@@ -121,10 +121,10 @@
 			</tr>
 			<tr id="campos">
 				<th id="text_fecha" width="12%">Fecha</th>
-				<th id="text_jornada" width="6%">Jornada</th>
-				<th id="text_equipos" width="35%">Equipos</th>
+				<th id="text_jornada" width="16%">Jornada</th>
+				<th id="text_equipos" width="30%">Equipos</th>
 				<th id="text_res" width="12%">Resultados</th>
-				<th id="text_estadio" width="35%">Estadio</th>
+				<th id="text_estadio" width="30%">Estadio</th>
 			</tr>
 			</table>
 			<div class="inner-table">
@@ -135,10 +135,10 @@
 				{% else %}
 					<tr>
 					<td class="middle" width="12%">{{partido.0}}</td>
-					<td class="middle" width="6%">{{partido.1}}</td>
-					<td width="35%">{{partido.2}}</td>
+					<td class="middle" width="16%">{{partido.1}}</td>
+					<td width="30%">{{partido.2}}</td>
 					<td class="middle yellow" width="12%">{{partido.3}}</td>
-					<td width="35%">{{partido.4}}</td>
+					<td width="30%">{{partido.4}}</td>
 					</tr>
 				{% endif %}
 			{% endfor %}

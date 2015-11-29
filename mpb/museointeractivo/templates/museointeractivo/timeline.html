@@ -113,7 +113,7 @@
 		traducir_contenido_dinamico_por,
 		lenguaje_pantalla,
 		traducirLinks);
-		
+	
 	$('a').click(function (event) {
 		event.preventDefault();
 		if ( typeof ($(this).find('.carousel-center')[0]) == 'undefined' &&
@@ -139,5 +139,8 @@
 				});	
 	});
 	
+	$('.filler').click(function(event){
+		return false;
+	});
 </script>
 </html>

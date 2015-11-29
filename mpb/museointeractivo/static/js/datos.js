@@ -261,29 +261,21 @@ var setup_datos = function(
 		fingers:'all'
 	});
 	
-	$('#step-4 .arrow_right').on('click',function(){
-		$('#bodydatos').animate({opacity:0},900);
-		$impressslide.goto(1);
-	});
 	$('#step-4 .arrow_left').on('click',function(){
 		$('#bodydatos').animate({opacity:0},900);
-		$impressslide.goto(2);
+		$impressslide.goto(1); //POSICIONES VA A RESULTADOS
 	});
 	$('#step-3 .arrow_right').on('click',function(){
 		$('#bodydatos').animate({opacity:0},900);
-		$impressslide.goto(3);
-	});
-	$('#step-3 .arrow_left').on('click',function(){
-		$('#bodydatos').animate({opacity:0},900);
-		$impressslide.goto(1);
+		$impressslide.goto(1); //JUGADORES VA A RESULTADOS
 	});
 	$('#step-2 .arrow_right').on('click',function(){
 		$('#bodydatos').animate({opacity:0},900);
-		$impressslide.goto(3);
+		$impressslide.goto(3);  //RESULTADOS VA A POSICIONES
 	});
 	$('#step-2 .arrow_left').on('click',function(){
 			$('#bodydatos').animate({opacity:0},900);
-		$impressslide.goto(2);
+		$impressslide.goto(2); //RESULTADOS VA A JUGADORES
 	});
 	
 	$('a.pantalladatos').each(function(){

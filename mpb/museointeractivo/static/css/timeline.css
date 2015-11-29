@@ -19,6 +19,13 @@ body{
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 }
+*:focus {
+    outline: none;
+}
+.filler{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none; 
+}
 a{
 	display: block;
 	z-index: 100;
