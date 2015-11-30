@@ -67,6 +67,7 @@
 		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
 		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
 		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
 	</div>
 	</div>
 </div>
@@ -120,8 +121,9 @@
 			 typeof ($(this).find('span')[0]) == 'undefined') {
 				var slideCentro = $('.carousel-center').parent().parent().attr('data-slick-index'),
 					slideActual = $(this).parent().attr('data-slick-index'),
-					slideCargada = $('.slick-current').attr('data-slick-index'),
+					slideCargada = $('.carousel').slick('slickCurrentSlide'),
 					distanciaCentro = slideCentro - slideActual;
+					
 				$(".carousel").slick('slickGoTo', slideCargada-distanciaCentro,true);
 				return false;
 			 }

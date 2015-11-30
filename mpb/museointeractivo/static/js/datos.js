@@ -370,5 +370,10 @@ var setup_datos = function(
 					complete: function(elements) { location.href = link;}
 					});		
 		});
+		
+		$('video').on('ended', function () {
+			$(this).get(0).load();
+			$(this).get(0).play();
+		});
 	});
 }

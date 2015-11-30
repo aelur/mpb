@@ -172,18 +172,14 @@ var setup_timeline = function(datos_campeonatos,
 				$('.carousel').slick('slickFilter', filtrarSlides);
 				var slidesActivas = $('.slick-active'),
 					slidesFillerActivas = $('.slick-active .filler').length,
-					numCentro = parseInt(slidesActivas.length / 2);
+					numCentro = parseInt(slidesActivas.length / 2) +1;
 				$('.carousel').slick('slickGoTo', numCentro-parseInt(slidesFillerActivas/2),true);
 			}
-		};
+			
+		};		
 		
-		if (typeof slick != 'undefined'){
-			var slidesActivas = $('.slick-active'),
-				slideCentro = $(slidesActivas[parseInt(slidesActivas.length / 2)]);
-			elemento_centro = $(slideCentro).find('img').attr('alt');
-		}
 		// ACTUALIZAR EL CENTRAL
-		animarImagenCentro(elemento_centro,datos_campeonatos,urlbg_viejo);
+		if (typeof slick == 'undefined') animarImagenCentro(elemento_centro,datos_campeonatos,urlbg_viejo);
 		
 		
 	} 
