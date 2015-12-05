@@ -1059,8 +1059,14 @@
             });
 			
 			// BUG FIX AGUSTINA
-			var slideActual = $($('.slick-active').get(0)).attr('data-slick-index');
-            slidesTraversed = Math.abs($(swipedSlide).attr('data-slick-index') - slideActual) || 1;
+			var i = 0, slidesActivas = $('.slick-active');
+			for (var i = 0; i < slidesActivas.length; i++){ 
+				if ($(slidesActivas[i]).attr('data-slick-index') == $(swipedSlide).attr('data-slick-index'))
+					break;
+			};
+			slidesTraversed = i+1;
+			//var slideActual = $($('.slick-active').get(0)).attr('data-slick-index');
+            //slidesTraversed = Math.abs($(swipedSlide).attr('data-slick-index') - slideActual) || 1;
             //slidesTraversed = Math.abs($(swipedSlide).attr('data-slick-index') - _.currentSlide) || 1;
             return slidesTraversed;
 
@@ -1860,7 +1866,7 @@
     };
 
     Slick.prototype.slideHandler = function(index, sync, dontAnimate) {
-
+		
         var targetSlide, animSlide, oldSlide, slideLeft, targetLeft = null,
             _ = this;
 
@@ -1935,7 +1941,7 @@
         }
 
         _.animating = true;
-
+		
         _.$slider.trigger("beforeChange", [_, _.currentSlide, animSlide]);
 
         oldSlide = _.currentSlide;
@@ -2088,9 +2094,9 @@
             _.touchObject.minSwipe = _.listHeight / _.options
                 .touchThreshold;
         }
-
+		
         switch (event.data.action) {
-
+			
             case 'start':
                 _.swipeStart(event);
                 break;

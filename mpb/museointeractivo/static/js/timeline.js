@@ -2,17 +2,18 @@ var recalcularHorizonte = function(){
 	var imagenes_carousel = $('.carousel').find('img');
 	$.each(imagenes_carousel, function(i,e){ 
 		$(e).removeAttr('style');
-		var pos = $(e).offset().left,
-			dis_al_centro = parseInt( Math.round(Math.abs(($(document).width()/2)-pos) / 200));
-		if (pos > 1000 && dis_al_centro == 0) dis_al_centro = 1;
+		var pos = parseInt($(e).offset().left),
+			dis_al_centro = parseInt( Math.floor(Math.abs(($(document).width()/2)-pos-100) / 200));
 		if (dis_al_centro != 0){
 			$(e).css({
 				opacity: (0.9/dis_al_centro),
-				'transform': 'scale('+(1 - (0.08*dis_al_centro))+')'
+				//'transform': 'scale('+(1 - (0.08*dis_al_centro))+')'
 				});
 		}else{
-			$(e).css({opacity: 1});
-			$(e).width('210px');
+			$(e).animate({
+				//width:'210px',
+				opacity: 1,
+			}, 5);
 		};
 	});
 	
@@ -30,7 +31,12 @@ var animarImagenCentro = function(elemento_centro,datos_campeonatos,urlbg_viejo)
 		objANIO = $("#a" + elemento_centro);
 	
 	imgCentro = $(imgCentro[0]);
-	imgCentro.addClass('carousel-center');
+	imgCentro.animate({
+		width: '210px',
+		opacity: 1,
+		}, 500, function(){
+			imgCentro.addClass('carousel-center');
+		});
 		
 	//Si es internacional tengo que mover el año y el titulo mas abajo
 	var tipo = $.grep(datos_campeonatos, function(elem,index){
