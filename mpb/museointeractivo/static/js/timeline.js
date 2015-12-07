@@ -32,7 +32,7 @@ var animarImagenCentro = function(elemento_centro,datos_campeonatos,urlbg_viejo)
 	
 	imgCentro = $(imgCentro[0]);
 	imgCentro.animate({
-		width: '210px',
+		width: '230px',
 		opacity: 1,
 		}, 500, function(){
 			imgCentro.addClass('carousel-center');
@@ -43,8 +43,8 @@ var animarImagenCentro = function(elemento_centro,datos_campeonatos,urlbg_viejo)
 		return elem.id ==  elemento_centro;
 	})[0].tipo;	
 	if(tipo=='INT') {
-		objANIO.css({'bottom': '5%'});	
-		objTexto.css({'bottom': '2%'});	
+		objANIO.css({'bottom': '11%'});	
+		objTexto.css({'bottom': '7%'});	
 	}
 	objANIO.css('z-index',9);
 	objTexto.animate({fontSize: 28,opacity: .9},800);
