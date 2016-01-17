@@ -6,7 +6,10 @@
     <title>Museo de la Pasión Boquense</title>
     <LINK href="{% static 'css/timeline.css' %}" rel="stylesheet" type="text/css">
     <LINK href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css">
-    <LINK href="{% static 'css/slick.css' %}" rel="stylesheet" type="text/css">
+	
+	<link type="text/css" rel="stylesheet" href="{% static 'css/default_skin.css' %}" />
+	<script type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.sky.carousel-1.0.2.min.js' %}"></script>
   </head>
 <body style="background:url('{% static 'img/BG.jpg' %}')  no-repeat center center fixed">
 
@@ -44,44 +47,93 @@
 		</div>
 	</div>
 	
-	{% for campeonato in campeonatos %}
-		<a href="{% url 'datos' campeonato.id lenguaje %}">
-			{% if campeonato.tipo == 'INT' %}<span class="anio" id="a{{campeonato.id}}">{{ campeonato.anio }}</span>{% endif %}
-		<em id="{{campeonato.id}}" class="timeline_titulo">{{ campeonato.titulo_es }}</em></a>
-	{% endfor %}
 	
-	<div id="wrapperCarousel">
-	<div class="carousel">
-		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+	<div id="wrapperCarousel" class="sky-carousel">
+	<div class="sky-carousel-wrapper">
+		<ul class="sky-carousel-container">
 		{% for campeonato in campeonatos %}
-			<div class="slide">
+			<li>
 				<a href="{% url 'datos' campeonato.id lenguaje %}">
-					<img src="{{ campeonato.imagen_copa.url }}" alt="{{campeonato.id}}">
-				</a>
-			</div>
+					<img src="{{ campeonato.imagen_copa.url }}" alt="{{campeonato.id}}" width="250px">
+				</a> 
+					<div class="sc-content"> 
+							<h2><a href="{% url 'datos' campeonato.id lenguaje %}">{{ campeonato.titulo_es }}</a></h2>
+							<p><a href="{% url 'datos' campeonato.id lenguaje %}">{% if campeonato.tipo == 'INT' %}{{ campeonato.anio }}{% endif %}</a></p>
+						  
+					</div>
+			</li>
 		{% endfor %}
-		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
-		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		</ul>
 	</div>
 	</div>
+	
+	<div id="carouselNacionales" class="sky-carousel" style="opacity: 0; z-index: -1000">>
+	<div class="sky-carousel-wrapper">
+		<ul class="sky-carousel-container">
+		{% for campeonato in campeonatos %}
+			{% if campeonato.tipo == 'NAC' %}
+			<li>
+				<a href="{% url 'datos' campeonato.id lenguaje %}">
+					<img src="{{ campeonato.imagen_copa.url }}" alt="{{campeonato.id}}" width="250px">
+				</a> 
+					<div class="sc-content"> 
+							<h2><a href="{% url 'datos' campeonato.id lenguaje %}">{{ campeonato.titulo_es }}</a></h2>
+							<p><a href="{% url 'datos' campeonato.id lenguaje %}">{% if campeonato.tipo == 'INT' %}{{ campeonato.anio }}{% endif %}</a></p>
+						  
+					</div>
+			</li>
+			{% endif %}
+		{% endfor %}
+		</ul>
+	</div>
+	</div>
+	
+	<div id="carouselInternacionales" class="sky-carousel" style="opacity: 0; z-index: -1000">
+	<div class="sky-carousel-wrapper">
+		<ul class="sky-carousel-container">
+		{% for campeonato in campeonatos %}
+			{% if campeonato.tipo == 'INT' %}
+			<li>
+				<a href="{% url 'datos' campeonato.id lenguaje %}">
+					<img src="{{ campeonato.imagen_copa.url }}" alt="{{campeonato.id}}" width="250px">
+				</a> 
+					<div class="sc-content"> 
+							<h2><a href="{% url 'datos' campeonato.id lenguaje %}">{{ campeonato.titulo_es }}</a></h2>
+							<p><a href="{% url 'datos' campeonato.id lenguaje %}">{% if campeonato.tipo == 'INT' %}{{ campeonato.anio }}{% endif %}</a></p>
+						  
+					</div>
+			</li>
+			{% endif %}
+		{% endfor %}
+		</ul>
+	</div>
+	</div>
+	
 </div>
 </body>
-<script type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
 <script type="text/javascript"  src="{% static 'js/timeline.js' %}"></script>
-<script type="text/javascript" src = "{% static 'js/slick.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.touchSwipe.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/attrchange.js' %}"></script>
 <script type="text/javascript"  src="{% static 'js/contextuales.js' %}"></script>
 <script type="text/javascript"  src="{% static 'js/jquery.velocity.min.js' %}"></script>
 <script>	
-		$('#body_timeline')
+	//ANIMACION
+	$('#body_timeline')
 			.velocity({translateY: "-150%", translateZ:"0%"}, {duration:1});
+	var secuenciaSalida = function(link){
+		$('#body_timeline')
+			.velocity({translateY: "10%", opacity:0.7, translateZ:"0%"}, {duration:300})
+			.velocity({
+			  translateY: "-150%"
+			  , translateZ:"0%"
+			 ,opacity: 0
+			},{ 
+				duration: 500, 
+				easing: "ease-out" ,
+				complete: function(elements) { location.href = link;}
+				});	
+	}
+	//TRADUCCION
 	var traducir_contenido_dinamico_es = function(){
 		{% for campeonato in campeonatos %}
 			$('#{{campeonato.id}}').text("{{ campeonato.titulo_es }}");	
@@ -101,13 +153,16 @@
 				{% for campeonato in campeonatos %}
 					{"id": {{campeonato.id}},
 					"tipo": '{{campeonato.tipo}}',
-					"urlbg": '{{campeonato.imagen_fondo.url}}'
+					"urlbg": '{{campeonato.imagen_fondo.url}}',
+					"anio": {{ campeonato.anio }}
 					},
 				{% endfor %}
 			]
 	var lenguaje_pantalla= '{{ lenguaje }}';
 	toggleTranslation(lenguaje_pantalla);
 		
+	var idCampeonatoCentro = 0;
+	
 	setup_timeline(datos_campeonatos,
 		traducir_contenido_dinamico_es,
 		traducir_contenido_dinamico_en,
@@ -115,32 +170,14 @@
 		lenguaje_pantalla,
 		traducirLinks);
 	
+	
 	$('a').click(function (event) {
 		event.preventDefault();
-		if ( typeof ($(this).find('.carousel-center')[0]) == 'undefined' &&
-			 typeof ($(this).find('span')[0]) == 'undefined') {
-				var slideCentro = $('.carousel-center').parent().parent().attr('data-slick-index'),
-					slideActual = $(this).parent().attr('data-slick-index'),
-					slideCargada = $('.carousel').slick('slickCurrentSlide'),
-					distanciaCentro = slideCentro - slideActual;
-					
-				$(".carousel").slick('slickGoTo', slideCargada-distanciaCentro,true);
-				return false;
-			 }
+		var idActual = $($(this).find('img')).attr('alt')
+		if ( idActual != idCampeonatoCentro ) return false;
 		var link = $(this).attr("href");
-		$('#body_timeline')
-			.velocity({translateY: "10%", opacity:0.7, translateZ:"0%"}, {duration:300})
-			.velocity({
-			  translateY: "-150%"
-			  , translateZ:"0%"
-			 ,opacity: 0
-			},{ 
-				duration: 500, 
-				easing: "ease-out" ,
-				complete: function(elements) { location.href = link;}
-				});	
+		secuenciaSalida(link);
 	});
-	
 	$('.filler').click(function(event){
 		return false;
 	});

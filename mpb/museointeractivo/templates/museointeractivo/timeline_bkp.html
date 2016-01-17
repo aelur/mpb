@@ -1,0 +1,148 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Museo de la Pasión Boquense</title>
+    <LINK href="{% static 'css/timeline.css' %}" rel="stylesheet" type="text/css">
+    <LINK href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css">
+    <LINK href="{% static 'css/slick.css' %}" rel="stylesheet" type="text/css">
+  </head>
+<body style="background:url('{% static 'img/BG.jpg' %}')  no-repeat center center fixed">
+
+<div id="body_timeline" >
+	<div class="fondo_campeonato"></div>
+	<div class="nombre">TODOS</div>
+	<div class="TOPBAR" id="timelinebar">
+		<div class="left">
+			<img src="{% static 'img/logo.png' %}" class="responsive">
+			<div class="typesetter">
+				<div class="selector filtro" id="copas_active" style="margin-left: 0px;">
+					<img src="{% static 'img/todos.png' %}" id="todos">
+					<span class="flecha">></span>
+					<span class="titulo todos">TODOS</span>
+				</div>
+				<div class="selector filtro" id="copas" style="margin-left: 74px;">
+					<img src="{% static 'img/int.png' %}" id="int">
+					<span class="flecha">></span>
+					<span class="titulo int">INTERNACIONALES</span>
+				</div>
+				<div class="selector filtro" id="copas"  style="margin-left: 149px;">
+					<img src="{% static 'img/nac.png' %}" id="nac">
+					<span class="flecha">></span>
+					<span class="titulo nac">NACIONALES</span>
+				</div>
+			</div>
+		</div>
+		<div class="right" id="tl">
+			<div class="typesetter" id="langtype">
+				<div class="selector" id="lang">
+				<img src="{% static 'img/es.png' %}" id="es"></div>
+				<div class="selector" id="lang"><img src="{% static 'img/en.png' %}" id="en"></div>
+				<div class="selector" id="lang"><img src="{% static 'img/por.png' %}" id="por"></div>
+			</div>
+		</div>
+	</div>
+	
+	{% for campeonato in campeonatos %}
+		<a href="{% url 'datos' campeonato.id lenguaje %}">
+			{% if campeonato.tipo == 'INT' %}<span class="anio" id="a{{campeonato.id}}">{{ campeonato.anio }}</span>{% endif %}
+		<em id="{{campeonato.id}}" class="timeline_titulo">{{ campeonato.titulo_es }}</em></a>
+	{% endfor %}
+	
+	<div id="wrapperCarousel">
+	<div class="carousel">
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		{% for campeonato in campeonatos %}
+			<div class="slide">
+				<a href="{% url 'datos' campeonato.id lenguaje %}">
+					<img src="{{ campeonato.imagen_copa.url }}" alt="{{campeonato.id}}">
+				</a>
+			</div>
+		{% endfor %}
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+		<div class="slide"><div class="filler" style="display: block; height: 250px; width: 160px;"></div></div>
+	</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
+<script type="text/javascript"  src="{% static 'js/timeline.js' %}"></script>
+<script type="text/javascript" src = "{% static 'js/slick.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.touchSwipe.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/attrchange.js' %}"></script>
+<script type="text/javascript"  src="{% static 'js/contextuales.js' %}"></script>
+<script type="text/javascript"  src="{% static 'js/jquery.velocity.min.js' %}"></script>
+<script>	
+		$('#body_timeline')
+			.velocity({translateY: "-150%", translateZ:"0%"}, {duration:1});
+	var traducir_contenido_dinamico_es = function(){
+		{% for campeonato in campeonatos %}
+			$('#{{campeonato.id}}').text("{{ campeonato.titulo_es }}");	
+		{% endfor %}
+	};
+	var traducir_contenido_dinamico_en = function(){
+		{% for campeonato in campeonatos %}
+			$('#{{campeonato.id}}').text("{{ campeonato.titulo_en }}");	
+		{% endfor %}
+	}
+	var traducir_contenido_dinamico_por = function(){
+		{% for campeonato in campeonatos %}
+			$('#{{campeonato.id}}').text("{{ campeonato.titulo_por }}");	
+		{% endfor %}
+	}
+	var datos_campeonatos=[ 
+				{% for campeonato in campeonatos %}
+					{"id": {{campeonato.id}},
+					"tipo": '{{campeonato.tipo}}',
+					"urlbg": '{{campeonato.imagen_fondo.url}}'
+					},
+				{% endfor %}
+			]
+	var lenguaje_pantalla= '{{ lenguaje }}';
+	toggleTranslation(lenguaje_pantalla);
+		
+	setup_timeline(datos_campeonatos,
+		traducir_contenido_dinamico_es,
+		traducir_contenido_dinamico_en,
+		traducir_contenido_dinamico_por,
+		lenguaje_pantalla,
+		traducirLinks);
+	
+	$('a').click(function (event) {
+		event.preventDefault();
+		if ( typeof ($(this).find('.carousel-center')[0]) == 'undefined' &&
+			 typeof ($(this).find('span')[0]) == 'undefined') {
+				var slideCentro = $('.carousel-center').parent().parent().attr('data-slick-index'),
+					slideActual = $(this).parent().attr('data-slick-index'),
+					slideCargada = $('.carousel').slick('slickCurrentSlide'),
+					distanciaCentro = slideCentro - slideActual;
+					
+				$(".carousel").slick('slickGoTo', slideCargada-distanciaCentro,true);
+				return false;
+			 }
+		var link = $(this).attr("href");
+		$('#body_timeline')
+			.velocity({translateY: "10%", opacity:0.7, translateZ:"0%"}, {duration:300})
+			.velocity({
+			  translateY: "-150%"
+			  , translateZ:"0%"
+			 ,opacity: 0
+			},{ 
+				duration: 500, 
+				easing: "ease-out" ,
+				complete: function(elements) { location.href = link;}
+				});	
+	});
+	
+	$('.filler').click(function(event){
+		return false;
+	});
+</script>
+</html>

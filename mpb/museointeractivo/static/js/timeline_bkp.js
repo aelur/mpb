@@ -1,48 +1,77 @@
-var idCampeonatoCentroViejo = 0;
-var carouselSeleccionado = '#wrapperCarousel';
-
-var filtrar = function(tipo, datos_campeonatos,idCampeonatoCentro){
-	tipo = tipo[1];
-	$(carouselSeleccionado).css({'opacity':0, 'z-index': -1000});
-	if (tipo == 'N'){
-		carouselSeleccionado = "#carouselNacionales";
-	}if (tipo == 'I'){
-		carouselSeleccionado = "#carouselInternacionales";
-	}if (tipo == 'T'){
-		carouselSeleccionado = "#wrapperCarousel";
-	}
+var recalcularHorizonte = function(){
+	var imagenes_carousel = $('.carousel').find('img');
+	$.each(imagenes_carousel, function(i,e){ 
+		$(e).removeAttr('style');
+		var pos = parseInt($(e).offset().left),
+			dis_al_centro = parseInt( Math.floor(Math.abs(($(document).width()/2)-pos-100) / 200));
+		if (dis_al_centro != 0){
+			$(e).css({
+				opacity: (0.9/dis_al_centro),
+				//'transform': 'scale('+(1 - (0.08*dis_al_centro))+')'
+				});
+		}else{
+			$(e).animate({
+				//width:'210px',
+				opacity: 1,
+			}, 5);
+		};
+	});
 	
-	$(carouselSeleccionado).css({'opacity':1, 'z-index': -0});
-	idCampeonatoCentroViejo = idCampeonatoCentro;
-	idCampeonatoCentro = $($(carouselSeleccionado +' .sc-selected').find('img')).attr('alt');
-	animarImagenCentro(idCampeonatoCentro,datos_campeonatos,idCampeonatoCentroViejo);
-};
+}
 
-var obtenerAnio = function(datos_campeonatos,idBuscado){
-	return $.grep(datos_campeonatos, function(elem,index){
-		return elem.id ==  idBuscado;
-	})[0].anio;
-};
-var mismaDecada = function(anio1,anio2){
-	return String(anio1).substr(2,1) == String(anio2).substr(2,1);
-};
-var animarImagenCentro = function(elemento_centro,datos_campeonatos,idCampeonatoCentroViejo){
-	var anioViejo = obtenerAnio(datos_campeonatos,idCampeonatoCentroViejo),
-		anioNuevo = obtenerAnio(datos_campeonatos,elemento_centro);
+var getNombreUnico= function(dato){
+ 	var url = dato;
+    var nombre = url.substr(url.lastIndexOf("/") + 1);
+	return nombre.substr(0,nombre.lastIndexOf("_"));
+}
+
+var animarImagenCentro = function(elemento_centro,datos_campeonatos,urlbg_viejo){
+	var imgCentro = $.grep($('img'), function(e,i){return $(e).attr('alt') == elemento_centro;}),
+		objTexto = $("#" + elemento_centro),
+		objANIO = $("#a" + elemento_centro);
+	
+	imgCentro = $(imgCentro[0]);
+	imgCentro.animate({
+		width: '230px',
+		opacity: 1,
+		}, 500, function(){
+			imgCentro.addClass('carousel-center');
+		});
 		
-	var elem_centro = $.grep(datos_campeonatos, function(elem,index){
+	//Si es internacional tengo que mover el año y el titulo mas abajo
+	var tipo = $.grep(datos_campeonatos, function(elem,index){
 		return elem.id ==  elemento_centro;
-	})[0],
-		urlbg_nuevo = elem_centro.urlbg,
-		tipo = elem_centro.tipo;
-	
-	if(!( tipo=='NAC' && mismaDecada(anioViejo,anioNuevo) ) ){
-		$(".fondo_campeonato").animate({opacity:0}, 300, "linear", function(){
-			$(".fondo_campeonato").css("background", "url("+urlbg_nuevo+") no-repeat center center fixed");	
-			$(".fondo_campeonato").animate({opacity:0.8}, 400, "linear");
-		})
-		
+	})[0].tipo;	
+	if(tipo=='INT') {
+		objANIO.css({'bottom': '11%'});	
+		objTexto.css({'bottom': '7%'});	
 	}
+	objANIO.css('z-index',9);
+	objTexto.animate({fontSize: 28,opacity: .9},800);
+	objANIO.animate({opacity: 1},800);
+	
+	var urlbg_nuevo = $.grep(datos_campeonatos, function(elem,index){
+		return elem.id ==  elemento_centro;
+	})[0].urlbg;
+	
+	if(!( tipo=='NAC' && urlbg_viejo == urlbg_nuevo) )
+	$(".fondo_campeonato").css("background", 
+			"url("+urlbg_nuevo+") no-repeat center center fixed");	
+	
+	urlbg_viejo = urlbg_nuevo;
+}
+
+var quitarAnimacionViejoCentro = function(elemento_centro){
+	var imgCentro = $.grep($('img'), function(e,i){return $(e).attr('alt') == elemento_centro;}),
+		objTexto = $("#" + elemento_centro),
+		objANIO = $("#a" + elemento_centro);
+	
+	objTexto.animate({fontSize: 9,opacity: 0});
+	objANIO.animate({opacity: 0});
+	objANIO.css('z-index',0);
+	
+	imgCentro = $(imgCentro[0]);
+	imgCentro.removeClass('carousel-center');
 }
 
 var traducir = function(lenguaje,
@@ -94,50 +123,102 @@ var setup_timeline = function(datos_campeonatos,
 	lenguaje_pantalla,
 	traducirLinks){
 	
+	var obtener_centro = function(anio){	
+		if (typeof anio == 'undefined'){
+			return datos_campeonatos[0].id;
+		}
+		var holder = $.grep(datos_campeonatos,function(elem,index){
+			return elem.anio==anio;
+		})[0];
+		if (typeof holder != 'undefined'){
+			holder = elemento_centro.id;
+		};
+		return holder;
+	}
+	
+	var elemento_centro = $($('.carousel img')[parseInt(datos_campeonatos.length/2)]).attr('alt');
+	var urlbg_viejo = '';
+	
 	var opciones = {			
-		itemWidth: 200, // The width of your images.
-		itemHeight: 200, // The height of your images.
-		selectByClick: false,
-		reflectionVisible: true,
-		gradientOverlayVisible: false,
-		navigationButtonsVisible: false,
-		slideSpeed: 0.86,
-		distance: 45,
-	};	
+			slidesToShow: 10,
+			arrows: false,
+			infinite: false,
+			touchThreshold: 10,
+			swipeToSlide: true,
+			initialSlide: parseInt(datos_campeonatos.length/2),
+	};
+	
+	var filtrar = function(tipo, slick){	
+		$('em').css('opacity',0);
+		$('.anio').css('opacity',0);
+		quitarAnimacionViejoCentro(elemento_centro);	
+		tipo = tipo[1].toUpperCase();
+		if (tipo == 'I') tipo = 'INT';
+		if (tipo == 'N') tipo = 'NAC';
+				
+		var filtrarSlides = function(index, element){
+			var id = $(element).find('img').attr('alt');
+			if (typeof id == 'undefined') return true;
+			var tipo_elemento = $.grep(datos_campeonatos, function(elem, index){
+				return (elem.id==id);
+			})[0].tipo;
+			return (tipo==tipo_elemento);
+		}
+		var devolverTodos = function(index,element){return true};
+		
+		if (typeof slick != 'undefined') {					
+			// EL FILTRO ES POR TODOS
+			if (tipo=='T' || tipo == 'A') {
+				$('.carousel').slick('slickFilter', devolverTodos);
+				var slidesActivas = $('.slick-active'),
+					numCentro = parseInt(slidesActivas.length / 2),
+					numImg = parseInt($('.slick-active img').length / 2);
+				$('.carousel').slick('slickGoTo', (numCentro+1)-numImg,true);
+			}else{
+				$('.carousel').slick('slickFilter', filtrarSlides);
+				var slidesActivas = $('.slick-active'),
+					slidesFillerActivas = $('.slick-active .filler').length,
+					numCentro = parseInt(slidesActivas.length / 2) +1;
+				$('.carousel').slick('slickGoTo', numCentro-parseInt(slidesFillerActivas/2),true);
+			}
+			
+		};		
+		
+		// ACTUALIZAR EL CENTRAL
+		if (typeof slick == 'undefined') animarImagenCentro(elemento_centro,datos_campeonatos,urlbg_viejo);
+		
+		
+	} 
 	
 	$(document).ready(function() {
+		filtrar('>T');
+		
 		// CAROUSEL
-		var carousel = $("#wrapperCarousel").carousel(opciones);		
-		var carouselInternacionales = $("#carouselInternacionales").carousel(opciones);		
-		var carouselNacionales = $("#carouselNacionales").carousel(opciones);
+		var slick = $(".carousel").slick(opciones);	
 		
-		idCampeonatoCentro = $($(carouselSeleccionado+' .sc-selected').find('img')).attr('alt');
-		animarImagenCentro(idCampeonatoCentro, datos_campeonatos, 11);
+		$(".carousel").on('beforeChange', function(event,slick,currentSlide,nextSlide){
+			quitarAnimacionViejoCentro(elemento_centro);
+		});
+		$(".carousel").on('afterChange', function(event,slick,currentSlide){
+			// ACTUALIZAMOS EL NUEVO CENTRO
+			var slideActivas = $('.slick-active'),
+				slideCentro = $(slideActivas[parseInt(slideActivas.length / 2)-1]);
+			elemento_centro = slideCentro.find('img').attr('alt');
+			
+			animarImagenCentro(elemento_centro,datos_campeonatos,urlbg_viejo);
+		});
 		
-		//EVENTOS TODOS
-		carousel.on('itemSelected.sc', function(evt) {
-			idCampeonatoCentroViejo = idCampeonatoCentro;
-			idCampeonatoCentro = $($(carouselSeleccionado +' .sc-selected').find('img')).attr('alt');
-		});
-		carousel.on('selectionAnimationEnd.sc', function(evt) {
-			animarImagenCentro(idCampeonatoCentro,datos_campeonatos,idCampeonatoCentroViejo);		
-		});
-		//EVENTOS INTERNACIONALES
-		carouselInternacionales.on('itemSelected.sc', function(evt) {
-			idCampeonatoCentroViejo = idCampeonatoCentro;
-			idCampeonatoCentro = $($(carouselSeleccionado +' .sc-selected').find('img')).attr('alt');
-		});
-		carouselInternacionales.on('selectionAnimationEnd.sc', function(evt) {
-			animarImagenCentro(idCampeonatoCentro,datos_campeonatos,idCampeonatoCentroViejo);		
-		});
-		//EVENTOS NACIONALES
-		carouselNacionales.on('itemSelected.sc', function(evt) {
-			idCampeonatoCentroViejo = idCampeonatoCentro;
-			idCampeonatoCentro = $($(carouselSeleccionado +' .sc-selected').find('img')).attr('alt');
-		});
-		carouselNacionales.on('selectionAnimationEnd.sc', function(evt) {
-			animarImagenCentro(idCampeonatoCentro,datos_campeonatos,idCampeonatoCentroViejo);		
-		});
+		recalcularHorizonte();
+		
+		$('.slick-track').attrchange({
+			trackValues: true,
+			callback: function(event){
+					if (event.attributeName == 'style') {
+						recalcularHorizonte();
+					}
+				}
+			});		
+		
 		// FILTRO - SWIPE
 		$('.left .typesetter').swipe({
 			swipeLeft:function(event,direction,distance,duration,fingerCount){
@@ -164,7 +245,7 @@ var setup_timeline = function(datos_campeonatos,
 					
 				$('.nombre').text($('#copas_active').find('.titulo').text());
 				var tipo = nuevo.find('span').text();
-				filtrar(tipo,datos_campeonatos,idCampeonatoCentro);			
+				filtrar(tipo, slick);			
 			},
 			swipeRight:function(event,direction,distance,duration,fingerCount){
 				//traigo la imagen sobre la que se deslizo
@@ -190,7 +271,7 @@ var setup_timeline = function(datos_campeonatos,
 					
 				$('.nombre').text($('#copas_active').find('.titulo').text());
 				var tipo = nuevo.find('span').text();
-				filtrar(tipo,datos_campeonatos,idCampeonatoCentro);	
+				filtrar(tipo, slick);	
 			},
 			threshold: 5
 		});
@@ -210,7 +291,7 @@ var setup_timeline = function(datos_campeonatos,
 				
 				$('.nombre').text($('#copas_active').find('.titulo').text());
 				var tipo = $(this).find('span').text();
-				filtrar(tipo,datos_campeonatos,idCampeonatoCentro);
+				filtrar(tipo, slick);
 			}else{
 				$objActivo = $("#lang_active");
 				$objActivo.find("img").animate({opacity:0.4});		
@@ -233,7 +314,6 @@ var setup_timeline = function(datos_campeonatos,
 			traducir_contenido_dinamico_por,
 			lenguaje_pantalla,
 			traducirLinks);
-			
 		// ENTRADA
 		 $('#body_timeline')
 			.velocity({translateY: "30%", opacity:0.7, translateZ:"0%"}, {duration:1200})
