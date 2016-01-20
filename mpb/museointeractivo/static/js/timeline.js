@@ -102,7 +102,7 @@ var setup_timeline = function(datos_campeonatos,
 		gradientOverlayVisible: false,
 		navigationButtonsVisible: false,
 		slideSpeed: 0.86,
-		distance: 45,
+		distance: 95,
 	};	
 	
 	$(document).ready(function() {
