@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en-us">
+<style>
+	body {
+		margin: 0px;
+		overflow:hidden;
+		cursor: none;
+	}
+	a {
+		cursor: none;
+	}
+</style>
+<body>
+<a href="{% url 'index' %}">
+<video type="video/webm" muted autoplay loop preload width=100%>
+	<source src="{{ configuracion.urlVideo.url }}" type="video/webm">
+</video>
+</a>
+</body>
+</html>

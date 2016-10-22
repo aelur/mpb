@@ -3,6 +3,28 @@ from django.db import models
 from django.conf import settings
 import datetime, xlrd
 import os
+from django.core.exceptions import ValidationError
+
+
+class configuracion(models.Model):
+	tiempoEspera = models.IntegerField(verbose_name = 'Tiempo de espera', 
+									   default=60,
+									   help_text='(en segundos)')
+	urlVideo =	models.FileField(upload_to='',
+								verbose_name='Video a mostrar durante timeouts')
+	def __str__(self):
+		return unicode('Configuracion')
+	def get_tiempoEspera(self):
+		return self.tiempoEspera
+	def get_urlVideo(self):
+		return self.urlVideo
+	
+	def clean(self):
+		model = self.__class__
+		if (model.objects.count() > 0 and
+				self.id != model.objects.get().id):
+			raise ValidationError("No se puede añadir otra configuracion: solo puede existir una configuracion")
+	
 
 class campeonato(models.Model):		
 

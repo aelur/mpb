@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from django import forms
 import xlrd
 
-from museointeractivo.models import campeonato
+from museointeractivo.models import campeonato, configuracion
 
 def extensionEsInvalida(nombre, ext):
 	tam = len(ext)
@@ -53,6 +53,25 @@ def validarExcel(excel, err):
 		print str(e)
 		err.append('No se ha podido leer el archivo Excel. Revisar que tenga todas las columnas correspondientes.')
 
+class configuracionForm(forms.ModelForm):
+	class Meta:
+		model = configuracion
+		fields = '__all__'
+	def clean(self):
+		cleaned_data = super(configuracionForm, self).clean()
+		err=[]
+		try:
+			urlVideo = self.cleaned_data['urlVideo']
+			if (extensionEsInvalida(urlVideo.name,'webm')):
+				err.append('Los videos deben tener la extension webm.')
+		except Exception,e:
+			err.append(str(e))
+			
+		if err:
+			raise forms.ValidationError(err)
+
+		return self.cleaned_data
+		
 class campeonatoForm(forms.ModelForm):
 	class Meta:
 		model = campeonato
@@ -101,6 +120,9 @@ class campeonatoForm(forms.ModelForm):
 
 		return self.cleaned_data
 
+class configuracionAdmin(admin.ModelAdmin):
+	form = configuracionForm
+	fieldsets = [(None, {'fields':[('tiempoEspera'),('urlVideo')] })]
 
 class campeonatoAdmin(admin.ModelAdmin):
 	form = campeonatoForm
@@ -121,7 +143,8 @@ class campeonatoAdmin(admin.ModelAdmin):
 	readonly_fields = ['img_copa_thumb','img_fondo_thumb','img_campo_thumb','img_formacion_thumb']
 	search_fields = ['titulo_es']
 	ordering = ['-anio']
-	
+
+admin.site.register(configuracion,configuracionAdmin)
 admin.site.register(campeonato, campeonatoAdmin)
 admin.site.unregister(User)
 admin.site.unregister(Group)

@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^datos/(?P<campeonato_id>[0-9]+)/(?P<lenguaje>(es|por|en))/$', views.datos, name='datos'),
     url(r'^tablas/(?P<campeonato_id>[0-9]+)/(?P<tabla_sel>(jugadores|campania|posiciones))/(?P<lenguaje>(es|por|en))/$', views.tablas, name='tablas'),
+	url(r'^wait/$', views.wait,name='wait')
 ] 
